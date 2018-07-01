@@ -1,0 +1,18 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}Admin Proverbe{% endblock %}
+{% block main_title %}Administration - Proverbe{% endblock %}
+
+{% block script_additional %}
+	{% import "Index/macro.html.twig" as macro %}
+	{{ macro.redactor() }}
+{% endblock %}
+
+{% block main_content %}
+{% form_theme form 'Form/fields.html.twig' %}
+
+{{ form_start(form, {'method' : 'post', 'action' : path('proverbadmin_create'), 'attr': {'novalidate': 'novalidate'} }) }}
+	{% include "Proverb/_form.html.twig" with {'form' : form} %}
+{{ form_end(form) }}
+
+{% endblock %}

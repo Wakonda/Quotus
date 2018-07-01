@@ -1,0 +1,44 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}Boutique{% endblock %}
+{% block main_title %}Boutique{% endblock %}
+
+{% block meta_tag_description %}{% endblock %}
+
+{% block main_content %}
+	<form method="post" action="{{ path('store') }}" name="search_form">
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<input type="text" class="form-control" name="query" value="{{ query }}" placeholder="Rechercher ...">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+				</span>
+			</div>
+		</div>
+	</div>
+	</form>
+	<br>
+	<div class="store_container">
+		{% for entity in entities %}
+			<div>{{ entity.embeddedCode|raw }}</div>
+		{% endfor %}
+	</div>
+	
+	{% if links is defined and links is not empty %}
+	<nav aria-label="Page navigation example" class="text-center">
+		<ul class="pagination">
+			<li class="page-item">
+				{% for link in links %}
+					{% if link.url is not null %}
+						<li class="page-item"><a href="{{ link.url }}">{{ link.text }}</a></li>
+					{% else %}
+						<li class="page-item {{ (link.class is defined) ? link.class }}"><span>{{ link.text }}</span></li>
+					{% endif %}
+				{% endfor %}
+				</a>
+			</li>
+		</ul>
+	</nav>
+	{% endif %}
+{% endblock %}

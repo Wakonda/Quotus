@@ -1,0 +1,26 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}Contact{% endblock %}
+{% block main_title %}Contactez nous !{% endblock %}
+
+{% block main_content %}
+	{% form_theme form 'Form/fields.html.twig' %}
+	{{ form_start(form, {'method' : 'post', 'action' : path('contact_send'), 'attr': {'novalidate': 'novalidate'} }) }}
+		<table class="form_grid">
+				<tr>
+					<th>{{ form_label(form.mail) }}</th>
+					<td><div class="errors">{{ form_errors(form.mail) }}</div>{{ form_widget(form.mail, {'attr':{'class':'full_width form-control'}}) }}</td>
+				</tr>
+				<tr>
+					<th>{{ form_label(form.subject) }}</th>
+					<td><div class="errors">{{ form_errors(form.subject) }}</div>{{ form_widget(form.subject, {'attr':{'class':'full_width form-control'}}) }}</td>
+				</tr>
+				<tr>
+					<th>{{ form_label(form.message) }}</th>
+					<td><div class="errors">{{ form_errors(form.message) }}</div>{{ form_widget(form.message, {'attr':{'class':'text form-control'}}) }}</td>
+				</tr>
+		</table>
+		{{ form_widget(form.send, {'icon': 'fa-send'}) }}
+		{{ form_rest(form) }}
+	{{ form_end(form) }}
+{% endblock %}

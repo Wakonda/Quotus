@@ -1,0 +1,59 @@
+{% form_theme form 'Form/fields.html.twig' %}
+
+<script type="text/javascript">
+	tinymce.init({
+		selector:'#{{ form.message.vars.id }}',
+		height: 150,
+		menubar: false,
+		language: "fr_FR",
+		statusbar: false,
+		plugins: [
+			'lists link image charmap textcolor media'
+		],
+		toolbar: 'bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | link image | undo redo |',
+		setup: function (editor) {
+			editor.on('change', function () {
+				tinymce.triggerSave();
+			});
+		}
+	});
+</script>
+
+{{ form_start(form, {'method' : 'post', 'action' : '' , 'attr': {'novalidate': 'novalidate', 'id': 'send_form'} }) }}
+	<div class="modal-body">
+		<div class="alert alert-info" role="alert">
+			<strong><i class="fa fa-info-circle" aria-hidden="true"></i> Infos</strong> - Le proverbe sera automatiquement ajouté à votre message
+		</div>
+		<table class="form_grid">
+			<tr>
+				<th>{{ form_label(form.firstName) }}</th>
+				<td><div class="errors">{{ form_errors(form.firstName) }}</div>{{ form_widget(form.firstName, {'attr':{'class':'full_width form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th>{{ form_label(form.lastName) }}</th>
+				<td><div class="errors">{{ form_errors(form.lastName) }}</div>{{ form_widget(form.lastName, {'attr':{'class':'full_width form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th>{{ form_label(form.yourMail) }}</th>
+				<td><div class="errors">{{ form_errors(form.yourMail) }}</div>{{ form_widget(form.yourMail, {'attr':{'class':'full_width form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th>{{ form_label(form.recipientMail) }}</th>
+				<td><div class="errors">{{ form_errors(form.recipientMail) }}</div>{{ form_widget(form.recipientMail, {'attr':{'class':'full_width form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th>{{ form_label(form.subject) }}</th>
+				<td><div class="errors">{{ form_errors(form.subject) }}</div>{{ form_widget(form.subject, {'attr':{'class':'full_width form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th>{{ form_label(form.message) }}</th>
+				<td><div class="errors">{{ form_errors(form.message) }}</div>{{ form_widget(form.message, {'attr':{'class':'text form-control'}}) }}</td>
+			</tr>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
+		{{ form_widget(form.send, {'icon': 'fa-send'}) }}
+	</div>
+	{{ form_rest(form) }}
+{{ form_end(form) }}

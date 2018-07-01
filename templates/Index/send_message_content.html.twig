@@ -1,0 +1,20 @@
+{% set senderName = "Une personne" %}
+
+{% if data.firstName is not null %}
+	{% set senderName = data.firstName %}
+	
+	{% if data.lastName is not null %}
+		{% set senderName = senderName ~ " " ~ data.lastName %}
+	{% endif %}
+{% endif %}
+
+<p>{{ senderName }} (<a href="mailto:{{ data.yourMail }}">{{ data.yourMail }}</a>) vous a envoyé ce proverbe.</p>
+
+{{ data.message|raw }}
+
+<hr>
+{{ entity.text|raw }}
+
+<hr>
+
+<p>Ce proverbe a été envoyé depuis <a href="{{ url("index") }}" alt="Proverbius">Proverbius</a></p>

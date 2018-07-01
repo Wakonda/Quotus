@@ -1,0 +1,51 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}Erreur {{ code }}{% endblock %}
+{% block main_title %}Erreur {{ code }}{% endblock %}
+
+{% block script_additional %}
+	<script src="{{ asset('js/jquery.qtip/jquery.qtip.min.js') }}"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("div#error_content").hide();
+
+			$("#state_error_content span").click(function() {
+				var state = $(this).data("stateError");
+
+				if(state == "more")
+				{
+					$(this).removeClass("glyphicon-plus");
+					$(this).addClass("glyphicon-minus");
+					$("div#error_content").slideDown();
+					$(this).data("stateError", "less");
+				}
+				else
+				{
+					$(this).removeClass("glyphicon-minus");
+					$(this).addClass("glyphicon-plus");
+					$("div#error_content").slideUp();
+					$(this).data("stateError", "more");
+				}
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block main_content %}
+	<p class="center"><img src="{{ asset('photo/error-page.jpg') }}" alt="" /></p>
+	<br>
+	{% if code == "404" %}
+		<p>La page à laquelle vous souhaitez accéder n'existe pas (ou plus) !</p>
+	{% else %}
+		<p>Une <b>erreur {{ code }}</b> est survenue. Si le problème persiste, n'hésitez pas à nous <a href="{{ path('contact') }}" alt="">contacter</a> afin que nous puissions le résoudre le plus rapidement possible !</p>
+	{% endif %}
+	<hr>
+	<div class="error error_content">
+	<div id="state_error_content">
+		<span class="glyphicon glyphicon-plus pointer" data-state-error="more"> </span>
+	</div>
+	<div id="error_content">
+		{{ message }}
+	</div>
+	</div>
+{% endblock %}

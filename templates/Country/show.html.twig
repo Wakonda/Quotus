@@ -1,0 +1,27 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}Admin Pays{% endblock %}
+{% block main_title %}Administration - Pays{% endblock %}
+
+{% block main_content %}
+	<table class="admin_show">
+		<tr>
+			<th>Titre</th>
+			<td>{{ entity.title }}</td>
+		</tr>
+		<tr>
+			<th>Nom international</th>
+			<td>{{ entity.internationalName }}</td>
+		</tr>
+		<tr>
+			<th>Drapeau</th>
+			<td><img src="{{ asset('photo/country/'~entity.flag) }}" alt="" /></td>
+		</tr>
+		<tr>
+			<th>Slug</th>
+			<td>{{ entity.slug }}</td>
+		</tr>
+	</table>
+	<hr>
+	<a href="{{ path('countryadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> Modifier</a> - <a href="{{ path('countryadmin_new') }}"><i class="fa fa-plus-square"></i> Créer</a>
+{% endblock %}

@@ -1,0 +1,10 @@
+<p>Bonjour {{ entity.username }},</p>
+
+<p>Nous vous remercions de votre inscription sur <b>Proverbius</b>.
+Pour pouvoir vous connecter, et ainsi profiter de l'ensemble des fonctionnalités du site, 
+cliquez sur le lien de confirmation ci-dessous.
+</p>
+<p><a href="{{ url('login') }}?t={{ entity.token }}" alt="">Cliquez-ici pour activer votre compte</a></p>
+<p><b><u>Attention : </u></b>Ce lien expirera le <i>{{ entity.expiredAt|date('d/m/Y à H:i') }}</i></p>
+<p>A bientôt sur Proverbius ...</p>
+<p>L'équipe de <b>Proverbius</b></p>

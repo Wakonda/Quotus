@@ -1,0 +1,27 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}Admin - Proverbe{% endblock %}
+{% block main_title %}Admin - Proverbe{% endblock %}
+
+{% block main_content %}
+	{% form_theme form 'Form/fields.html.twig' %}
+	<form action="{{ path('proverbadmin_addfastmultiple') }}" method="post" novalidate>
+		<table class="form_grid">
+			<tr>
+				<th>{{ form_label(form.ipProxy) }}</th>
+				<td><div class="errors">{{ form_errors(form.ipProxy) }}</div>{{ form_widget(form.ipProxy, {'attr':{'class':'full_width form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th>{{ form_label(form.country) }}</th>
+				<td><div class="errors">{{ form_errors(form.country) }}</div>{{ form_widget(form.country, {'attr':{'class':'full_width form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th>{{ form_label(form.url) }}</th>
+				<td><div class="errors">{{ form_errors(form.url) }}</div>{{ form_widget(form.url, {'attr':{'class':'full_width form-control'}}) }}</td>
+			</tr>
+		</table>
+		<hr />
+		{{ form_widget(form.save, {'icon': 'fa-save'}) }}
+		{{ form_rest(form) }}
+	</form>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}{{ entity.title }}{% endblock %}
+{% block main_title %}{{ entity.title }}{% endblock %}
+
+{% block main_content %}
+	<p class="center"><img src="{{ asset('photo/page/'~entity.photo) }}" alt="" /></p>
+	{{ entity.text|raw }}
+{% endblock %}

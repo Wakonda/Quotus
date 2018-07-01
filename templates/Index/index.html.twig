@@ -1,0 +1,55 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}Accueil{% endblock %}
+
+{% block script_additional %}
+	<script src="{{ asset('js/jquery-ui-1.11.0/jquery-ui.min.js') }}"></script>	
+	<script src="{{ asset('js/tag-it-master/js/tag-it.min.js') }}"></script>
+
+	<script type="text/javascript">
+		$(function()
+		{
+			$(".tagit").tagit({
+				allowSpaces: true
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block style_additional %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('js/jquery-ui-1.11.0/jquery-ui.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset(minify_file('js/tag-it-master/css/jquery.tagit.css')) }}" />
+{% endblock %}
+
+{% block main_content %}
+	<h2>Rechercher un proverbe</h2>
+	{% form_theme form 'Form/fields.html.twig' %}
+	{{ form_start(form, {'method' : 'post', 'action' : path('index_search') , 'attr': {'novalidate': 'novalidate'} }) }}
+		<table class="form_grid">
+				<tr>
+					<th>{{ form_label(form.text) }}</th>
+					<td>{{ form_widget(form.text) }}</td>
+				</tr>
+				<tr>
+					<th>{{ form_label(form.country) }}</th>
+					<td>{{ form_widget(form.country, {'attr':{'class':'full_width form-control'}}) }}</td>
+				</tr>
+		</table>
+		<br>
+		{{ form_widget(form.search, {'icon': 'fa-search'}) }}
+		{{ form_rest(form) }}
+	{{ form_end(form) }}
+	<hr class="flare">
+	<h2>Proverbe au hasard</h2>
+	{% if random is not null %}
+	<div>
+		<blockquote>{{ random.text|raw }}</blockquote>
+	</div>
+	<hr>
+	<p>
+	<a href="{{ path('country', {'id' : random.country.id, 'slug' : random.country.slug }) }}" alt=""><img class="flag" src="{{ asset('photo/country/'~random.country.flag) }}" alt="" height="8" /> Proverbe - {{ random.country.title }}</a>
+	</p>
+	{% else %}
+		<p>Aucun Proverbe encore ajouté.</p>
+	{% endif %}
+{% endblock %}

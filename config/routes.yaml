@@ -1,0 +1,415 @@
+# MAIN
+index:
+    path: /
+    controller: App\Controller\IndexController::indexAction
+
+index_search:
+    path: /search
+    controller: App\Controller\IndexController::indexSearchAction
+
+read:
+    path: /read/{id}/{slug}
+    controller: App\Controller\IndexController::readAction
+    defaults:
+        slug: null
+
+read_pdf:
+    path: /read_pdf/{id}/{slug}
+    controller: App\Controller\IndexController::readPDFAction
+    defaults:
+        slug: null
+
+index_search_datatables:
+    path: /result_search/{search}
+    controller: App\Controller\IndexController::indexSearchDatatablesAction
+
+store:
+    path: /store/{page}
+    controller: App\Controller\IndexController::storeAction
+    defaults:
+        page: 1
+
+error:
+    path: /error/{code}
+    controller: App\Controller\IndexController::errorAction
+
+last:
+    path: /last
+    controller: App\Controller\IndexController::lastAction
+
+stat:
+    path: /stat
+    controller: App\Controller\IndexController::statAction
+
+country:
+    path: /country/{id}/{slug}
+    controller: App\Controller\IndexController::countryAction
+    defaults:
+        slug: null
+
+country_datatables:
+    path: /country_datatables/{countryId}
+    controller: App\Controller\IndexController::countryDatatablesAction
+
+bycountries:
+    path: /bycountries
+    controller: App\Controller\IndexController::byCountriesAction
+
+bycountries_datatables:
+    path: /bycountries_datatables
+    controller: App\Controller\IndexController::byCountriesDatatablesAction
+
+byletters:
+    path: /byletters
+    controller: App\Controller\IndexController::byLettersAction
+
+byletters_datatables:
+    path: /byletters_datatables
+    controller: App\Controller\IndexController::byLettersDatatablesAction
+
+letter:
+    path: /letter/{letter}
+    controller: App\Controller\IndexController::letterAction
+
+letter_datatables:
+    path: /letter_datatables/{letter}
+    controller: App\Controller\IndexController::letterDatatablesAction
+
+page_display:
+    path: /page/{name}
+    controller: App\Controller\IndexController::pageAction
+
+admin:
+    path: /admin
+    controller: App\Controller\AdminController::indexAction
+
+# CONTACT
+contact:
+    path: /contact
+    controller: App\Controller\ContactController::indexAction
+
+contact_send:
+    path: /contact_send
+    controller: App\Controller\ContactController::sendAction
+
+# SEND
+send:
+    path: send/index/{id}
+    controller: App\Controller\SendController::indexAction
+    requirements:
+        id: \d+
+
+send_go:
+    path: send/send/{id}
+    controller: App\Controller\SendController::sendAction
+    requirements:
+        id: \d+
+
+# SITEMAP
+sitemap:
+    path: /sitemap.xml
+    controller: App\Controller\SitemapController::sitemapAction
+
+generate_sitemap:
+    path: /generate_sitemap
+    controller: App\Controller\SitemapController::generateAction
+
+# CAPTCHA
+captcha:
+    path: /captcha
+    controller: App\Controller\IndexController::reloadCaptchaAction
+
+# GRAVATAR
+gravatar:
+    path: /gravatar
+    controller: App\Controller\IndexController::reloadGravatarAction
+
+# COMMENT
+comment:
+    path: /comment/{id}
+    controller: App\Controller\CommentController::indexAction
+    requirements:
+        id: \d+
+
+comment_create:
+    path: comment/create/{id}
+    controller: App\Controller\CommentController::createAction
+    requirements:
+        id: \d+
+
+comment_load:
+    path: comment/load/{id}
+    controller: App\Controller\CommentController::loadCommentAction
+    requirements:
+        id: \d+
+
+# VOTE
+vote:
+    path: /vote/{id}
+    controller: App\Controller\VoteController::voteAction
+
+# ADMIN AJAX
+vote_datatables:
+    path: /user/vote_datatables/{username}
+    controller: App\Controller\UserController::votesUserDatatablesAction
+
+comment_datatables:
+    path: /user/comment_datatables/{username}
+    controller: App\Controller\UserController::commentsUserDatatablesAction
+
+# USER
+login:
+    path: /user/login
+    controller: App\Controller\UserController::loginAction
+
+logout:
+    path: /logout
+
+list:
+    path: /user/list
+    controller: App\Controller\UserController::listAction
+
+user_show:
+    path: /user/show/{username}
+    controller: App\Controller\UserController::showAction
+    defaults:
+        username: null
+
+user_new:
+    path: /user/new
+    controller: App\Controller\UserController::newAction
+
+user_create:
+    path: /user/create
+    controller: App\Controller\UserController::createAction
+
+user_edit:
+    path: /user/edit/{id}
+    controller: App\Controller\UserController::editAction
+    defaults:
+        id: false
+
+user_update:
+    path: /user/update/{id}
+    controller: App\Controller\UserController::updateAction
+    defaults:
+        id: false
+
+user_udpatepassword:
+    path: /user/updatepassword
+    controller: App\Controller\UserController::updatePasswordAction
+
+user_updatepasswordsave:
+    path: /user/updatepasswordsave
+    controller: App\Controller\UserController::updatePasswordSaveAction
+
+user_forgottenpassword:
+    path: /user/forgottenpassword
+    controller: App\Controller\UserController::forgottenPasswordAction
+
+user_forgottenpasswordsend:
+    path: /user/forgottenpasswordsend
+    controller: App\Controller\UserController::forgottenPasswordSendAction
+
+# ADMIN COUNTRY
+countryadmin_index:
+    path: /admin/country/index
+    controller: App\Controller\CountryAdminController::indexAction
+
+countryadmin_indexdatatables:
+    path: /admin/country/indexdatatables
+    controller: App\Controller\CountryAdminController::indexDatatablesAction
+
+countryadmin_new:
+    path: /admin/country/new
+    controller: App\Controller\CountryAdminController::newAction
+
+countryadmin_create:
+    path: /admin/country/create
+    controller: App\Controller\CountryAdminController::createAction
+
+countryadmin_show:
+    path: /admin/country/show/{id}
+    controller: App\Controller\CountryAdminController::showAction
+
+countryadmin_edit:
+    path: /admin/country/edit/{id}
+    controller: App\Controller\CountryAdminController::editAction
+
+countryadmin_update:
+    path: /admin/country/upate/{id}
+    controller: App\Controller\CountryAdminController::updateAction
+
+# ADMIN TAG
+tagadmin_index:
+    path: /admin/tag/index
+    controller: App\Controller\TagAdminController::indexAction
+
+tagadmin_indexdatatables:
+    path: /admin/tag/indexdatatables
+    controller: App\Controller\TagAdminController::indexDatatablesAction
+
+tagadmin_new:
+    path: /admin/tag/new
+    controller: App\Controller\TagAdminController::newAction
+
+tagadmin_create:
+    path: /admin/tag/create
+    controller: App\Controller\TagAdminController::createAction
+
+tagadmin_show:
+    path: /admin/tag/show/{id}
+    controller: App\Controller\TagAdminController::showAction
+
+tagadmin_edit:
+    path: /admin/tag/edit/{id}
+    controller: App\Controller\TagAdminController::editAction
+
+tagadmin_update:
+    path: /admin/tag/upate/{id}
+    controller: App\Controller\TagAdminController::updateAction
+
+# ADMIN PROVERB
+proverbadmin_index:
+    path: /admin/proverb/index
+    controller: App\Controller\ProverbAdminController::indexAction
+
+proverbadmin_indexdatatables:
+    path: /admin/proverb/indexdatatables
+    controller: App\Controller\ProverbAdminController::indexDatatablesAction
+
+proverbadmin_new:
+    path: /admin/proverb/new
+    controller: App\Controller\ProverbAdminController::newAction
+
+proverbadmin_create:
+    path: /admin/proverb/create
+    controller: App\Controller\ProverbAdminController::createAction
+
+proverbadmin_show:
+    path: /admin/proverb/show/{id}
+    controller: App\Controller\ProverbAdminController::showAction
+
+proverbadmin_edit:
+    path: /admin/proverb/edit/{id}
+    controller: App\Controller\ProverbAdminController::editAction
+
+proverbadmin_update:
+    path: /admin/proverb/upate/{id}
+    controller: App\Controller\ProverbAdminController::updateAction
+
+proverbadmin_delete:
+    path: /admin/proverb/delete/{id}
+    controller: App\Controller\ProverbAdminController::deleteAction
+
+proverbadmin_newfastmultiple:
+    path: /admin/proverb/newFastMultiple
+    controller: App\Controller\ProverbAdminController::newFastMultipleAction
+
+proverbadmin_addfastmultiple:
+    path: /admin/proverb/addFastMultiple
+    controller: App\Controller\ProverbAdminController::addFastMultipleAction
+
+proverbadmin_twitter:
+    path: /admin/proverb/twitter/{id}
+    controller: App\Controller\ProverbAdminController::twitterAction
+
+proverbadmin_save_image:
+    path: /admin/proverb/saveimage/{id}
+    controller: App\Controller\ProverbAdminController:saveImageAction
+
+proverbadmin_remove_image:
+    path: /admin/proverb/removeimage/{id}/{fileName}
+    controller: App\Controller\ProverbAdminController:removeImageAction
+
+# ADMIN PAGE
+pageadmin_index:
+    path: /admin/page/index
+    controller: App\Controller\PageAdminController::indexAction
+
+pageadmin_indexdatatables:
+    path: /admin/page/indexdatatables
+    controller: App\Controller\PageAdminController::indexDatatablesAction
+
+pageadmin_new:
+    path: /admin/page/new
+    controller: App\Controller\PageAdminController::newAction
+
+pageadmin_create:
+    path: /admin/page/create
+    controller: App\Controller\PageAdminController::createAction
+
+pageadmin_show:
+    path: /admin/page/show/{id}
+    controller: App\Controller\PageAdminController::showAction
+
+pageadmin_edit:
+    path: /admin/page/edit/{id}
+    controller: App\Controller\PageAdminController::editAction
+
+pageadmin_update:
+    path: /admin/page/upate/{id}
+    controller: App\Controller\PageAdminController::updateAction
+
+pageadmin_upload_image_mce:
+    path: /admin/page/upload_image_mce
+    controller: App\Controller\PageAdminController::uploadImageMCEAction
+
+# ADMIN STORE
+storeadmin_index:
+    path: /admin/store/index
+    controller: App\Controller\StoreAdminController::indexAction
+
+storeadmin_indexdatatables:
+    path: /admin/store/indexdatatables
+    controller: App\Controller\StoreAdminController::indexDatatablesAction
+
+storeadmin_new:
+    path: /admin/store/new
+    controller: App\Controller\StoreAdminController::newAction
+
+storeadmin_create:
+    path: /admin/store/create
+    controller: App\Controller\StoreAdminController::createAction
+
+storeadmin_show:
+    path: /admin/store/show/{id}
+    controller: App\Controller\StoreAdminController::showAction
+
+storeadmin_edit:
+    path: /admin/store/edit/{id}
+    controller: App\Controller\StoreAdminController::editAction
+
+storeadmin_update:
+    path: /admin/store/upate/{id}
+    controller: App\Controller\StoreAdminController::updateAction
+
+# ADMIN CONTACT FORM
+contactadmin_index:
+    path: /admin/contact/index
+    controller: App\Controller\ContactAdminController::indexAction
+
+contactadmin_indexdatatables:
+    path: /admin/contact/indexdatatables
+    controller: App\Controller\ContactAdminController::indexDatatablesAction
+
+contactadmin_show:
+    path: /admin/contact/show/{id}
+    controller: App\Controller\ContactAdminController::showAction
+
+# ADMIN USER
+useradmin_index:
+    path: /admin/user/index
+    controller: App\Controller\UserAdminController::indexAction
+
+useradmin_indexdatatables:
+    path: /admin/user/indexdatatables
+    controller: App\Controller\UserAdminController::indexDatatablesAction
+
+useradmin_show:
+    path: /admin/user/show/{id}
+    controller: App\Controller\UserAdminController::showAction
+
+useradmin_enabled:
+    path: /admin/user/enabled/{id}/{state}
+    controller: App\Controller\UserAdminController::enabledAction

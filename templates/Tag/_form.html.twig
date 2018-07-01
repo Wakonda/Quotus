@@ -1,0 +1,10 @@
+{% import "Index/macro.html.twig" as macro %}
+<table class="form_grid">
+	<tr>
+		<th>{{ form_label(form.title) }}</th>
+		<td><div class="errors">{{ form_errors(form.title) }}</div>{{ form_widget(form.title, {'attr':{'class':'full_width form-control'}}) }}</td>
+	</tr>
+</table>
+<hr />
+{{ form_widget(form.save, {'icon': 'fa-save'}) }}
+{{ form_rest(form) }}

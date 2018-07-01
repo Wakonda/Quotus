@@ -1,0 +1,32 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}Admin Boutique{% endblock %}
+{% block main_title %}Administration - Boutique{% endblock %}
+
+{% block script_additional %}
+	<script src="{{ asset('js/jquery-ui-1.11.0/jquery-ui.min.js') }}"></script>	
+	<script src="{{ asset('js/tag-it-master/js/tag-it.min.js') }}"></script>
+
+	<script type="text/javascript">
+		$(function()
+		{
+			$(".tagit").tagit({
+				allowSpaces: true
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block style_additional %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('js/jquery-ui-1.11.0/jquery-ui.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset(minify_file('js/tag-it-master/css/jquery.tagit.css')) }}" />
+{% endblock %}
+
+{% block main_content %}
+{% form_theme form 'Form/fields.html.twig' %}
+
+{{ form_start(form, {'method' : 'post', 'action' : path('storeadmin_create'), 'attr': {'novalidate': 'novalidate'} }) }}
+	{% include "Store/_form.html.twig" with {'form' : form} %}
+{{ form_end(form) }}
+
+{% endblock %}

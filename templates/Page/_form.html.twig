@@ -1,0 +1,22 @@
+{% import "Index/macro.html.twig" as macro %}
+<table class="form_grid">
+	<tr>
+		<th>{{ form_label(form.title) }}</th>
+		<td><div class="errors">{{ form_errors(form.title) }}</div>{{ form_widget(form.title, {'attr':{'class':'form-control'}}) }}</td>
+	</tr>
+	<tr>
+		<th>{{ form_label(form.text) }}</th>
+		<td><div class="errors">{{ form_errors(form.text) }}</div>{{ form_widget(form.text) }}</td>
+	</tr>
+	<tr>
+		<th>{{ form_label(form.internationalName) }}</th>
+		<td><div class="errors">{{ form_errors(form.internationalName) }}</div>{{ form_widget(form.internationalName, {'attr':{'class':'form-control'}}) }}</td>
+	</tr>
+	<tr>
+		<th>{{ form_label(form.photo) }}</th>
+		<td><div class="errors">{{ form_errors(form.photo) }}</div>{% if entity.photo is defined %}{{ macro.currentImage("photo/page/", entity.photo) }}{% endif %}{{ form_widget(form.photo) }}</td>
+	</tr>
+</table>
+<hr />
+{{ form_widget(form.save, {'icon': 'fa-save'}) }}
+{{ form_rest(form) }}

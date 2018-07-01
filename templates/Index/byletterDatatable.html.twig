@@ -1,0 +1,6 @@
+{% for result in results %}
+	<tr>
+		<td>{{ result["letter"] }}</td>
+		<td><a href="{{ path('letter', {'letter' : result['letter']}) }}">{{ result["link"]|raw }}</a></td>
+	</tr>
+{% endfor %}

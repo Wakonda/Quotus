@@ -1,0 +1,122 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}Admin Proverbe{% endblock %}
+{% block main_title %}Administration - Proverbe{% endblock %}
+
+{% block main_content %}
+	<table class="admin_show">
+		<tr>
+			<th>Texte</th>
+			<td>{{ entity.text|raw }}</td>
+		</tr>
+		<tr>
+			<th>Pays</th>
+			<td>{{ entity.country.title }}</td>
+		</tr>
+		<tr>
+			<th>Slug</th>
+			<td>{{ entity.slug }}</td>
+		</tr>
+		<tr>
+			<th>Image</th>
+			<td>
+				{% if entity.images is not empty %}
+					{% for image in entity.images %}
+						<div>
+							{{ ("photo/proverb/"~image)|max_size_image() }}
+							&nbsp;
+							<a class="btn btn-danger" href="{{ path('proverbadmin_remove_image', {'id' : entity.id, 'fileName': image}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+						</div>
+						<br>
+					{% endfor %}
+				{% endif %}
+			</td>
+		</tr>
+	</table>
+	<hr>
+	<div class="panel panel-default sub_block">
+		<div class="panel-heading" role="tab" id="headingImageGenerator">
+			<p class="panel-title">
+			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwitter" aria-expanded="true" aria-controls="collapseOne">
+			<i class="fa fa-picture-o" aria-hidden="true"></i> Générer une image
+			</a>
+			</p>
+		</div>
+		<div id="collapseTwitter" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingImageGenerator" aria-expanded="true" style="">
+			<div class="panel-body">
+				{{ form_start(imageGeneratorForm, {'attr': {'class': 'form-horizontal'}, 'action': path('proverbadmin_save_image', {'id': entity.id})}) }}
+					<div class="form-group">
+						{{ form_label(imageGeneratorForm.image, null, {'label_attr': {'class': "col-sm-3 control-label"}}) }}
+						<div class="col-sm-9">
+							{{ form_widget(imageGeneratorForm.image, {'attr': {'class': 'form-control'}}) }}
+						</div>
+					</div>
+					<div class="form-group">
+						{{ form_label(imageGeneratorForm.font_size, null, {'label_attr': {'class': "col-sm-3 control-label"}}) }}
+						<div class="col-sm-9">
+							{{ form_widget(imageGeneratorForm.font_size, {'attr': {'class': 'form-control'}}) }}
+						</div>
+					</div>
+					<div class="form-group">
+						{{ form_label(imageGeneratorForm.invert_colors, null, {'label_attr': {'class': "col-sm-3 control-label"}}) }}
+						<div class="col-sm-9">
+							{{ form_widget(imageGeneratorForm.invert_colors) }}
+						</div>
+					</div>
+					<div class="text-right">
+					{{ form_row(imageGeneratorForm.save) }}
+					</div>
+				{{ form_end(imageGeneratorForm) }}
+				<!--<form action="{{ path('proverbadmin_save_image', {'id': entity.id}) }}" method="post" enctype="multipart/form-data">
+					<input type="file" name="image_imagegenerator" />
+					<br>
+					<input value="Valider" id="submit_imagegenerator" type="submit" class="btn btn-default">
+				</form>-->
+			</div>
+		</div>
+	</div>
+	
+	<div class="panel panel-default sub_block">
+		<div class="panel-heading" role="tab" id="headingTwitter">
+			<p class="panel-title">
+			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwitter" aria-expanded="true" aria-controls="collapseOne">
+			<i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter
+			</a>
+			</p>
+		</div>
+		<div id="collapseTwitter" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwitter" aria-expanded="true" style="">
+			<div class="panel-body">
+				<form action="{{ path('proverbadmin_twitter', {'id': entity.id}) }}" method="post">
+					<label for="addImage"> <input type="checkbox" id="addImage"> Ajouter une image</label>
+					<div class="row hidden" id="image_container">
+						{% for image in entity.images %}
+							<div class="col-md-4 mb-10"><div class="thumbnail" role="button"><img src="{{ absolute_url(asset('photo/proverb/'~image)) }}"></div></div>
+						{% endfor %}
+					</div>
+					<input type="hidden" name="image_tweet" id="image_tweet">
+					<textarea id="twitter_area" name="twitter_area" rows="3" cols="70" class="form-control">{{ entity.text|raw }} #proverbe #{{ entity.country.title|replace({'-': '', ' ':''}) }} </textarea>
+					<br>
+					<input value="Tweeter" id="tweet" type="submit" class="btn btn-default">
+				</form>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<a href="{{ path('proverbadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> Modifier</a> - <a href="{{ path('proverbadmin_delete', { 'id' : entity.id }) }}"><i class="fa fa-trash"></i> Supprimer</a> - <a href="{{ path('proverbadmin_new') }}"><i class="fa fa-plus-square"></i> Créer</a>
+{% endblock %}
+
+{% block script_additional %}
+	<script type="text/javascript">
+		$(function() {
+			$("input#addImage").click(function() {
+				$("#image_container").toggleClass('hidden');
+			});
+		
+			$("div#image_container .thumbnail").click(function() {
+				$("div#image_container .thumbnail").removeAttr("style");
+				$(this).css({"border-color": "#f00", "background-color": "#eca7a7"});
+				$("#image_tweet").val($("img", this).attr("src"));
+			});
+		});
+	</script>
+{% endblock %}
