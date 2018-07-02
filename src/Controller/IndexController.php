@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use App\Form\Type\IndexSearchType;
 use App\Service\Captcha;
@@ -101,6 +103,13 @@ class IndexController extends Controller
 		$browsingProverbs = $entityManager->getRepository(Proverb::class)->browsingProverbShow($id);
 
 		return $this->render('Index/read.html.twig', array('entity' => $entity, 'browsingProverbs' => $browsingProverbs));
+	}
+	
+	public function downloadImageProverbAction($fileName)
+	{
+		$response = new BinaryFileResponse('photo/proverb/'.$fileName);
+		$response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
+		return $response;
 	}
 
 	public function readPDFAction(Request $request, $id)

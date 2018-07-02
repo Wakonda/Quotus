@@ -23,3 +23,9 @@ blockquote {
 .hidden_print, header#header, aside, footer, a.back-to-top, #cookieChoiceInfo {
 	display: none !important;
 }
+
+img.center {
+  display: block;
+   margin-left: auto;
+   margin-right: auto;
+}

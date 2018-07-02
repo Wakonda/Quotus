@@ -7,6 +7,10 @@ index_search:
     path: /search
     controller: App\Controller\IndexController::indexSearchAction
 
+download_image:
+    path: /download_image/{fileName}
+    controller: App\Controller\IndexController::downloadImageProverbAction
+
 read:
     path: /read/{id}/{slug}
     controller: App\Controller\IndexController::readAction
