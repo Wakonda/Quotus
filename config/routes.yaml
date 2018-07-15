@@ -283,8 +283,12 @@ proverbadmin_indexdatatables:
     controller: App\Controller\ProverbAdminController::indexDatatablesAction
 
 proverbadmin_new:
-    path: /admin/proverb/new
+    path: /admin/proverb/new/{countryId}
     controller: App\Controller\ProverbAdminController::newAction
+    requirements:
+        countryId: \d+
+    defaults:
+        countryId: null
 
 proverbadmin_create:
     path: /admin/proverb/create

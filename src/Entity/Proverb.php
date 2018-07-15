@@ -34,7 +34,7 @@ class Proverb
     protected $country;
 
     /**
-     * @ORM\Column(type="json", length=255)
+     * @ORM\Column(type="json", length=255, nullable=true)
      */
     protected $images;
 

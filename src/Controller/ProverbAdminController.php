@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Proverb;
+use App\Entity\Country;
 use App\Service\GenericFunction;
 use App\Service\ImageGenerator;
 use App\Form\Type\ProverbType;
@@ -19,7 +20,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
-require __DIR__.'/../../Vendor/simple_html_dom.php';
+require __DIR__.'/../../vendor/simple_html_dom.php';
 
 class ProverbAdminController extends Controller
 {
@@ -77,9 +78,14 @@ class ProverbAdminController extends Controller
 		return $response;
 	}
 
-    public function newAction(Request $request)
+    public function newAction(Request $request, $countryId)
     {
+		$entityManager = $this->getDoctrine()->getManager();
 		$entity = new Proverb();
+		
+		if(!empty($countryId))
+			$entity->setCountry($entityManager->getRepository(Country::class)->find($countryId));
+		
         $form = $this->genericCreateForm($entity);
 
 		return $this->render('Proverb/new.html.twig', array('form' => $form->createView()));

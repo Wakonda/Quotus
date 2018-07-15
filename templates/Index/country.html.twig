@@ -37,7 +37,7 @@
 	</script>
 {% endblock %}
 
-{% block main_title %}<img id="flag_title" class="flag" src="{{ asset('photo/country/~entity.flag') }}" /> {{ entity.title }}{% endblock %}
+{% block main_title %}<img id="flag_title" class="flag" src="{{ asset('photo/country/'~entity.flag) }}" /> {{ entity.title }}{% endblock %}
 
 {% block main_content %}
 	<table class="index_directories table table-striped table-bordered dt-responsive">
