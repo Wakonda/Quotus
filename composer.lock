@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "af94646f130918b5c56e491aca3b6312",
-    "content-hash": "90d2a8867e41be939d3995e059a2e931",
+    "hash": "2ac0f9b3c4afcabd0be2a49831b88544",
+    "content-hash": "760eb1a0624dd02f6d5615a9d69c506d",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -1904,6 +1904,58 @@
                 "controllers"
             ],
             "time": "2018-02-14 08:40:54"
+        },
+        {
+            "name": "seregazhuk/pinterest-bot",
+            "version": "5.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/seregazhuk/php-pinterest-bot.git",
+                "reference": "ef21163a1c29df479bd8a7b0e7100819a746f357"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/seregazhuk/php-pinterest-bot/zipball/ef21163a1c29df479bd8a7b0e7100819a746f357",
+                "reference": "ef21163a1c29df479bd8a7b0e7100819a746f357",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-fileinfo": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "^0.4",
+                "mockery/mockery": "1.0",
+                "phpunit/phpunit": "~6.5"
+            },
+            "type": "package",
+            "autoload": {
+                "files": [
+                    "src/Helpers/functions.php"
+                ],
+                "psr-4": {
+                    "seregazhuk\\PinterestBot\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Zhuk",
+                    "email": "seregazhuk88@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP library for Pintrest",
+            "keywords": [
+                "lib",
+                "php",
+                "pinterest"
+            ],
+            "time": "2018-07-07 18:57:40"
         },
         {
             "name": "spipu/html2pdf",

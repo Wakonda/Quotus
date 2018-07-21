@@ -71,9 +71,7 @@ class ImageGenerator
 	{
 		$this->image = $image;
 	}
-	
-	
-	
+
 	public function generate($start_x, $start_y, $max_width)
 	{
 		//split the string 
@@ -145,7 +143,7 @@ class ImageGenerator
 			
 		// imagettftext($image, $this->fontSize, 0, $start_x, $start_y, $this->fontColor, $this->font, );            
 	
-		$this->imagettfstroketext($this->image, $this->fontSize, 0, $this->copyright["x"], $this->copyright["y"], $this->strokeColor, $this->fontColor, $this->font, $this->copyright["text"], 1);
+		$this->imagettfstroketext($this->image, 20, 0, $this->copyright["x"], $this->copyright["y"], $this->strokeColor, $this->fontColor, $this->font, $this->copyright["text"], 1);
 	}
 	
     private function imagettftextblur(&$image, $size, $angle, $x, $y, $color, $fontfile, $text, $blur_intensity = 0, $blur_filter = IMG_FILTER_GAUSSIAN_BLUR)

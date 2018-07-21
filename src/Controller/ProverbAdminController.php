@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use seregazhuk\PinterestBot\Factories\PinterestBot;
 
 require __DIR__.'/../../vendor/simple_html_dom.php';
 
@@ -283,10 +284,10 @@ class ProverbAdminController extends Controller
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Proverb::class)->find($id);
 
-		$consumer_key = "e4yhUO4SYqVcjS5g7itJeBcln";
-		$consumer_secret = "U5xMbhBXs4aGeXF2AqFjdIIGTbIVIbjgzZSNEPawgGNNvbbtMB";
-		$access_token = "706490944305102848-tx27engIyYshExc76IZNgPkqc1aBafc";
-		$access_token_secret = "vjna9QCsQxfjYx5Q0TLj0ha9nQs3b5ClvIUkQtwDdpJjS";
+		$consumer_key = getenv("TWITTER_CONSUMER_KEY");
+		$consumer_secret = getenv("TWITTER_CONSUMER_SECRET");
+		$access_token = getenv("TWITTER_ACCESS_TOKEN");
+		$access_token_secret = getenv("TWITTER_ACCESS_TOKEN_SECRET");
 
 		$connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
 
@@ -303,6 +304,30 @@ class ProverbAdminController extends Controller
 		$statues = $connection->post("statuses/update", $parameters);
 	
 		$session->getFlashBag()->add('message', 'Twitter envoyé avec succès');
+	
+		return $this->redirect($this->generateUrl("proverbadmin_show", array("id" => $id)));
+	}
+
+	public function pinterestAction(Request $request, SessionInterface $session, $id)
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+		$entity = $entityManager->getRepository(Proverb::class)->find($id);
+		
+		$mail = getenv("PINTEREST_MAIL");
+		$pwd = getenv("PINTEREST_PASSWORD");
+		$username = getenv("PINTEREST_USERNAME");
+
+		$bot = PinterestBot::create();
+		$bot->auth->login($mail, $pwd);
+		
+		/*$boards = $bot->boards->forUser($username);
+		
+		$image = $request->request->get('image_pinterest');
+		
+		$bot->pins->create($image, $boards[0]['id'], $entity->getText());
+		
+		
+		$session->getFlashBag()->add('message', 'Pinterest envoyé avec succès');*/
 	
 		return $this->redirect($this->generateUrl("proverbadmin_show", array("id" => $id)));
 	}

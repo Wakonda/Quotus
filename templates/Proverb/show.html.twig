@@ -37,12 +37,12 @@
 	<div class="panel panel-default sub_block">
 		<div class="panel-heading" role="tab" id="headingImageGenerator">
 			<p class="panel-title">
-			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwitter" aria-expanded="true" aria-controls="collapseOne">
+			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseImageGenerator" aria-expanded="true" aria-controls="collapseOne">
 			<i class="fa fa-picture-o" aria-hidden="true"></i> Générer une image
 			</a>
 			</p>
 		</div>
-		<div id="collapseTwitter" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingImageGenerator" aria-expanded="true" style="">
+		<div id="collapseImageGenerator" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingImageGenerator" aria-expanded="true">
 			<div class="panel-body">
 				{{ form_start(imageGeneratorForm, {'attr': {'class': 'form-horizontal'}, 'action': path('proverbadmin_save_image', {'id': entity.id})}) }}
 					<div class="form-group">
@@ -84,7 +84,7 @@
 			</a>
 			</p>
 		</div>
-		<div id="collapseTwitter" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwitter" aria-expanded="true" style="">
+		<div id="collapseTwitter" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingTwitter" aria-expanded="true">
 			<div class="panel-body">
 				<form action="{{ path('proverbadmin_twitter', {'id': entity.id}) }}" method="post">
 					<label for="addImage"> <input type="checkbox" id="addImage"> Ajouter une image</label>
@@ -96,11 +96,38 @@
 					<input type="hidden" name="image_tweet" id="image_tweet">
 					<textarea id="twitter_area" name="twitter_area" rows="3" cols="70" class="form-control">{{ entity.text|raw }} #proverbe #{{ entity.country.title|replace({'-': '', ' ':''}) }} </textarea>
 					<br>
-					<input value="Tweeter" id="tweet" type="submit" class="btn btn-default">
+					<input value="Envoyer" id="tweet" type="submit" class="btn btn-default">
 				</form>
 			</div>
 		</div>
 	</div>
+
+	{% if entity.images is not empty %}
+	<div class="panel panel-default sub_block">
+		<div class="panel-heading" role="tab" id="headingPinterest">
+			<p class="panel-title">
+			<a role="button" data-toggle="collapse" data-parent="accordion" href="#collapsePinterest" aria-expanded="true" aria-controls="collapseOne">
+			<i class="fa fa-pinterest" aria-hidden="true"></i> Pinterest
+			</a>
+			</p>
+		</div>
+		<div id="collapsePinterest" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingTwitter" aria-expanded="true">
+			<div class="panel-body">
+				<form action="{{ path('proverbadmin_pinterest', {'id': entity.id}) }}" method="post">
+					<div class="row">
+						{% for image in entity.images %}
+							<div class="col-md-4 mb-10"><div class="thumbnail" role="button"><img src="{{ absolute_url(asset('photo/proverb/'~image)) }}"></div></div>
+						{% endfor %}
+					</div>
+					<input type="hidden" name="image_pinterest" id="image_pinterest">
+					<textarea id="twitter_area" name="twitter_area" rows="3" cols="70" class="form-control">{{ entity.text|raw }} #proverbe #{{ entity.country.title|replace({'-': '', ' ':''}) }} </textarea>
+					<br>
+					<input value="Envoyer" id="tweet" type="submit" class="btn btn-default">
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endif %}
 	<hr>
 	<a href="{{ path('proverbadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> Modifier</a> - <a href="{{ path('proverbadmin_delete', { 'id' : entity.id }) }}"><i class="fa fa-trash"></i> Supprimer</a> - <a href="{{ path('proverbadmin_new') }}"><i class="fa fa-plus-square"></i> Créer</a> | <a href="{{ path('proverbadmin_new', {countryId: entity.country.id}) }}"> pour le même pays</a>
 {% endblock %}
@@ -108,14 +135,22 @@
 {% block script_additional %}
 	<script type="text/javascript">
 		$(function() {
-			$("input#addImage").click(function() {
-				$("#image_container").toggleClass('hidden');
+			// Twitter
+			$("div#collapseTwitter input#addImage").click(function() {
+				$("div#collapseTwitter #image_container").toggleClass('hidden');
 			});
 		
-			$("div#image_container .thumbnail").click(function() {
-				$("div#image_container .thumbnail").removeAttr("style");
+			$("div#collapseTwitter div#image_container .thumbnail").click(function() {
+				$("div#collapseTwitter div#image_container .thumbnail").removeAttr("style");
 				$(this).css({"border-color": "#f00", "background-color": "#eca7a7"});
 				$("#image_tweet").val($("img", this).attr("src"));
+			});
+			
+			// Pinterest
+			$("div#collapsePinterest .thumbnail").click(function() {
+				$("div#collapsePinterest .thumbnail").removeAttr("style");
+				$(this).css({"border-color": "#f00", "background-color": "#eca7a7"});
+				$("#image_pinterest").val($("img", this).attr("src"));
 			});
 		});
 	</script>
