@@ -320,14 +320,13 @@ class ProverbAdminController extends Controller
 		$bot = PinterestBot::create();
 		$bot->auth->login($mail, $pwd);
 		
-		/*$boards = $bot->boards->forUser($username);
+		$boards = $bot->boards->forUser($username);
 		
 		$image = $request->request->get('image_pinterest');
 		
-		$bot->pins->create($image, $boards[0]['id'], $entity->getText());
+		$bot->pins->create($image, $boards[0]['id'], $entity->getText(), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
 		
-		
-		$session->getFlashBag()->add('message', 'Pinterest envoyé avec succès');*/
+		$session->getFlashBag()->add('message', 'Pinterest envoyé avec succès');
 	
 		return $this->redirect($this->generateUrl("proverbadmin_show", array("id" => $id)));
 	}
