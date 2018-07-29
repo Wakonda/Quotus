@@ -326,7 +326,10 @@ class ProverbAdminController extends Controller
 		
 		$bot->pins->create($image, $boards[0]['id'], $entity->getText(), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
 		
-		$session->getFlashBag()->add('message', 'Pinterest envoyé avec succès');
+		if(empty($bot->getLastError()))
+			$session->getFlashBag()->add('message', 'Pinterest envoyé avec succès');
+		else
+			$session->getFlashBag()->add('message', $bot->getLastError());
 	
 		return $this->redirect($this->generateUrl("proverbadmin_show", array("id" => $id)));
 	}
