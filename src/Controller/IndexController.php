@@ -383,6 +383,19 @@ class IndexController extends Controller
 			'links' => $links
 		));
     }
+	
+	public function generateWidgetAction()
+	{
+		return $this->render('Index/generate_widget.html.twig');
+	}
+	
+	public function widgetAction()
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+		$proverb = $entityManager->getRepository(Proverb::class)->getRandomProverb();
+
+		return $this->render('Index/Widget/randomProverbWidget.html.twig', ['proverb' => $proverb]);
+	}
 
 	private function createFormIndexSearch()
 	{

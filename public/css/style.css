@@ -407,6 +407,10 @@ textarea.text
 	resize:vertical;
 }
 
+textarea.vertical {
+	resize:vertical;
+}
+
 input.year {
 	width: 85px !important;
 	display: inherit;

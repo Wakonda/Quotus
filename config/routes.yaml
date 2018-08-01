@@ -87,6 +87,14 @@ admin:
     path: /admin
     controller: App\Controller\AdminController::indexAction
 
+generate_widget:
+    path: /generate_widget
+    controller: App\Controller\IndexController::generateWidgetAction
+
+widget:
+    path: /widget
+    controller: App\Controller\IndexController::widgetAction
+
 # CONTACT
 contact:
     path: /contact
