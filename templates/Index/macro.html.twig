@@ -16,9 +16,9 @@
         force_p_newlines : false,
         forced_root_block : '',
 		plugins: [
-			'lists link image charmap textcolor media'
+			'lists link image charmap textcolor media code'
 		],
-		toolbar: 'bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | link image | undo redo |',
+		toolbar: 'bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | link image | undo redo | code',
 		setup: function (editor) {
 			editor.on('change', function () {
 				tinymce.triggerSave();

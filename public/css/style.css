@@ -901,3 +901,36 @@ div.social_network_container {
 	width: 100% !important;
 	border: none !important;
 }
+
+/* Social Network */
+.social-media-icons ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.social-media-icons a {	
+	display: inline-block;
+	text-decoration: none;
+	padding: 7px;
+}
+
+.social-media-icons a.facebook i {
+	color: 	#3b5998;
+}
+
+.social-media-icons a.twitter i {
+	color: #4099FF;
+}
+
+.social-media-icons a.pinterest i {
+	color: #b31217;
+}
+
+.social-media-icons a.instagram i {
+	color: #DD2A7B;
+}
+
+.social-media-icons a i:hover{
+	opacity: 0.8;
+}
