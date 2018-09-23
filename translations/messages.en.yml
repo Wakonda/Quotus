@@ -66,6 +66,7 @@ search:
         Criteria: "Criteria:"
         Country: "Country"
         Text: "Text"
+        None: "None"
 send:
     index:
         AutomaticallyAddedPost: "Proverb will be automatically added to your message"
@@ -73,6 +74,14 @@ send:
         Infos: "Infos"
     message:
         ThisProverbHasBeenSentSince: "This proverb has been sent since"
+    field:
+        FirstName: "First name"
+        LastName: "Last name"
+        YourMail: "Your mail"
+        RecipientMail: "Recipient email"
+        Subject: "Subject"
+        Message: "Message"
+        Send: "Send"
 error:
     index:
         Error: "Error"

@@ -66,6 +66,7 @@ search:
         Criteria: "Critères :"
         Country: "Pays"
         Text: "Texte"
+        None: "Aucun"
 send:
     index:
         AutomaticallyAddedPost: "La poésie sera automatiquement ajoutée à votre message"
@@ -73,6 +74,14 @@ send:
         Infos: "Infos"
     message:
         ThisProverbHasBeenSentSince: "Ce proverbe a été envoyé depuis"
+    field:
+        FirstName: "Prénom"
+        LastName: "Nom"
+        YourMail: "Votre email"
+        RecipientMail: "Email du destinataire"
+        Subject: "Sujet"
+        Message: "Message"
+        Send: "Envoyer"
 error:
     index:
         Error: "Erreur"
@@ -135,6 +144,7 @@ contact:
         Email: "Email"
         Subject: "Objet"
         Send: "Envoyer"
+        None: "Aucun"
 comment:
     index:
         Comments: "Commentaires"

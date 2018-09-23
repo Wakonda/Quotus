@@ -14,15 +14,15 @@ class SendType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-			->add('firstName', TextType::class, array('required' => false, "label" => "Prénom"))
-			->add('lastName', TextType::class, array('required' => false, "label" => "Nom"))
-            ->add('yourMail', TextType::class, array('constraints' => array(new Assert\Email(), new Assert\NotBlank()), "label" => "Votre Email"))
-            ->add('recipientMail', TextType::class, array('constraints' => array(new Assert\Email(), new Assert\NotBlank()), "label" => "Email du destinataire"))
-            ->add('subject', TextType::class, array('constraints' => new Assert\NotBlank(), "label" => "Sujet"))
+			->add('firstName', TextType::class, array('required' => false, "label" => "send.field.FirstName"))
+			->add('lastName', TextType::class, array('required' => false, "label" => "send.field.LastName"))
+            ->add('yourMail', TextType::class, array('constraints' => array(new Assert\Email(), new Assert\NotBlank()), "label" => "send.field.YourMail"))
+            ->add('recipientMail', TextType::class, array('constraints' => array(new Assert\Email(), new Assert\NotBlank()), "label" => "send.field.RecipientMail"))
+            ->add('subject', TextType::class, array('constraints' => new Assert\NotBlank(), "label" => "send.field.Subject"))
 			->add('message', TextareaType::class, array(
-                'constraints' => new Assert\NotBlank(), "label" => "Texte", 'attr' => array('class' => TextType::class)
+                'constraints' => new Assert\NotBlank(), "label" => "send.field.Message", 'attr' => array('class' => TextType::class)
             ))
-			->add('send', SubmitType::class, array('label' => 'Envoyer', 'attr' => array('class' => 'btn btn-success')))
+			->add('send', SubmitType::class, array('label' => 'send.field.Send', 'attr' => array('class' => 'btn btn-success')))
 			;
     }
 

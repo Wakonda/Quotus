@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\Translation\TranslatorInterface;
 
 use App\Form\Type\IndexSearchType;
 use App\Service\Captcha;
@@ -42,13 +43,13 @@ class IndexController extends Controller
 		return $this->redirect($this->generateUrl('index'));
 	}
 	
-	public function indexSearchAction(Request $request)
+	public function indexSearchAction(Request $request, TranslatorInterface $translator)
 	{
 		$search = $request->request->get("index_search");
 		$entityManager = $this->getDoctrine()->getManager();
 		$search['country'] = (empty($search['country'])) ? null : $entityManager->getRepository(Country::class)->find($search['country'])->getTitle();
 		$criteria = array_filter(array_values($search));
-		$criteria = empty($criteria) ? "Aucun" : $criteria;
+		$criteria = empty($criteria) ? $translator->trans("search.result.None") : $criteria;
 		
 		unset($search["_token"]);
 		
