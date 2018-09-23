@@ -1,7 +1,7 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Administration{% endblock %}
-{% block main_title %}Administration{% endblock %}
+{% block head_title %}{{ 'menu.left.Admin'|trans }}{% endblock %}
+{% block main_title %}{{ 'menu.left.Admin'|trans }}{% endblock %}
 
 {% block meta_tag %}
 	<meta name="robots" content="noindex,nofollow" />
@@ -37,31 +37,31 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><a href="{{ path('countryadmin_index') }}" alt="">Pays</a></td>
-				<td><a href="{{ path('countryadmin_new') }}" alt="">Création</a></td>
+				<td><a href="{{ path('countryadmin_index') }}" alt="">{{ 'admin.index.Country'|trans }}</a></td>
+				<td><a href="{{ path('countryadmin_new') }}" alt="">{{ 'admin.index.Create'|trans }}</a></td>
 			</tr>
 			<tr>
-				<td><a href="{{ path('proverbadmin_index') }}" alt="">Proverbe</a></td>
-				<td><a href="{{ path('proverbadmin_new') }}" alt="">Création</a> - <a href="{{ path('proverbadmin_newfastmultiple') }}" alt=""><i class="fa fa-rocket text-danger" aria-hidden="true"></i></a></td>
+				<td><a href="{{ path('proverbadmin_index') }}" alt="">{{ 'admin.index.Proverb'|trans }}</a></td>
+				<td><a href="{{ path('proverbadmin_new') }}" alt="">{{ 'admin.index.Create'|trans }}</a> - <a href="{{ path('proverbadmin_newfastmultiple') }}" alt=""><i class="fa fa-rocket text-danger" aria-hidden="true"></i></a></td>
 			</tr>
 			<tr>
-				<td><a href="{{ path('pageadmin_index') }}" alt="">Page</a></td>
-				<td><a href="{{ path('pageadmin_new') }}" alt="">Création</a></td>
+				<td><a href="{{ path('pageadmin_index') }}" alt="">{{ 'admin.index.Page'|trans }}</a></td>
+				<td><a href="{{ path('pageadmin_new') }}" alt="">{{ 'admin.index.Create'|trans }}</a></td>
 			</tr>
 			<tr>
-				<td><a href="{{ path('storeadmin_index') }}" alt="">Boutique</a></td>
-				<td><a href="{{ path('storeadmin_new') }}" alt="">Création</a></td>
+				<td><a href="{{ path('storeadmin_index') }}" alt="">{{ 'admin.index.Store'|trans }}</a></td>
+				<td><a href="{{ path('storeadmin_new') }}" alt="">{{ 'admin.index.Create'|trans }}</a></td>
 			</tr>
 			<tr>
-				<td><a href="{{ path('contactadmin_index') }}" alt="">Contact</a></td>
-				<td>{{ count_unread_messages() }} message(s) non lu(s)</td>
+				<td><a href="{{ path('contactadmin_index') }}" alt="">{{ 'admin.index.Contact'|trans }}</a></td>
+				<td>{{ count_unread_messages() }} {{ 'admin.index.UnreadMessages'|trans }}</td>
 			</tr>
 			<tr>
-				<td><a href="{{ path('useradmin_index') }}" alt="">Membre</a></td>
+				<td><a href="{{ path('useradmin_index') }}" alt="">{{ 'admin.index.Member'|trans }}</a></td>
 				<td>-</td>
 			</tr>
 		</tbody>
 	</table>
 	<hr>
-	<a href="{{ path('generate_sitemap') }}" class="btn btn-info"><i class="fa fa-sitemap"></i> Générer le Sitemap</a>
+	<a href="{{ path('generate_sitemap') }}" class="btn btn-info"><i class="fa fa-sitemap"></i> {{ 'admin.index.GenerateSitemap'|trans }}</a>
 {% endblock %}

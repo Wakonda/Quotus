@@ -1,16 +1,16 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Connection{% endblock %}
-{% block main_title %}Connection{% endblock %}
+{% block head_title %}{{ 'user.login.LogIn'|trans }}{% endblock %}
+{% block main_title %}{{ 'user.login.LogIn'|trans }}{% endblock %}
 
 {% block main_content %}
 	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-		Vous êtes déjà connecté en tant que {{ app.user.username }}
-		<a href="{{ path('admin_logout') }}">Déconnexion</a>
+		{{ 'user.login.YouAreLoggedInAs'|trans }} {{ app.user.username }}
+		<a href="{{ path('logout') }}">{{ 'user.login.LogOut'|trans }}</a>
 	{% else %}
 		<form action="{{ path('login') }}" method="post" novalidate>
 			{% if error %}
-				<p class="error">Pseudo ou mot de passe incorect</p>
+				<p class="error">{{ 'user.login.PasswordOrUserForgotten'|trans }}</p>
 			{% endif %}
 			{% for message in app.session.getFlashBag.get('confirm_login') %}
 				<div class="success">{{ message }}</div>
@@ -22,19 +22,19 @@
 
 			<table class="form_grid">
 				<tr>
-					<th><label for="username" class="required">Pseudo</label></th>
+					<th><label for="username" class="required">{{ 'user.login.Pseudo'|trans }}</label></th>
 					<td><input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" /></td>
 				</tr>
 				<tr>
-					<th><label for="password" class="required">Mot de passe</label></th>
+					<th><label for="password" class="required">{{ 'user.login.Password'|trans }}</label></th>
 					<td><input type="password" id="password" name="_password" value="" class="form-control" /></td>
 				</tr>
 			</table>
 			<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-			<label for="remember_me">Se souvenir de moi</label>
+			<label for="remember_me">{{ 'user.login.RememberMe'|trans }}</label>
 			<br>
-			<button type="submit" class="btn btn-info"><i class="fa fa-sign-in"></i> Connection</button>
-			<a href="{{ path('user_forgottenpassword') }}" alt="">Mot de passe oublié ?</a>
+			<button type="submit" class="btn btn-info"><i class="fa fa-sign-in"></i> {{ 'user.login.LogIn'|trans }}</button>
+			<a href="{{ path('user_forgottenpassword') }}" alt="">{{ 'user.login.ForgottenPassword'|trans }}</a>
 		</form>
 	{% endif %}
 {% endblock %}

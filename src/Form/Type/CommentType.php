@@ -15,9 +15,9 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('text', TextareaType::class, array(
-                'constraints' => new Assert\NotBlank(), 'label' => 'Message'
+                'constraints' => new Assert\NotBlank(), 'label' => 'comment.field.Message'
             ))		
-            ->add('save', SubmitType::class, array('label' => 'Envoyer', 'attr' => array('class' => 'btn btn-success')));
+            ->add('save', SubmitType::class, array('label' => 'comment.field.Send', 'attr' => array('class' => 'btn btn-success')));
     }
 
     public function getName()

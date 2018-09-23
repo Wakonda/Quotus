@@ -32,6 +32,11 @@ class Country
      * @ORM\Column(type="string", length=255)
      */
     protected $slug;
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Language")
+     */
+	protected $language;
 
 	public function __toString()
 	{
@@ -94,4 +99,14 @@ class Country
 		if(empty($this->slug))
 			$this->slug = GenericFunction::slugify($this->title);
     }
+
+	public function getLanguage()
+	{
+		return $this->language;
+	}
+	
+	public function setLanguage($language)
+	{
+		$this->language = $language;
+	}
 }

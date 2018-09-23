@@ -1,6 +1,6 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Accueil{% endblock %}
+{% block head_title %}Proverbius{% endblock %}
 
 {% block script_additional %}
 	<script src="{{ asset('js/jquery-ui-1.11.0/jquery-ui.min.js') }}"></script>	
@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block main_content %}
-	<h2>Rechercher un proverbe</h2>
+	<h2>{{ 'main.index.Search'|trans }}</h2>
 	{% form_theme form 'Form/fields.html.twig' %}
 	{{ form_start(form, {'method' : 'post', 'action' : path('index_search') , 'attr': {'novalidate': 'novalidate'} }) }}
 		<table class="form_grid">
@@ -40,7 +40,7 @@
 		{{ form_rest(form) }}
 	{{ form_end(form) }}
 	<hr class="flare">
-	<h2>Proverbe au hasard</h2>
+	<h2>{{ 'main.index.ProverbRandomly'|trans }}</h2>
 	{% if random is not null %}
 	<div>
 		<blockquote>{{ random.text|raw }}</blockquote>
@@ -50,6 +50,6 @@
 	<a href="{{ path('country', {'id' : random.country.id, 'slug' : random.country.slug }) }}" alt=""><img class="flag" src="{{ asset('photo/country/'~random.country.flag) }}" alt="" height="8" /> Proverbe - {{ random.country.title }}</a>
 	</p>
 	{% else %}
-		<p>Aucun Proverbe encore ajouté.</p>
+		<p>{{ 'main.index.NoProverb'|trans }}.</p>
 	{% endif %}
 {% endblock %}

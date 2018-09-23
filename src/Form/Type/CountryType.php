@@ -9,23 +9,40 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use App\Entity\Country;
+use App\Entity\Language;
+use App\Repository\LanguageRepository;
 
 class CountryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+		$locale = $options["locale"];
+		
         $builder
             ->add('title', TextType::class, array(
-                'constraints' => new Assert\NotBlank(), "label" => "Titre"
+                'constraints' => new Assert\NotBlank(), "label" => "admin.country.Title"
             ))
 			->add('internationalName', TextType::class, array(
-                'constraints' => new Assert\NotBlank(), "label" => "Nom international", 'attr' => array('class' => 'redactor')
+                'constraints' => new Assert\NotBlank(), "label" => "admin.country.InternationalName", 'attr' => array('class' => 'redactor')
             ))
-			->add('flag', FileType::class, array('data_class' => null, "label" => "Drapeau", "required" => true
+			->add('flag', FileType::class, array('data_class' => null, "label" => "admin.country.Flag", "required" => true
             ))
-            ->add('save', SubmitType::class, array('label' => 'Sauvegarder', 'attr' => array('class' => 'btn btn-success')))
+			->add('language', EntityType::class, array(
+				'label' => 'admin.form.Language', 
+				'class' => Language::class,
+				'query_builder' => function (LanguageRepository $er) use ($locale) {
+					return $er->findAllForChoice($locale);
+				},
+				'multiple' => false,
+				'required' => true,
+				'expanded' => false,
+				'placeholder' => 'main.field.ChooseAnOption',
+				'constraints' => new Assert\NotBlank()
+			))
+            ->add('save', SubmitType::class, array('label' => 'admin.main.Save', 'attr' => array('class' => 'btn btn-success')))
 			;
     }
 
@@ -35,7 +52,8 @@ class CountryType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			"data_class" => Country::class
+			"data_class" => Country::class,
+			"locale" => null
 		));
 	}
 

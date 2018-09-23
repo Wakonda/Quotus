@@ -19,22 +19,34 @@ class IndexSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+		$locale = $options["locale"];
+
         $builder
-			->add('text', TextType::class, array("label" => "Mots-clés", "required" => false, "attr" => array("class" => "tagit full_width")))
+			->add('text', TextType::class, array("label" => "main.field.Keywords", "required" => false, "attr" => array("class" => "tagit full_width")))
 			->add('country', EntityType::class, array(
-				'label' => 'Pays',
+				'label' => 'main.field.Country',
 				'class' => Country::class,
-				'query_builder' => function (CountryRepository $er) {
-					return $er->findAllForChoice();
+				'query_builder' => function (CountryRepository $er) use ($locale) {
+					return $er->findAllForChoice($locale);
 				},
 				'multiple' => false, 
 				'expanded' => false,
 				'constraints' => array(new Assert\NotBlank()),
-				'placeholder' => 'Sélectionnez un pays'
+				'placeholder' => 'main.field.ChooseAnOption'
 			))
-            ->add('search', SubmitType::class, array('label' => 'Rechercher', "attr" => array("class" => "btn btn-primary")))
+            ->add('search', SubmitType::class, array('label' => 'main.field.Search', "attr" => array("class" => "btn btn-primary")))
 			;
     }
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function configureOptions(OptionsResolver $resolver)
+	{
+		$resolver->setDefaults(array(
+			"locale" => null
+		));
+	}
 
     public function getName()
     {

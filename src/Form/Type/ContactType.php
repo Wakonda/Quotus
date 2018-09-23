@@ -15,12 +15,12 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mail', TextType::class, array('constraints' => array(new Assert\Email(), new Assert\NotBlank()), "label" => "Email"))
-            ->add('subject', TextType::class, array('constraints' => new Assert\NotBlank(), "label" => "Sujet"))
+            ->add('mail', TextType::class, array('constraints' => array(new Assert\Email(), new Assert\NotBlank()), "label" => "contact.field.Email"))
+            ->add('subject', TextType::class, array('constraints' => new Assert\NotBlank(), "label" => "contact.field.Subject"))
 			->add('message', TextareaType::class, array(
-                'constraints' => new Assert\NotBlank(), "label" => "Texte", 'attr' => array('class' => TextType::class)
+                'constraints' => new Assert\NotBlank(), "label" => "contact.field.Message", 'attr' => array('class' => TextType::class)
             ))
-			->add('send', SubmitType::class, array('label' => 'Envoyer', 'attr' => array('class' => 'btn btn-success')))
+			->add('send', SubmitType::class, array('label' => 'contact.field.Send', 'attr' => array('class' => 'btn btn-success')))
 			;
     }
 

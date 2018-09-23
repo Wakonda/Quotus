@@ -56,7 +56,7 @@
 
 <div class="hidden_print">
 	<hr>
-	<h2>Commentaires</h2>
+	<h2>{{ 'comment.index.Comments'|trans }}</h2>
 	<div>
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
@@ -82,7 +82,7 @@
 			<div role="tabpanel" class="tab-pane" id="proverbius_comment">
 				{% if is_granted('IS_AUTHENTICATED_FULLY') == false and is_granted('IS_AUTHENTICATED_REMEMBERED') == false %}
 					<div class="alert alert-danger" role="alert">
-						<i class="fa fa-exclamation-triangle"></i> Vous devez être connecté pour pouvoir écrire un commentaire
+						<i class="fa fa-exclamation-triangle"></i> {{ 'comment.field.YouMustBeLoggedInToWriteAComment'|trans }}
 					</div>
 				{% endif %}
 				<div id="form_comment_container">

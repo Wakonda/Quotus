@@ -30,6 +30,11 @@ class Store
      * @ORM\Column(type="text")
      */
     protected $tag;
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Language")
+     */
+	protected $language;
 
     public function getId()
     {
@@ -70,4 +75,14 @@ class Store
     {
         $this->tag = $tag;
     }
+
+	public function getLanguage()
+	{
+		return $this->language;
+	}
+	
+	public function setLanguage($language)
+	{
+		$this->language = $language;
+	}
 }

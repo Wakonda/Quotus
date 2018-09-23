@@ -1,0 +1,234 @@
+menu:
+    top:
+        MainPage: "Accueil"
+        Countries: "Pays"
+        AlphabetBook: "Abécédaire"
+        Store: "Boutique"
+    left:
+        RecentPublications: "Publications récentes"
+        FollowUs: "Suivez-nous"
+        Publicity: "Publicité"
+        Statistics: "Statistiques"
+        MemberArea: "Espace membre"
+        Languages: "Autres langues"
+        LogIn: "Se connecter"
+        CreateAccount: "Créer un compte utilisateur"
+        NumberOfPublishedProverbs: "Nombre de proverbes publiés"
+        MyProfile: "Mon profil"
+        ChangeMyPassword: "Modifier mon mot de passe"
+        EditProfile: "Modifier mon profil"
+        LogOut: "Déconnexion"
+        Admin: "Admin"
+    footer:
+        About: "À propos"
+        ContactUs: "Contactez-nous"
+        Version: "Version"
+        PrivacyPolicy: "Politique de confidentialité"
+main:
+    index:
+        WonderfulWorldOfProverb: "Le<small> Monde Magique </small> des Proverbes"
+        WelcomeTo: "Bienvenue sur Proverbius"
+        Search: "Rechercher un proverbe"
+        ProverbRandomly: "Proverbe au hasard"
+        NoProverb: "Aucun Proverbe encore ajouté"
+    field:
+        Keywords: "Mots-clés"
+        Country: "Pays"
+        ChooseAnOption: "Choisissez une option"
+        Search: "Rechercher"
+country:
+    index:
+        ByCountries: "Par pays"
+    table:
+        Number: "Nombre"
+        Read: "Lire"
+        Country: "Pays"
+        Text: "Texte"
+alphabetBook:
+    index:
+        ByLetter: "Abécédaire"
+    table:
+        Number: "Nombre"
+        Letter: "Lettre"
+        Read: "Lire"
+        Text: "Texte"
+store:
+    index:
+        Store: "Boutique"
+        Search: "Rechercher"
+proverb:
+    read:
+        Proverb: "Proverbe"
+search:
+    result:
+        Search: "Recherche"
+        SearchResults: "Résultat de votre recherche"
+        Criteria: "Critères :"
+        Country: "Pays"
+        Text: "Texte"
+send:
+    index:
+        AutomaticallyAddedPost: "La poésie sera automatiquement ajoutée à votre message"
+        SendFriend: "Envoyez cette poésie à un ami"
+        Infos: "Infos"
+    message:
+        ThisProverbHasBeenSentSince: "Ce proverbe a été envoyé depuis"
+error:
+    index:
+        Error: "Erreur"
+        PageNotFound: "La page à laquelle vous souhaitez accéder n'existe pas (ou plus) !"
+widget:
+    random:
+        Proverb: "Proverbe"
+user:
+    login:
+        Pseudo: "Pseudo"
+        Password: "Mot de passe"
+        RememberMe: "Se souvenir de moi"
+        LogIn: "Connexion"
+        LogOut: "Se déconnecter"
+        ForgottenPassword: "Mot de passe oublié ?"
+        PasswordOrUserForgotten: "Pseudo ou mot de passe incorect"
+        YouAreLoggedInAs: "Vous êtes déjà connecté en tant que"
+    createAccount:
+        CreateAccount: "Créer un compte"
+        Pseudo: "Pseudo"
+        Password: "Mot de passe"
+        PasswordValidation: "Mot de passe (validation)"
+        Email: "Email"
+        Avatar: "Avatar"
+        Description: "Présentation"
+        Country: "Pays"
+        Captcha: "Recopiez le mot contenu dans l'image"
+        CreateSave: "Créer votre compte"
+        OR: "OU"
+        SelectFile: "Sélectionnez un fichier"
+        UseGravatar: "Utilisez un gravatar"
+        PasswordsMustMatch: "Les mots de passe doivent correspondre"
+    myProfile:
+        MyPoems: "Mes poésies"
+        MyComments: "Mes commentaires"
+        MyVotes: "Mes votes"
+        Login: "Nom d'utilisateur"
+        Country: "Pays"
+        Description: "Présentation"
+        Title: "Titre"
+        Action: "Action"
+        Edit: "Modifier"
+        Delete: "Supprimer"
+        State: "Etat"
+        Poem: "Poésie"
+        PublicationDate: "Date de publication"
+        Vote: "Vote"
+forgottenPassword:
+    index:
+        ResetPassword: "Réinitialisation du mot de passe"
+        NewPasswordSend: "Un nouveau mot de passe vous sera envoyé à l'adresse mail renseignée sur votre compte utilisateur."
+    field:
+        EmailUsername: "Email ou nom d'utilisateur"
+        Captcha: "Recopiez le mot contenu dans l'image"
+        Send: "Réinitialiser le mot de passe"
+contact:
+    field:
+        ContactUs: "Contactez nous !"
+        Message: "Message"
+        Email: "Email"
+        Subject: "Objet"
+        Send: "Envoyer"
+comment:
+    index:
+        Comments: "Commentaires"
+    field:
+        Message: "Message"
+        Send: "Envoyer"
+        YouMustBeLoggedInToWriteAComment: "Vous devez être connecté pour pouvoir écrire un commentaire"
+    list:
+        PreviousPage: "Page précédente"
+        NextPage: "Page Suivante"
+vote:
+    index:
+        Votes: "Votes"
+    field:
+        Error: "Erreur"
+        YouMustBeLoggedInToVote: "Vous devez être connecté pour pouvoir voter !"
+        YouHaveAlreadyVotedForThisPoem: "Vous avez déjà voté pour cette poésie"
+version:
+    index:
+        Version: "Version"
+        ReleaseDate: "Date de sortie"
+        Read: "Lire"
+admin:
+    index:
+        Contact: "Contact"
+        Member: "Membre"
+        Page: "Page"
+        Country: "Pays"
+        Proverb: "Proverbe"
+        Version: "Version"
+        Store: "Boutique"
+        Tag: "Tag"
+        Create: "Créer"
+        Read: "Lire"
+        Update: "Modifier"
+        Add: "Ajouter"
+        QuicklyCreation: "Création rapide"
+        GenerateSitemap: "Générer le Sitemap"
+        Yes: "Oui"
+        No: "Non"
+        CurrentImage: "Photo actuelle"
+        CurrentFile: "Fichier actuel"
+        UnreadMessages: "Message(s) non lu(s)"
+    table:
+        Title: "Titre"
+        Text: "Texte"
+        Action: "Action"
+        Subject: "Sujet"
+        ReadQuestion: "Lu ?"
+        Pseudo: "Pseudo"
+        ReleaseDate: "Date de sortie"
+        VersionNumber: "Numéro de version"
+    main:
+        Save: "Sauvegarder"
+    form:
+        Language: "Langue"
+        Slug: "Slug"
+    proverb:
+        Text: "Texte"
+        Slug: "Slug"
+        Country: "Pays"
+        ProxyAddress: "Adresse proxy"
+        ForSameCountry: "pour le même pays"
+    country:
+        Title: "Titre"
+        InternationalName: "Nom international"
+        Flag: "Drapeau"
+    contact:
+        Message: "Message"
+        Email: "Email"
+        DateOfDispatch: "Date d'envoi"
+    member:
+        Pseudo: "Pseudo"
+        Roles: "Rôles"
+        Email: "Email"
+        Activated: "Activé"
+        Activate: "Activer"
+        Desactivate: "Désactiver"
+    page:
+        Title: "Titre"
+        Text: "Texte"
+        InternationalName: "Nom international"
+        Image: "Image"
+    version:
+        VersionNumber: "Numéro de version"
+        ReleaseDate: "Date de sortie"
+        File: "Fichier"
+    store:
+        Title: "Titre"
+        ProductCode: "Code produit"
+        Tag: "Tag"
+    socialNetwork:
+        Send: "Envoyer"
+    imageGenerator:
+        Image: "Image"
+        FontSize: "Taille de la police"
+        InvertColors: "Inverses les couleurs"

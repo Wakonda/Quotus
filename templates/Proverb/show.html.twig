@@ -1,21 +1,25 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Admin Proverbe{% endblock %}
-{% block main_title %}Administration - Proverbe{% endblock %}
+{% block head_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Proverb'|trans }}{% endblock %}
+{% block main_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Proverb'|trans }}{% endblock %}
 
 {% block main_content %}
 	<table class="admin_show">
 		<tr>
-			<th>Texte</th>
+			<th>{{ 'admin.proverb.Text'|trans }}</th>
 			<td>{{ entity.text|raw }}</td>
 		</tr>
 		<tr>
-			<th>Pays</th>
+			<th>{{ 'admin.proverb.Country'|trans }}</th>
 			<td>{{ entity.country.title }}</td>
 		</tr>
 		<tr>
-			<th>Slug</th>
+			<th>{{ 'admin.proverb.Slug'|trans }}</th>
 			<td>{{ entity.slug }}</td>
+		</tr>
+		<tr>
+			<th>{{ "admin.form.Language"|trans }}</th>
+			<td>{{ entity.language.title }}</td>
 		</tr>
 		<tr>
 			<th>Image</th>
@@ -91,7 +95,7 @@
 					<input type="hidden" name="image_tweet" id="image_tweet">
 					<textarea id="twitter_area" name="twitter_area" rows="3" cols="70" class="form-control">{{ entity.text|raw }} #proverbe #{{ entity.country.title|replace({'-': '', ' ':''}) }} </textarea>
 					<br>
-					<input value="Envoyer" id="tweet" type="submit" class="btn btn-default">
+					<input value="{{ 'admin.socialNetwork.Send'|trans }}" id="tweet" type="submit" class="btn btn-default">
 				</form>
 			</div>
 		</div>
@@ -117,14 +121,14 @@
 					<input type="hidden" name="image_pinterest" id="image_pinterest">
 					<textarea id="twitter_area" name="twitter_area" rows="3" cols="70" class="form-control">{{ entity.text|raw }} #proverbe #{{ entity.country.title|replace({'-': '', ' ':''}) }} </textarea>
 					<br>
-					<input value="Envoyer" id="tweet" type="submit" class="btn btn-default">
+					<input value="{{ 'admin.socialNetwork.Send'|trans }}" id="tweet" type="submit" class="btn btn-default">
 				</form>
 			</div>
 		</div>
 	</div>
 	{% endif %}
 	<hr>
-	<a href="{{ path('proverbadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> Modifier</a> - <a href="{{ path('proverbadmin_delete', { 'id' : entity.id }) }}"><i class="fa fa-trash"></i> Supprimer</a> - <a href="{{ path('proverbadmin_new') }}"><i class="fa fa-plus-square"></i> Créer</a> | <a href="{{ path('proverbadmin_new', {countryId: entity.country.id}) }}"> pour le même pays</a>
+	<a href="{{ path('proverbadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> {{ 'admin.index.Update'|trans }}</a> - <a href="{{ path('proverbadmin_delete', { 'id' : entity.id }) }}"><i class="fa fa-trash"></i> Supprimer</a> - <a href="{{ path('proverbadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a> | <a href="{{ path('proverbadmin_new', {countryId: entity.country.id}) }}"> {{ 'admin.index.ForSameCountry'|trans }}</a>
 {% endblock %}
 
 {% block script_additional %}

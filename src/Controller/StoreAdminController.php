@@ -52,6 +52,7 @@ class StoreAdminController extends Controller
 			$row = array();
 			$row[] = $entity->getId();
 			$row[] = $entity->getTitle();
+			$row[] = $entity->getLanguage()->getTitle();
 			
 			$show = $this->generateUrl('storeadmin_show', array('id' => $entity->getId()));
 			$edit = $this->generateUrl('storeadmin_edit', array('id' => $entity->getId()));

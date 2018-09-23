@@ -64,6 +64,7 @@ class ProverbAdminController extends Controller
 			$row = array();
 			$row[] = $entity->getId();
 			$row[] = $entity->getText();
+			$row[] = $entity->getLanguage()->getTitle();
 			
 			$show = $this->generateUrl('proverbadmin_show', array('id' => $entity->getId()));
 			$edit = $this->generateUrl('proverbadmin_edit', array('id' => $entity->getId()));

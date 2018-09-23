@@ -1,6 +1,6 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Par Pays{% endblock %}
+{% block head_title %}{{ 'country.index.ByCountries'|trans }}{% endblock %}
 
 {% block style_additional %}
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}" media="screen" />
@@ -37,13 +37,13 @@
 	</script>
 {% endblock %}
 
-{% block main_title %}Par pays{% endblock %}
+{% block main_title %}{{ 'country.index.ByCountries'|trans }}{% endblock %}
 
 {% block main_content %}
 		<table class="index_directories table table-striped table-bordered dt-responsive">
 		<thead>
-			<th>Pays</th>
-			<th class="phone">Nombre</th>
+			<th>{{ 'country.table.Country'|trans }}</th>
+			<th class="phone">{{ 'country.table.Number'|trans }}</th>
 		</thead>
 		<tbody>
 		</tbody>

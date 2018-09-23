@@ -39,16 +39,16 @@
 						</a>
 					</div>
 					<!--<h1>Creating HTML5 <span>Responsive Web Template Using Media Queries</span></h1>-->
-					<h2>Le<small> Monde Magique </small> des Proverbes</h2>
+					<h2>{{ 'main.index.WonderfulWorldOfProverb'|trans|raw }}</h2>
 				</hgroup>
 				<!-- Hgroup Element Ends Here -->
 
 				<!-- Nav Element Starts Here -->
 				<nav class="navigation">
-					<a href="{{ path('index') }}"><i class="fa fa-home"></i> Accueil</a>
-					<a href="{{ path('bycountries') }}">Pays</a>
-					<a href="{{ path('byletters') }}">Abécédaire</a>
-					<a href="{{ path('store') }}">Boutique</a>
+					<a href="{{ path('index') }}"><i class="fa fa-home"></i> {{ 'menu.top.MainPage'|trans }}</a>
+					<a href="{{ path('bycountries') }}">{{ 'menu.top.Countries'|trans }}</a>
+					<a href="{{ path('byletters') }}">{{ 'menu.top.AlphabetBook'|trans }}</a>
+					<a href="{{ path('store') }}">{{ 'menu.top.Store'|trans }}</a>
 				</nav>
 			</header>
 			<!-- Header Element Ends Here -->
@@ -57,7 +57,7 @@
 				<!-- Sidebar Element Starts Here -->
 				<aside id="sidebar-wrapper">
 					<nav class="sidebar">
-						<h1>Publications récentes</h1>
+						<h1>{{ 'menu.left.RecentPublications'|trans }}</h1>
 						{{ render(controller('App\\Controller\\IndexController::lastAction')) }}
 						
 						<div class="social-media-icons">
@@ -67,13 +67,13 @@
 							<a class="instagram" href="https://www.instagram.com/_proverbius/" target="_blank"><i class="fa fa-instagram fa-3x"></i></a> 
 							<a class="widget" style="color: #33b242;" href="{{ path('generate_widget') }}"><i class="fa fa-share-alt-square fa-3x"></i></a> 
 						</div>
-						<h1>Suivez-nous</h1>
+						<h1>{{ 'menu.left.FollowUs'|trans }}</h1>
 						<span class="follow_on_twitter"><a href="https://twitter.com/poeticus12" class="twitter-follow-button" data-show-count="false" data-lang="fr" data-size="large" data-dnt="true">Suivre @poeticus12</a>
 						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
 					</nav>
 
 					<nav class="sidebar">
-						<h1>Publicité</h1>
+						<h1>{{ 'menu.left.Publicity'|trans }}</h1>
 						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- Poeticus_right_menu -->
 						<ins class="adsbygoogle"
@@ -85,25 +85,32 @@
 						</script>
 					</nav>
 					<nav class="sidebar">
-						<h1>Statistiques</h1>
+						<h1>{{ 'menu.left.Statistics'|trans }}</h1>
 						{{ render(controller('App\\Controller\\IndexController::statAction')) }}
 					</nav>
 
 					<nav class="sidebar">
-						<h1>Espace membre</h1>
+						<h1>{{ 'menu.left.MemberArea'|trans }}</h1>
 						<ul>
 							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 								{% if is_granted("ROLE_ADMIN") %}
-									<li><a href="{{ path('admin') }}">Admin</a></li>
+									<li><a href="{{ path('admin') }}">{{ 'menu.left.Admin'|trans }}</a></li>
 								{% endif %}
-								<li><a href="{{ path('user_show') }}">Mon profil</a></li>
-								<li><a href="{{ path('user_udpatepassword') }}">Modifier mon mot de passe</a></li>
-								<li><a href="{{ path('user_edit') }}">Modifier mon profil</a></li>
-								<li><a href="{{ path('logout') }}">Déconnexion</a></li>
+								<li><a href="{{ path('user_show') }}">{{ 'menu.left.MyProfile'|trans }}</a></li>
+								<li><a href="{{ path('user_udpatepassword') }}">{{ 'menu.left.ChangeMyPassword'|trans }}</a></li>
+								<li><a href="{{ path('user_edit') }}">{{ 'menu.left.EditProfile'|trans }}</a></li>
+								<li><a href="{{ path('logout') }}">{{ 'menu.left.LogOut'|trans }}</a></li>
 							{% else %}
-								<li><a href="{{ path('login') }}" alt="">Se connecter</a></li>
-								<li><a href="{{ path('user_new') }}" alt="">Créer un compte utilisateur</a></li>
+								<li><a href="{{ path('login') }}" alt="">{{ 'menu.left.LogIn'|trans }}</a></li>
+								<li><a href="{{ path('user_new') }}" alt="">{{ 'menu.left.CreateAccount'|trans }}</a></li>
 							{% endif %}
+						</ul>
+					</nav>
+
+					<nav class="sidebar">
+						<h1>{{ 'menu.left.Languages'|trans }}</h1>
+							<a href="{{ path('change_language', {'locale':'fr'}) }}" title="Français"><img src="{{ asset('photo/language/fr.png') }}" alt="Fr" width="22" {{ app.request.locale == "fr" ? 'class="selected_language"' : "" }}></a>
+							| <a href="{{ path('change_language', {'locale':'en'}) }}" title="English"><img src="{{ asset('photo/language/en.png') }}" alt="En" width="22" {{ app.request.locale == "en" ? 'class="selected_language"' : "" }}></a>
 						</ul>
 					</nav>
 				</aside>
@@ -112,7 +119,7 @@
 				<article id="contents">
 					<!-- Article's Header Element Starts Here -->
 					<header>
-						<h1>{% block main_title %}Bienvenue sur Proverbius{% endblock %}</h1>
+						<h1>{% block main_title %}{{ 'main.index.WelcomeTo'|trans }}{% endblock %}</h1>
 					</header>
 					
 					{% for message in app.session.getFlashBag.get('message') %}
@@ -121,7 +128,7 @@
 					
 					{% block main_content %}{% endblock %}
 					<div class="advert">
-					<p class="ad_title hidden_print">Publicité</p>
+					<p class="ad_title hidden_print">{{ 'menu.left.Publicity'|trans }}</p>
 					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 					<!-- poeticus_down -->
 					<ins class="adsbygoogle"
@@ -139,7 +146,7 @@
 
 			<!-- Footer Element Starts Here -->
 			<footer id="copyrights">
-				<p>© {{ ("2017" == "now"|date("Y")) ? "2017" : "2017 - " ~ "now"|date("Y") }} <a href="{{ path('page_display', {'name' : 'copyright'}) }}">Proverbius</a> by <a href="https://wakonda.guru">Wakonda.guru</a> - <a href="{{ path('page_display', {'name' : 'about'}) }}">À propos</a> - <a href="{{ path('page_display', {'name' : 'privacyPolicy'}) }}">Politique de confidentialité</a> - <a href="{{ path('contact') }}">Contactez-nous</a></p>
+				<p>© {{ ("2017" == "now"|date("Y")) ? "2017" : "2017 - " ~ "now"|date("Y") }} <a href="{{ path('page_display', {'name' : 'copyright'}) }}">Proverbius</a> by <a href="https://wakonda.guru">Wakonda.guru</a> - <a href="{{ path('page_display', {'name' : 'about'}) }}">{{ 'menu.footer.About'|trans }}</a> - <a href="{{ path('page_display', {'name' : 'privacyPolicy'}) }}">{{ 'menu.footer.PrivacyPolicy'|trans }}</a> - <a href="{{ path('contact') }}">{{ 'menu.footer.ContactUs'|trans }}</a></p>
 			</footer>
 			<!-- Footer Element Ends Here -->
 		</div>

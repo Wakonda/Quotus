@@ -19,6 +19,7 @@ use App\Entity\Proverb;
 use App\Entity\Country;
 use App\Entity\Page;
 use App\Entity\Store;
+use App\Entity\Language;
 
 use Spipu\Html2Pdf\Html2Pdf;
 use MatthiasMullie\Minify;
@@ -27,12 +28,19 @@ class IndexController extends Controller
 {
     public function indexAction(Request $request)
     {
-		$form = $this->createFormIndexSearch();
+		// die(var_dump($request->getLocale()));
+		$form = $this->createFormIndexSearch($request->getLocale(), null);
 		$entityManager = $this->getDoctrine()->getManager();
-		$random = $entityManager->getRepository(Proverb::class)->getRandomProverb();
+		$random = $entityManager->getRepository(Proverb::class)->getRandomProverb($request->getLocale());
 		
         return $this->render('Index/index.html.twig', array('form' => $form->createView(), 'random' => $random));
     }
+
+	public function changeLanguageAction(Request $request, $locale)
+	{
+		$request->getSession()->set('_locale', $locale);
+		return $this->redirect($this->generateUrl('index'));
+	}
 	
 	public function indexSearchAction(Request $request)
 	{
@@ -66,8 +74,8 @@ class IndexController extends Controller
 		$sSearch = json_decode(base64_decode($search));
 
 		$entityManager = $this->getDoctrine()->getManager();
-		$entities = $entityManager->getRepository(Proverb::class)->findIndexSearch($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch);
-		$iTotal = $entityManager->getRepository(Proverb::class)->findIndexSearch($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, true);
+		$entities = $entityManager->getRepository(Proverb::class)->findIndexSearch($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $request->getLocale());
+		$iTotal = $entityManager->getRepository(Proverb::class)->findIndexSearch($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $request->getLocale(), true);
 
 		$output = array(
 			"sEcho" => $request->query->get('sEcho'),
@@ -131,7 +139,7 @@ class IndexController extends Controller
 	public function lastAction(Request $request)
     {
 		$entityManager = $this->getDoctrine()->getManager();
-		$entities = $entityManager->getRepository(Proverb::class)->getLastEntries();
+		$entities = $entityManager->getRepository(Proverb::class)->getLastEntries($request->getLocale());
 
 		return $this->render('Index/last.html.twig', array('entities' => $entities));
     }
@@ -139,7 +147,7 @@ class IndexController extends Controller
 	public function statAction(Request $request)
     {
 		$entityManager = $this->getDoctrine()->getManager();
-		$statistics = $entityManager->getRepository(Proverb::class)->getStat();
+		$statistics = $entityManager->getRepository(Proverb::class)->getStat($request->getLocale());
 
 		return $this->render('Index/stat.html.twig', array('statistics' => $statistics));
     }
@@ -222,8 +230,8 @@ class IndexController extends Controller
 		}
 
 		$entityManager = $this->getDoctrine()->getManager();
-		$entities = $entityManager->getRepository(Proverb::class)->findProverbByCountry($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch);
-		$iTotal = $entityManager->getRepository(Proverb::class)->findProverbByCountry($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, true);
+		$entities = $entityManager->getRepository(Proverb::class)->findProverbByCountry($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $request->getLocale());
+		$iTotal = $entityManager->getRepository(Proverb::class)->findProverbByCountry($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $request->getLocale(), true);
 
 		$output = array(
 			"sEcho" => $request->query->get('sEcho'),
@@ -319,7 +327,7 @@ class IndexController extends Controller
 			
 			$subArray["letter"] = $letter;
 			
-			$resQuery = $entityManager->getRepository(Proverb::class)->findProverbByLetter($letter);
+			$resQuery = $entityManager->getRepository(Proverb::class)->findProverbByLetter($letter, $request->getLocale());
 			$subArray["link"] = $resQuery["number_letter"];
 			$results[] = $subArray;
 		}
@@ -358,7 +366,8 @@ class IndexController extends Controller
 	public function pageAction(Request $request, $name)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
-		$entity = $entityManager->getRepository(Page::class)->findOneBy(["internationalName" => $name]);
+		$language = $entityManager->getRepository(Language::class)->findOneBy(['abbreviation' => $request->getLocale()]);
+		$entity = $entityManager->getRepository(Page::class)->findOneBy(["internationalName" => $name, "language" => $language]);
 		
 		return $this->render('Index/page.html.twig', array("entity" => $entity));
 	}
@@ -371,8 +380,8 @@ class IndexController extends Controller
 		$page = (empty(intval($page))) ? 1 : $page;
 		$nbMessageByPage = 12;
 		
-		$entities = $em->getRepository(Store::class)->getProducts($nbMessageByPage, $page, $query);
-		$totalEntities = $em->getRepository(Store::class)->countEntities($query);
+		$entities = $em->getRepository(Store::class)->getProducts($nbMessageByPage, $page, $query, $request->getLocale());
+		$totalEntities = $em->getRepository(Store::class)->countEntities($query, $request->getLocale());
 		
 		$links = $pagination->setPagination(['url' => 'store'], $page, $totalEntities, $nbMessageByPage);
 
@@ -389,16 +398,16 @@ class IndexController extends Controller
 		return $this->render('Index/generate_widget.html.twig');
 	}
 	
-	public function widgetAction()
+	public function widgetAction(Request $request)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
-		$proverb = $entityManager->getRepository(Proverb::class)->getRandomProverb();
+		$proverb = $entityManager->getRepository(Proverb::class)->getRandomProverb($request->getLocale());
 
 		return $this->render('Index/Widget/randomProverbWidget.html.twig', ['proverb' => $proverb]);
 	}
 
-	private function createFormIndexSearch()
+	private function createFormIndexSearch($locale, $entity)
 	{
-		return $this->createForm(IndexSearchType::class, null);
+		return $this->createForm(IndexSearchType::class, null, ["locale" => $locale]);
 	}
 }

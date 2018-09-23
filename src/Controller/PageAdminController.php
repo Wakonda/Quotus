@@ -52,6 +52,7 @@ class PageAdminController extends Controller
 			$row = array();
 			$row[] = $entity->getId();
 			$row[] = $entity->getTitle();
+			$row[] = $entity->getLanguage()->getTitle();
 			
 			$show = $this->generateUrl('pageadmin_show', array('id' => $entity->getId()));
 			$edit = $this->generateUrl('pageadmin_edit', array('id' => $entity->getId()));

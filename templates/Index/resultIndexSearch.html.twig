@@ -1,6 +1,6 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Recherche{% endblock %}
+{% block head_title %}{{ "search.result.Search"|trans }}{% endblock %}
 
 {% block style_additional %}
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}" media="screen" />
@@ -37,19 +37,19 @@
 	</script>
 {% endblock %}
 
-{% block main_title %}Résultat de votre recherche{% endblock %}
+{% block main_title %}{{ "search.result.SearchResults"|trans }}{% endblock %}
 
 {% block main_content %}
 	<div class="alert alert-info alert-dismissable">
 	  <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	  <strong><i class="fa fa-search" aria-hidden="true"></i> Critères : </strong>
+	  <strong><i class="fa fa-search" aria-hidden="true"></i> {{ "search.result.Criteria"|trans }} </strong>
 	  <span class="italic">{{ criteria|join(", ") }}</span>
 	</div>
 
 	<table class="index_directories table table-striped table-bordered dt-responsive">
 		<thead>
-			<th>Texte</th>
-			<th class="phone">Pays</th>
+			<th>{{ "search.result.Text"|trans }}</th>
+			<th class="phone">{{ "search.result.Country"|trans }}</th>
 		</thead>
 		<tbody>
 		</tbody>

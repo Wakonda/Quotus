@@ -1,7 +1,7 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Erreur {{ code }}{% endblock %}
-{% block main_title %}Erreur {{ code }}{% endblock %}
+{% block head_title %}{{ "error.index.Error"|trans }} {{ code }}{% endblock %}
+{% block main_title %}{{ "error.index.Error"|trans }} {{ code }}{% endblock %}
 
 {% block script_additional %}
 	<script src="{{ asset('js/jquery.qtip/jquery.qtip.min.js') }}"></script>
@@ -35,7 +35,7 @@
 	<p class="center"><img src="{{ asset('photo/error-page.jpg') }}" alt="" /></p>
 	<br>
 	{% if code == "404" %}
-		<p>La page à laquelle vous souhaitez accéder n'existe pas (ou plus) !</p>
+		<p>{{ "error.index.PageNotFound"|trans }}</p>
 	{% else %}
 		<p>Une <b>erreur {{ code }}</b> est survenue. Si le problème persiste, n'hésitez pas à nous <a href="{{ path('contact') }}" alt="">contacter</a> afin que nous puissions le résoudre le plus rapidement possible !</p>
 	{% endif %}

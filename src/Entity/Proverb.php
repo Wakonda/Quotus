@@ -37,6 +37,11 @@ class Proverb
      * @ORM\Column(type="json", length=255, nullable=true)
      */
     protected $images;
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Language")
+     */
+	protected $language;
 
     public function getId()
     {
@@ -102,4 +107,14 @@ class Proverb
 		if(empty($this->slug))
 			$this->slug = GenericFunction::slugify($this->text, 30);
     }
+
+	public function getLanguage()
+	{
+		return $this->language;
+	}
+	
+	public function setLanguage($language)
+	{
+		$this->language = $language;
+	}
 }

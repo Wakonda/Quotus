@@ -21,6 +21,7 @@ class UpdatePasswordType extends AbstractType
 				'options' => array('required' => true),
 				'first_options'  => array('label' => 'Mot de passe'),
 				'second_options' => array('label' => 'Mot de passe (validation)'),
+				'constraints' => new Assert\NotBlank()
 			))
 			
             ->add('save', SubmitType::class, array('label' => 'Sauvegarder', 'attr' => array('class' => 'btn btn-success')));

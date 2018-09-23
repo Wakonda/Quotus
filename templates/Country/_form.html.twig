@@ -12,6 +12,10 @@
 		<th>{{ form_label(form.flag) }}</th>
 		<td><div class="errors">{{ form_errors(form.flag) }}</div>{% if entity.flag is defined %}{{ macro.currentImage("photo/country/", entity.flag) }}{% endif %}{{ form_widget(form.flag) }}</td>
 	</tr>
+	<tr>
+		<th>{{ form_label(form.language) }}</th>
+		<td><div class="errors">{{ form_errors(form.language) }}</div>{{ form_widget(form.language, {'attr':{'class':'full_width form-control'}}) }}</td>
+	</tr>
 </table>
 <hr />
 {{ form_widget(form.save, {'icon': 'fa-save'}) }}

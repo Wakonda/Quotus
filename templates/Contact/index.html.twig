@@ -1,7 +1,7 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Admin Contact{% endblock %}
-{% block main_title %}Administration - Contact{% endblock %}
+{% block head_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Contact'|trans }}{% endblock %}
+{% block main_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Contact'|trans }}{% endblock %}
 
 {% block style_additional %}
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}" media="screen" />
@@ -42,9 +42,9 @@
 <table class="index_directories table table-striped table-bordered dt-responsive">
 	<thead>
 		<th>Id</th>
-		<th>Sujet</th>
-		<th>Lu ?</th>
-		<th>Action</th>
+		<th>{{ 'admin.table.Subject'|trans }}</th>
+		<th>{{ 'admin.table.ReadQuestion'|trans }}</th>
+		<th>{{ 'admin.table.Action'|trans }}</th>
 	</thead>
 	<tbody>
 	</tbody>

@@ -1,6 +1,6 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Abécédaire{% endblock %}
+{% block head_title %}{{ 'alphabetBook.index.ByLetter'|trans }}{% endblock %}
 
 {% block style_additional %}
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}" media="screen" />
@@ -29,14 +29,14 @@
 	</script>
 {% endblock %}
 
-{% block main_title %}Abécédaire{% endblock %}
+{% block main_title %}{{ 'alphabetBook.index.ByLetter'|trans }}{% endblock %}
 
 {% block main_content %}
 		<table class="index_directories table table-striped table-bordered dt-responsive">
 		<thead>
 			<tr>
-				<th>Lettre</th>
-				<th class="phone">Nombre</th>
+				<th>{{ 'alphabetBook.table.Letter'|trans }}</th>
+				<th class="phone">{{ 'alphabetBook.table.Number'|trans }}</th>
 			</tr>
 		</thead>
 		<tbody>

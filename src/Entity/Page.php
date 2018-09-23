@@ -35,6 +35,11 @@ class Page
      * @ORM\Column(type="string", length=255)
      */
     protected $photo;
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Language")
+     */
+	protected $language;
 
     public function getId()
     {
@@ -85,4 +90,14 @@ class Page
     {
         $this->internationalName = $internationalName;
     }
+
+	public function getLanguage()
+	{
+		return $this->language;
+	}
+	
+	public function setLanguage($language)
+	{
+		$this->language = $language;
+	}
 }

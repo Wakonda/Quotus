@@ -1,34 +1,34 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Admin Contact{% endblock %}
-{% block main_title %}Administration - Contact{% endblock %}
+{% block head_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Contact'|trans }}{% endblock %}
+{% block main_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Contact'|trans }}{% endblock %}
 
 {% block main_content %}
 	<table class="admin_show">
 		<tr>
-			<th>Sujet</th>
+			<th>{{ 'admin.table.Subject'|trans }}</th>
 			<td>{{ entity.subject }}</td>
 		</tr>
 		<tr>
-			<th>Email</th>
+			<th>{{ 'admin.contact.Email'|trans }}</th>
 			<td>{{ entity.mail }}</td>
 		</tr>
 		<tr>
-			<th>Message</th>
+			<th>{{ 'admin.contact.Message'|trans }}</th>
 			<td>{{ entity.message|raw }}</td>
 		</tr>
 		<tr>
-			<th>Lu ?</th>
+			<th>{{ 'admin.table.ReadQuestion'|trans }}</th>
 			<td>
 				{% if entity.readMessage is null %}
-					Non
+					{{ "admin.index.No"|trans }}
 				{% else %}
-					Oui
+					{{ "admin.index.Yes"|trans }}
 				{% endif %}
 			</td>
 		</tr>
 		<tr>
-			<th>Date d'envoi</th>
+			<th>{{ 'admin.contact.DateOfDispatch'|trans }}</th>
 			<td>{{ entity.dateSending|date("d/m/Y H:i:s") }}</td>
 		</tr>
 	</table>

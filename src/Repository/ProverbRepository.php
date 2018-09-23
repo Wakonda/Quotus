@@ -17,12 +17,13 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
         parent::__construct($registry, Proverb::class);
     }
 
-	public function findIndexSearch($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $datasObject, $count = false)
+	public function findIndexSearch($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $datasObject, $locale, $count = false)
 	{
 		$aColumns = array('pa.text', 'co.title');
 		$qb = $this->createQueryBuilder("pa");
 
 		$qb->leftjoin("pa.country", "co");
+		$this->whereLanguage($qb, 'pa', $locale);
 
 		if(!empty($datasObject->text))
 		{
@@ -59,7 +60,7 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
 		return $qb->getQuery()->getResult();
 	}
 
-    public function findProverbByCountry($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $count = false)
+    public function findProverbByCountry($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $locale, $count = false)
     {
 		$qb = $this->createQueryBuilder("pa");
 
@@ -69,6 +70,8 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
 		   ->leftjoin("pa.country", "co")
 		   ->groupBy("co.id, co.title, co.flag")
 		   ;
+		
+		$this->whereLanguage($qb, 'pa', $locale);
 		
 		if(!empty($sortDirColumn))
 		   $qb->orderBy($aColumns[$sortByColumn[0]], $sortDirColumn[0]);
@@ -95,22 +98,26 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
 		return $qb->getQuery()->getResult();
     }
 
-    public function findProverbByLetter($letter, $count = false)
+    public function findProverbByLetter($letter, $locale, $count = false)
     {
 		$qb = $this->createQueryBuilder("pa");
 		
 		$qb->select("COUNT(pa.id) AS number_letter")
 		   ->where("SUBSTRING(pa.text, 1, 1) = :letter")
 		   ->setParameter("letter", $letter);
+		
+		$this->whereLanguage($qb, 'pa', $locale);
 
 		return $qb->getQuery()->getOneOrNullResult();
     }
 
-	public function getRandomProverb()
+	public function getRandomProverb($locale)
 	{
 		$qb = $this->createQueryBuilder("pt");
 
 		$qb->select("COUNT(pt) AS countRow");
+		
+		$this->whereLanguage($qb, "pt", $locale);
 		
 		$max = $qb->getQuery()->getSingleScalarResult() - 1;
 		$offset = rand(0, $max);
@@ -119,23 +126,29 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
 
 		$qb->setFirstResult($offset)
 		   ->setMaxResults(1);
+		 
+		$this->whereLanguage($qb, "pt", $locale);
 
 		return $qb->getQuery()->getOneOrNullResult();
 	}
 
-	public function getLastEntries()
+	public function getLastEntries($locale)
 	{
 		$qb = $this->createQueryBuilder("pt");
 
 		$qb->setMaxResults(7)
 		   ->orderBy("pt.id", "DESC");
 		   
+		$this->whereLanguage($qb, "pt", $locale, true);
+		   
 		return $qb->getQuery()->getResult();
 	}
 	
-	public function getStat()
+	public function getStat($locale)
 	{
 		$qbProverb = $this->createQueryBuilder("pt");
+		
+		$this->whereLanguage($qbProverb, "pt", $locale);
 
 		$qbProverb->select("COUNT(pt)");
 		
@@ -268,5 +281,16 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
 			$qb->setFirstResult($iDisplayStart)->setMaxResults($iDisplayLength);
 
 		return $qb->getQuery()->getResult();
+	}
+
+	public function whereLanguage($qb, $alias, $locale, $join = true)
+	{
+		if($join)
+			$qb->leftjoin($alias.".language", "la");
+		
+		$qb->andWhere('la.abbreviation = :locale')
+		   ->setParameter("locale", $locale);
+		
+		return $qb;
 	}
 }

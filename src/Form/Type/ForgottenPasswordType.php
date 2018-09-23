@@ -14,10 +14,10 @@ class ForgottenPasswordType extends AbstractType
     {
         $builder
             ->add('emailUsername', TextType::class, array(
-                'constraints' => new Assert\NotBlank(), 'label' => 'Email ou nom d\'utilisateur'
+                'constraints' => new Assert\NotBlank(), 'label' => 'forgottenPassword.field.EmailUsername'
             ))
-			->add('captcha', TextType::class, array('label' => 'Recopiez le mot contenu dans l\'image', "mapped" => false, "attr" => array("class" => "captcha_word"), 'constraints' => new Assert\NotBlank()))
-            ->add('save', SubmitType::class, array('label' => 'Envoyer', "attr" => array("class" => "btn btn-success")));
+			->add('captcha', TextType::class, array('label' => 'forgottenPassword.field.Captcha', "mapped" => false, "attr" => array("class" => "captcha_word"), 'constraints' => new Assert\NotBlank()))
+            ->add('save', SubmitType::class, array('label' => 'forgottenPassword.field.Send', "attr" => array("class" => "btn btn-success")));
     }
 
     public function getName()

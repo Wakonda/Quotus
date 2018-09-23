@@ -1,7 +1,7 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Admin Tag{% endblock %}
-{% block main_title %}Administration - Tag{% endblock %}
+{% block head_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Tag'|trans }}{% endblock %}
+{% block main_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Tag'|trans }}{% endblock %}
 
 {% block main_content %}
 	<table class="admin_show">
@@ -11,5 +11,5 @@
 		</tr>
 	</table>
 	<hr>
-	<a href="{{ path('tagadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> Modifier</a> - <a href="{{ path('tagadmin_new') }}"><i class="fa fa-plus-square"></i> Créer</a>
+	<a href="{{ path('tagadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> {{ 'admin.index.Update'|trans }}</a> - <a href="{{ path('tagadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a>
 {% endblock %}

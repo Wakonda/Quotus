@@ -3,6 +3,10 @@ index:
     path: /
     controller: App\Controller\IndexController::indexAction
 
+change_language:
+    path: /change_language/{locale}
+    controller: App\Controller\IndexController::changeLanguageAction
+
 index_search:
     path: /search
     controller: App\Controller\IndexController::indexSearchAction
@@ -168,6 +172,10 @@ vote_datatables:
 comment_datatables:
     path: /user/comment_datatables/{username}
     controller: App\Controller\UserController::commentsUserDatatablesAction
+
+get_countries_by_language:
+    path: /get_countries_by_language
+    controller: App\Controller\CountryAdminController::getCountriesByLanguageAction
 
 # USER
 login:

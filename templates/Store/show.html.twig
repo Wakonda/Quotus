@@ -1,23 +1,27 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Admin Boutique{% endblock %}
-{% block main_title %}Administration - Boutique{% endblock %}
+{% block head_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Store'|trans }}{% endblock %}
+{% block main_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Store'|trans }}{% endblock %}
 
 {% block main_content %}
 	<table class="admin_show">
 		<tr>
-			<th>Titre</th>
+			<th>{{ "admin.store.Title"|trans }}</th>
 			<td>{{ entity.title }}</td>
 		</tr>
 		<tr>
-			<th>Code</th>
+			<th>{{ "admin.store.ProductCode"|trans }}</th>
 			<td>{{ entity.embeddedCode|raw }}</td>
 		</tr>
 		<tr>
-			<th>Tag</th>
+			<th>{{ "admin.store.Tag"|trans }}</th>
 			<td>{{ entity.tag }}</td>
+		</tr>
+		<tr>
+			<th>{{ "admin.form.Language"|trans }}</th>
+			<td>{{ entity.language.title }}</td>
 		</tr>
 	</table>
 	<hr>
-	<a href="{{ path('storeadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> Modifier</a> - <a href="{{ path('storeadmin_new') }}"><i class="fa fa-plus-square"></i> Créer</a>
+	<a href="{{ path('storeadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> {{ 'admin.index.Update'|trans }}</a> - <a href="{{ path('storeadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a>
 {% endblock %}

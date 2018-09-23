@@ -29,15 +29,15 @@ class UserType extends AbstractType
 
         $builder
             ->add('username', TextType::class, array(
-                'constraints' => new Assert\NotBlank(), 'label' => 'Pseudo'
+                'constraints' => new Assert\NotBlank(), 'label' => 'user.createAccount.Pseudo'
             ))
 
             ->add('email', EmailType::class, array(
-                'constraints' => new Assert\NotBlank(), 'label' => 'Email'
+                'constraints' => new Assert\NotBlank(), 'label' => 'user.createAccount.Email'
             ))
 
 			->add('avatar', FileType::class, array(
-                'data_class' => null, 'label' => 'Avatar', 'required' => false
+                'data_class' => null, 'label' => 'user.createAccount.Avatar', 'required' => false
             ))
 
 			->add('gravatar', HiddenType::class, array(
@@ -45,34 +45,34 @@ class UserType extends AbstractType
             ))
 			
 			->add('presentation', TextareaType::class, array(
-                'constraints' => new Assert\NotBlank(), 'label' => 'Présentation'
+                'constraints' => new Assert\NotBlank(), 'label' => 'user.createAccount.Description'
             ))
+			
 			->add('country', EntityType::class, array(
-				'label' => 'Pays',
-				'class' => Country::class,
-				'query_builder' => function (CountryRepository $er) {
-					return $er->findAllForChoice();
-				},
-				'multiple' => false, 
-				'expanded' => false,
-				'constraints' => array(new Assert\NotBlank()),
-				'placeholder' => 'Sélectionnez un pays'
-			))
-            ->add('save', SubmitType::class, array('label' => 'Sauvegarder', "attr" => array("class" => "btn btn-success")));
+											'label' => 'user.createAccount.Country', 
+											'class' => Country::class, 
+											'multiple' => false, 
+											'expanded' => false,
+											'constraints' => array(new Assert\NotBlank()),
+											'placeholder' => 'main.field.ChooseAnOption'
+											))
+			
+			
+            ->add('save', SubmitType::class, array('label' => 'user.createAccount.CreateSave', "attr" => array("class" => "btn btn-success")));
 			
 		if(!$ifEdit)
 		{
 			$builder
 				->add('password', RepeatedType::class, array(
 					'type' => PasswordType::class,
-					'label' => 'Mot de passe',
-					'invalid_message' => 'Les mots de passe doivent correspondre',
+					'label' => 'user.createAccount.Password',
+					'invalid_message' => 'user.createAccount.PasswordsMustMatch',
 					'constraints' => new Assert\NotBlank(),
 					'options' => array('required' => true),
-					'first_options'  => array('label' => 'Mot de passe'),
-					'second_options' => array('label' => 'Mot de passe (validation)'),
+					'first_options'  => array('label' => 'user.createAccount.Password'),
+					'second_options' => array('label' => 'user.createAccount.PasswordValidation'),
 				))
-				->add('captcha', TextType::class, array('label' => 'Recopiez le mot contenu dans l\'image', "mapped" => false, "attr" => array("class" => "captcha_word"), 'constraints' => new Assert\NotBlank()))
+				->add('captcha', TextType::class, array('label' => 'user.createAccount.Captcha', "mapped" => false, "attr" => array("class" => "captcha_word"), 'constraints' => new Assert\NotBlank()))
 			;
 		}
     }

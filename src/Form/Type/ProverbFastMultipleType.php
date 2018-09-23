@@ -24,10 +24,10 @@ class ProverbFastMultipleType extends AbstractType
                 'constraints' => [new Assert\NotBlank(), new Assert\Url()], 'label' => 'URL', 'mapped' => false
             ))
 			->add('ipProxy', TextType::class, array(
-                'label' => 'Adresse Proxy', 'required' => false, 'mapped' => false, 'constraints' => [new Assert\Regex("#^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:[0-9]{2,4}$#")]
+                'label' => 'admin.proverb.ProxyAddress', 'required' => false, 'mapped' => false, 'constraints' => [new Assert\Regex("#^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:[0-9]{2,4}$#")]
             ))
 			->add('country', EntityType::class, array(
-				'label' => 'Pays',
+				'label' => 'admin.proverb.Country',
 				'class' => Country::class,
 				'query_builder' => function (CountryRepository $er) {
 					return $er->findAllForChoice();
@@ -35,9 +35,9 @@ class ProverbFastMultipleType extends AbstractType
 				'multiple' => false, 
 				'expanded' => false,
 				'constraints' => array(new Assert\NotBlank()),
-				'placeholder' => 'Sélectionnez un pays'
+				'placeholder' => 'main.field.ChooseAnOption'
 			))
-            ->add('save', SubmitType::class, array('label' => 'Ajouter', 'attr' => array('class' => 'btn btn-success')));
+            ->add('save', SubmitType::class, array('label' => 'admin.main.Save', 'attr' => array('class' => 'btn btn-success')));
     }
 
 	/**

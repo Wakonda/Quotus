@@ -1,0 +1,234 @@
+menu:
+    top:
+        MainPage: "Home"
+        Countries: "Countries"
+        AlphabetBook: "Alphabet book"
+        Store: "Store"
+    left:
+        RecentPublications: "Recent publications"
+        FollowUs: "Follow us"
+        Publicity: "Ad"
+        Statistics: "Statistics"
+        MemberArea: "Member area"
+        Languages: "Other languages"
+        LogIn: "Log in"
+        CreateAccount: "Create an account"
+        NumberOfPublishedProverbs: "Number of published proverbs"
+        MyProfile: "My profile"
+        ChangeMyPassword: "Change my password"
+        EditProfile: "Edit my profile"
+        LogOut: "Log out"
+        Admin: "Admin"
+    footer:
+        About: "About"
+        ContactUs: "Contact us"
+        Version: "Version"
+        PrivacyPolicy: "Privacy policy"
+main:
+    index:
+        WonderfulWorldOfProverb: "The <small> Wonderful World </small> of Proverbs"
+        WelcomeTo: "Welcome to Proverbius"
+        Search: "Search a proverb"
+        ProverbRandomly: "Random proverb"
+        NoProverb: "No Proverbs added yet"
+    field:
+        Keywords: "Keywords"
+        Country: "Country"
+        ChooseAnOption: "Choose an option"
+        Search: "Search"
+country:
+    index:
+        ByCountries: "By countries"
+    table:
+        Number: "Number"
+        Read: "Read"
+        Country: "Country"
+        Text: "Text"
+alphabetBook:
+    index:
+        ByLetter: "By letter"
+    table:
+        Number: "Number"
+        Letter: "Letter"
+        Read: "Read"
+        Text: "Text"
+store:
+    index:
+        Store: "Store"
+        Search: "Search"
+proverb:
+    read:
+        Proverb: "Proverb"
+search:
+    result:
+        Search: "Search"
+        SearchResults: "Result of your search"
+        Criteria: "Criteria:"
+        Country: "Country"
+        Text: "Text"
+send:
+    index:
+        AutomaticallyAddedPost: "Proverb will be automatically added to your message"
+        SendFriend: "Send this proverb to a friend"
+        Infos: "Infos"
+    message:
+        ThisProverbHasBeenSentSince: "This proverb has been sent since"
+error:
+    index:
+        Error: "Error"
+        PageNotFound: "The page you want to access does not exist!"
+widget:
+    random:
+        Proverb: "Proverb"
+user:
+    login:
+        Pseudo: "Pseudo"
+        Password: "Password"
+        RememberMe: "Remember me"
+        LogIn: "Log in"
+        LogOut: "Log out"
+        ForgottenPassword: "Forgot your password?"
+        PasswordOrUserForgotten: "Nickname or password incorect"
+        YouAreLoggedInAs: "You are already logged in as"
+    createAccount:
+        CreateAccount: "Create an account"
+        Pseudo: "Pseudo"
+        Password: "Password"
+        PasswordValidation: "Password (validation)"
+        Email: "Email"
+        Avatar: "Avatar"
+        Description: "Presentation"
+        Country: "Country"
+        Captcha: "Copy the word contained in the image"
+        CreateSave: "Create your account"
+        OR: "OR"
+        SelectFile: "Select a file"
+        UseGravatar: "Use a gravatar"
+        PasswordsMustMatch: "Passwords must match"
+    myProfile:
+        MyPoems: "My proverbs"
+        MyComments: "My comments"
+        MyVotes: "My votes"
+        Login: "Login"
+        Country: "Country"
+        Description: "Presentation"
+        Title: "Title"
+        Action: "Action"
+        Edit: "Edit"
+        Delete: "Delete"
+        State: "State"
+        Poem: "Proverb"
+        PublicationDate: "Publication date"
+        Vote: "Vote"
+forgottenPassword:
+    index:
+        ResetPassword: "Reset password"
+        NewPasswordSend: "A new password will be sent to the email address entered on your user account."
+    field:
+        EmailUsername: "Email or username"
+        Captcha: "Copy the word contained in the image"
+        Send: "Reset password"
+contact:
+    field:
+        ContactUs: "Contact us"
+        Message: "Message"
+        Email: "Email"
+        Subject: "Subject"
+        Send: "Send"
+comment:
+    index:
+        Comments: "Comments"
+    field:
+        Message: "Message"
+        Send: "Send"
+        YouMustBeLoggedInToWriteAComment: "You must be logged in to write a comment"
+    list:
+        PreviousPage: "Previous page"
+        NextPage: "Next page"
+vote:
+    index:
+        Votes: "Votes"
+    field:
+        Error: "Error"
+        YouMustBeLoggedInToVote: "You must be logged in to vote!"
+        YouHaveAlreadyVotedForThisPoem: "You have already voted for this proverb"
+version:
+    index:
+        Version: "Version"
+        ReleaseDate: "Release date"
+        Read: "Read"
+admin:
+    index:
+        Contact: "Contact"
+        Member: "Member"
+        Page: "Page"
+        Country: "Country"
+        Proverb: "Proverb"
+        Version: "Version"
+        Store: "Store"
+        Tag: "Tag"
+        Create: "Create"
+        Read: "Read"
+        Update: "Update"
+        Add: "Add"
+        QuicklyCreation: "Quick Creation"
+        GenerateSitemap: "Generate Sitemap"
+        Yes: "Yes"
+        No: "Yes"
+        CurrentImage: "Current image"
+        CurrentFile: "Current file"
+        UnreadMessages: "Unread message(s)"
+    table:
+        Title: "Title"
+        Text: "Text"
+        Action: "Action"
+        Subject: "Subject"
+        ReadQuestion: "Read?"
+        Pseudo: "Pseudo"
+        ReleaseDate: "Release date"
+        VersionNumber: "Version number"
+    main:
+        Save: "Save"
+    form:
+        Language: "Language"
+        Slug: "Slug"
+    proverb:
+        Text: "Text"
+        Slug: "Slug"
+        Country: "Country"
+        ProxyAddress: "Proxy address"
+        ForSameCountry: "for the same country"
+    country:
+        Title: "Title"
+        InternationalName: "International name"
+        Flag: "Flag"
+    contact:
+        Message: "Message"
+        Email: "Email"
+        DateOfDispatch: "Date sent"
+    member:
+        Pseudo: "Pseudo"
+        Roles: "Roles"
+        Email: "Email"
+        Activated: "On"
+        Activate: "Activate"
+        Desactivate: "Desactivate"
+    page:
+        Title: "Title"
+        Text: "Text"
+        InternationalName: "International name"
+        Image: "Image"
+    version:
+        VersionNumber: "Version number"
+        ReleaseDate: "Release date"
+        File: "File"
+    store:
+        Title: "Title"
+        ProductCode: "Product code"
+        Tag: "Tag"
+    socialNetwork:
+        Send: "Product Code"
+    imageGenerator:
+        Image: "Image"
+        FontSize: "Font size"
+        InvertColors: "Invert colors"

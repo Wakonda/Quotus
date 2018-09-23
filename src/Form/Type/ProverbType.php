@@ -18,18 +18,22 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use App\Entity\Proverb;
 use App\Entity\Country;
+use App\Entity\Language;
 use App\Repository\CountryRepository;
+use App\Repository\LanguageRepository;
 
 class ProverbType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+		$locale = $options["locale"];
+
         $builder
 			->add('text', TextareaType::class, array(
-                'attr' => array('class' => 'redactor'), 'label' => 'Texte'
+                'attr' => array('class' => 'redactor'), 'label' => 'admin.proverb.Text'
             ))
 			->add('country', EntityType::class, array(
-				'label' => 'Pays',
+				'label' => 'admin.proverb.Country',
 				'class' => Country::class,
 				'query_builder' => function (CountryRepository $er) {
 					return $er->findAllForChoice();
@@ -37,10 +41,22 @@ class ProverbType extends AbstractType
 				'multiple' => false, 
 				'expanded' => false,
 				'constraints' => array(new Assert\NotBlank()),
-				'placeholder' => 'Sélectionnez un pays'
+				'placeholder' => 'main.field.ChooseAnOption'
+			))
+			->add('language', EntityType::class, array(
+				'label' => 'admin.form.Language',
+				'class' => Language::class,
+				'query_builder' => function (LanguageRepository $er) use ($locale) {
+					return $er->findAllForChoice($locale);
+				},
+				'multiple' => false,
+				'required' => true,
+				'expanded' => false,
+				'placeholder' => 'main.field.ChooseAnOption',
+				'constraints' => new Assert\NotBlank()
 			))
 
-            ->add('save', SubmitType::class, array('label' => 'Sauvegarder', 'attr' => array('class' => 'btn btn-success')));
+            ->add('save', SubmitType::class, array('label' => 'admin.main.Save', 'attr' => array('class' => 'btn btn-success')));
     }
 
 	/**
@@ -50,6 +66,7 @@ class ProverbType extends AbstractType
 	{
 		$resolver->setDefaults(array(
 			"data_class" => Proverb::class,
+			"locale" => null
 		));
 	}
 	

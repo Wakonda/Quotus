@@ -50,6 +50,17 @@ class CountryRepository extends ServiceEntityRepository implements iRepository
 
 		return $qb->getQuery()->getResult();
 	}
+	
+	public function findAllByLanguage($locale)
+	{
+		$qb = $this->createQueryBuilder("co");
+
+		$qb->leftjoin("co.language", "la")
+		   ->where("la.abbreviation = :locale")
+		   ->setParameter("locale", $locale);
+
+		return $qb->getQuery()->getResult();
+	}
 
 	public function checkForDoubloon($entity)
 	{

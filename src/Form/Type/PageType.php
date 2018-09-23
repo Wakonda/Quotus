@@ -11,25 +11,41 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use App\Entity\Page;
+use App\Entity\Language;
+use App\Repository\LanguageRepository;
 
 class PageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+		$locale = $options["locale"];
+
         $builder
             ->add('title', TextType::class, array(
-                'constraints' => new Assert\NotBlank(), "label" => "Titre"
+                'constraints' => new Assert\NotBlank(), "label" => "admin.page.Title"
             ))
 			->add('text', TextareaType::class, array(
-                'constraints' => new Assert\NotBlank(), "label" => "Texte", 'attr' => array('class' => 'redactor')
+                'constraints' => new Assert\NotBlank(), "label" => "admin.page.Text", 'attr' => array('class' => 'redactor')
             ))
 			->add('internationalName', TextType::class, array(
-                'constraints' => new Assert\NotBlank(), "label" => "Nom international"
+                'constraints' => new Assert\NotBlank(), "label" => "admin.page.InternationalName"
             ))
-			->add('photo', FileType::class, array('data_class' => null, "label" => "Photo", "required" => true))
-            ->add('save', SubmitType::class, array('label' => 'Sauvegarder', 'attr' => array('class' => 'btn btn-success')))
+			->add('photo', FileType::class, array('data_class' => null, "label" => "admin.page.Image", "required" => true))
+			->add('language', EntityType::class, array(
+				'label' => 'admin.form.Language', 
+				'class' => Language::class,
+				'query_builder' => function (LanguageRepository $er) use ($locale) {
+					return $er->findAllForChoice($locale);
+				},
+				'multiple' => false,
+				'required' => false,
+				'expanded' => false,
+				'placeholder' => 'main.field.ChooseAnOption'
+			))
+			->add('save', SubmitType::class, array('label' => 'admin.main.Save', 'attr' => array('class' => 'btn btn-success')))
 			;
     }
 	
@@ -39,7 +55,8 @@ class PageType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			"data_class" => Page::class
+			"data_class" => Page::class,
+			"locale" => null
 		));
 	}
 
