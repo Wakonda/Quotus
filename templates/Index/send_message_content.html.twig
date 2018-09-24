@@ -1,4 +1,4 @@
-{% set senderName = "Une personne" %}
+{% set senderName = "send.index.Somebody"|trans %}
 
 {% if data.firstName is not null %}
 	{% set senderName = data.firstName %}
@@ -8,7 +8,7 @@
 	{% endif %}
 {% endif %}
 
-<p>{{ senderName }} (<a href="mailto:{{ data.yourMail }}">{{ data.yourMail }}</a>) vous a envoyé ce proverbe.</p>
+<p>{{ senderName }} (<a href="mailto:{{ data.yourMail }}">{{ data.yourMail }}</a>) {{ "send.index.HeSentYouThisProverb"|trans }}.</p>
 
 {{ data.message|raw }}
 
@@ -17,4 +17,4 @@
 
 <hr>
 
-<p>{{ "send.message.ThisProverbHasBeenSentSince"|trans }} <a href="{{ url("index") }}" alt="Proverbius">Proverbius</a></p>
+<p>{{ "send.index.ThisProverbHasBeenSentSince"|trans }} <a href="{{ url("index") }}" alt="Proverbius">Proverbius</a></p>

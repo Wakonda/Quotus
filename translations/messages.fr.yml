@@ -72,8 +72,10 @@ send:
         AutomaticallyAddedPost: "La poésie sera automatiquement ajoutée à votre message"
         SendFriend: "Envoyez cette poésie à un ami"
         Infos: "Infos"
-    message:
+        YourMessageHasBeenSentSuccessfully: "Votre message a été envoyé avec succès !"
+        Somebody: "Quelqu'un"
         ThisProverbHasBeenSentSince: "Ce proverbe a été envoyé depuis"
+        HeSentYouThisProverb: "vous a envoyé ce proverbe"
     field:
         FirstName: "Prénom"
         LastName: "Nom"
@@ -82,6 +84,7 @@ send:
         Subject: "Sujet"
         Message: "Message"
         Send: "Envoyer"
+        Close: "Fermer"
 error:
     index:
         Error: "Erreur"
@@ -144,7 +147,6 @@ contact:
         Email: "Email"
         Subject: "Objet"
         Send: "Envoyer"
-        None: "Aucun"
 comment:
     index:
         Comments: "Commentaires"

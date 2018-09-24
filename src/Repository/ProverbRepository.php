@@ -119,7 +119,7 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
 		
 		$this->whereLanguage($qb, "pt", $locale);
 		
-		$max = $qb->getQuery()->getSingleScalarResult() - 1;
+		$max = max($qb->getQuery()->getSingleScalarResult() - 1, 0);
 		$offset = rand(0, $max);
 
 		$qb = $this->createQueryBuilder("pt");

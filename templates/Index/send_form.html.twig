@@ -22,7 +22,7 @@
 {{ form_start(form, {'method' : 'post', 'action' : '' , 'attr': {'novalidate': 'novalidate', 'id': 'send_form'} }) }}
 	<div class="modal-body">
 		<div class="alert alert-info" role="alert">
-			<strong><i class="fa fa-info-circle" aria-hidden="true"></i> Infos</strong> - {{ "send.message.AutomaticallyAddedPost"|trans }}
+			<strong><i class="fa fa-info-circle" aria-hidden="true"></i> Infos</strong> - {{ "send.index.AutomaticallyAddedPost"|trans }}
 		</div>
 		<table class="form_grid">
 			<tr>
@@ -52,7 +52,7 @@
 		</table>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Fermer</button>
+		<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> {{ 'send.field.Close'|trans }}</button>
 		{{ form_widget(form.send, {'icon': 'fa-send'}) }}
 	</div>
 	{{ form_rest(form) }}

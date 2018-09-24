@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use App\Entity\Proverb;
+
 class SendController extends Controller
 {
     public function indexAction(Request $request, $id)

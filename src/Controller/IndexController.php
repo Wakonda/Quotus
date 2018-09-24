@@ -29,7 +29,6 @@ class IndexController extends Controller
 {
     public function indexAction(Request $request)
     {
-		// die(var_dump($request->getLocale()));
 		$form = $this->createFormIndexSearch($request->getLocale(), null);
 		$entityManager = $this->getDoctrine()->getManager();
 		$random = $entityManager->getRepository(Proverb::class)->getRandomProverb($request->getLocale());

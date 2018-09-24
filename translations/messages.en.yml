@@ -72,8 +72,10 @@ send:
         AutomaticallyAddedPost: "Proverb will be automatically added to your message"
         SendFriend: "Send this proverb to a friend"
         Infos: "Infos"
-    message:
+        YourMessageHasBeenSentSuccessfully: "Your message has been sent successfully!"
+        Somebody: "Quelqu'un"
         ThisProverbHasBeenSentSince: "This proverb has been sent since"
+        HeSentYouThisProverb: "sent you this proverb"
     field:
         FirstName: "First name"
         LastName: "Last name"
@@ -82,6 +84,7 @@ send:
         Subject: "Subject"
         Message: "Message"
         Send: "Send"
+        Close: "Close"
 error:
     index:
         Error: "Error"

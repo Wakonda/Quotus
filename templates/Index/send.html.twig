@@ -25,7 +25,7 @@
 						tinyMCE.activeEditor.setContent('');
 						$('#send_modal').modal('hide');
 						$('html, body').animate({scrollTop:$('h1').position().top}, 'slow');
-						$('#send_result').html("Votre message a été envoyé avec succès !");
+						$('#send_result').html("{{ 'send.index.YourMessageHasBeenSentSuccessfully'|trans }}");
 						$('#send_result').show();
 					}
 				}
