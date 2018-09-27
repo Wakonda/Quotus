@@ -15,16 +15,15 @@ class UpdatePasswordType extends AbstractType
     {
         $builder
 			->add('password', RepeatedType::class, array(
-				'label' => 'Nouveau mot de passe',
+				'label' => 'editPassword.field.NewPassword',
 				'type' => PasswordType::class,
-				'invalid_message' => 'Les mots de passe doivent correspondre',
 				'options' => array('required' => true),
-				'first_options'  => array('label' => 'Mot de passe'),
-				'second_options' => array('label' => 'Mot de passe (validation)'),
+				'first_options'  => array('label' => 'editPassword.field.NewPassword'),
+				'second_options' => array('label' => 'editPassword.field.PasswordValidation'),
 				'constraints' => new Assert\NotBlank()
 			))
 			
-            ->add('save', SubmitType::class, array('label' => 'Sauvegarder', 'attr' => array('class' => 'btn btn-success')));
+            ->add('save', SubmitType::class, array('label' => 'admin.main.Save', 'attr' => array('class' => 'btn btn-success')));
     }
 
     public function getName()

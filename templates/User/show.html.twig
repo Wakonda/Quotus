@@ -1,6 +1,6 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}Membre - {{ entity.username }}{% endblock %}
+{% block head_title %}{{ 'user.myProfile.User'|trans }} - {{ entity.username }}{% endblock %}
 {% block main_title %}{{ entity.username }}{% endblock %}
 
 {% block style_additional %}
@@ -74,34 +74,34 @@
 	</p>
 	<table id="generic_info">
 		<tr>
-			<th>Login</th>
+			<th>{{ 'user.myProfile.Login'|trans }}</th>
 			<td>{{ entity.username }}</td>
 		</tr>
 		<tr>
-			<th>Pays</th>
+			<th>{{ 'user.myProfile.Country'|trans }}</th>
 			<td><span>{{ entity.country.title }} <img class="flag" src="{{ asset('photo/country/'~entity.country.flag) }}" alt="" /></span></td>
 		</tr>
 		<tr>
-			<th>Présentation</th>
+			<th>{{ 'user.myProfile.Description'|trans }}</th>
 			<td>{{ entity.presentation|raw }}</td>
 		</tr>
 	</table>
-	<h2 class="subtitle_show_user">Mes commentaires</h2>
+	<h2 class="subtitle_show_user">{{ 'user.myProfile.MyComments'|trans }}</h2>
 	<hr class="show_user_separator">
 	<table class="comments_user_datatables table table-striped table-bordered dt-responsive">
 		<thead>
-			<th>Proverbe</th>
-			<th>Date</th>
+			<th>{{ 'user.myProfile.Proverb'|trans }}</th>
+			<th>{{ 'user.myProfile.PublicationDate'|trans }}</th>
 		</thead>
 		<tbody>
 		</tbody>
 	</table>
-	<h2 class="subtitle_show_user">Mes votes</h2>
+	<h2 class="subtitle_show_user">{{ 'user.myProfile.MyVotes'|trans }}</h2>
 	<hr class="show_user_separator">
 	<table class="votes_user_datatables table table-striped table-bordered dt-responsive">
 		<thead>
-			<th>Proverbe</th>
-			<th>Vote</th>
+			<th>{{ 'user.myProfile.Proverb'|trans }}</th>
+			<th>{{ 'user.myProfile.Vote'|trans }}</th>
 		</thead>
 		<tbody>
 		</tbody>

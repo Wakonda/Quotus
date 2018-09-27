@@ -118,7 +118,7 @@ user:
         UseGravatar: "Use a gravatar"
         PasswordsMustMatch: "Passwords must match"
     myProfile:
-        MyPoems: "My proverbs"
+        User: "User"
         MyComments: "My comments"
         MyVotes: "My votes"
         Login: "Login"
@@ -129,7 +129,7 @@ user:
         Edit: "Edit"
         Delete: "Delete"
         State: "State"
-        Poem: "Proverb"
+        Proverb: "Proverb"
         PublicationDate: "Publication date"
         Vote: "Vote"
 forgottenPassword:
@@ -140,6 +140,12 @@ forgottenPassword:
         EmailUsername: "Email or username"
         Captcha: "Copy the word contained in the image"
         Send: "Reset password"
+editPassword:
+    index:
+        EditMyPassword: "Edit my password"
+    field:
+        NewPassword: "New password"
+        PasswordValidation: "Password (Validation)"
 contact:
     field:
         ContactUs: "Contact us"
