@@ -91,11 +91,11 @@
 		<tr>
 			<th>{{ form_label(form.avatar) }}</th>
 			<td>
-				<p class="underline italic">Sélectionnez un fichier</p>
+				<p class="underline italic">{{ 'user.createAccount.SelectFile'|trans }}</p>
 				<div class="errors">{{ form_errors(form.avatar) }}</div>
 				{{ form_widget(form.avatar) }}
-				<p class="bold underline">OU</p>
-				<p class="italic underline">Utilisez un gravatar</p>
+				<p class="bold underline">{{ 'user.createAccount.OR'|trans }}</p>
+				<p class="italic underline">{{ 'user.createAccount.UseGravatar'|trans }}</p>
 				<img src="{{ gravatar() }}" alt="gravatar" id="gravatar" /> <span class="glyphicon glyphicon-refresh reload" id="reload_gravatar"></span>
 			</td>
 		</tr>

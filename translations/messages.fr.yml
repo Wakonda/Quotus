@@ -116,7 +116,14 @@ user:
         OR: "OU"
         SelectFile: "Sélectionnez un fichier"
         UseGravatar: "Utilisez un gravatar"
+        CurrentGravatar: "Avatar actuel :"
         PasswordsMustMatch: "Les mots de passe doivent correspondre"
+    editAccount:
+        Title: "Modifier mon compte"
+    listUsers:
+        ListUsers: "Liste de nos membres"
+        Pseudo: "Pseudo"
+        Action: "Action"
     myProfile:
         User: "Membre"
         MyComments: "Mes commentaires"
@@ -140,6 +147,9 @@ forgottenPassword:
         EmailUsername: "Email ou nom d'utilisateur"
         Captcha: "Recopiez le mot contenu dans l'image"
         Send: "Réinitialiser le mot de passe"
+    confirmation:
+        Title: "Confirmation - Mot de passe oublié"
+        EmailSent: "Un email vous a été envoyé. Vous y trouverez la procédure afin de pouvoir vous reconnecter sur"
 editPassword:
     index:
         EditMyPassword: "Modifier mon mot de passe"
