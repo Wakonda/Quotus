@@ -118,6 +118,10 @@ user:
         UseGravatar: "Utilisez un gravatar"
         CurrentGravatar: "Avatar actuel :"
         PasswordsMustMatch: "Les mots de passe doivent correspondre"
+    confirmation:
+        Title: "Confirmation"
+        Text: "Votre compte a bien été créé. Toutefois pour pouvoir connecter, vous devez activer votre compte. Pour ce faire, cliquez sur le lien que vous avez reçu par email."
+        Email: "<p>Bonjour %username%,</p><p>Nous vous remercions de votre inscription sur <b>Proverbius</b>. Pour pouvoir vous connecter, et ainsi profiter de l'ensemble des fonctionnalités du site, cliquez sur le lien de confirmation ci-dessous.</p><p><a href='%urlLogin%' alt=''>Cliquez-ici pour activer votre compte</a></p><p><b><u>Attention : </u></b>Ce lien expirera le <i>%expiredAt%</i></p><p>A bientôt sur Proverbius ...</p><p>L'équipe de <a href='%urlIndex%' alt=''><b>Proverbius</b></a></p>"
     editAccount:
         Title: "Modifier mon compte"
     listUsers:
@@ -150,6 +154,7 @@ forgottenPassword:
     confirmation:
         Title: "Confirmation - Mot de passe oublié"
         EmailSent: "Un email vous a été envoyé. Vous y trouverez la procédure afin de pouvoir vous reconnecter sur"
+        Email: "<p>Bonjour %entity.username%,</p><p>Si vous recevez cet email, c'est que vous avez oublié votre mot de passe. Pour remédier à la situation, nous vous en avons généré un provisoire :</p><p><b><u>Mot de passe provisoire :</u></b> <i>%temporaryPassword%</i></p><p><b><u>Attention :</u></b> Ce mot de passe est provisoire. De ce fait, nous vous invitons vivement à le modifier dès que vous vous serez <a href='%urlLogin%'>connecté à votre compte</a>.</p><p>Cordialement,</p><p>L'équipe de <a href='%urlIndex%'><b>Proverbius</b></a></p>"
 editPassword:
     index:
         EditMyPassword: "Modifier mon mot de passe"

@@ -118,6 +118,10 @@ user:
         UseGravatar: "Use a gravatar"
         CurrentGravatar: "Current avatar:"
         PasswordsMustMatch: "Passwords must match"
+    confirmation:
+        Title: "Confirmation"
+        Text: "Your account has been created, but to be able to log in, you must activate your account by clicking on the link you received by email."
+        Email: "<p>Hello %username%, </p><p>Thank you for signing up on <b>Proverbius</b>. To be able to log in, and thus take advantage of all the features of the site, click on the confirmation link below.</p> <p><a href='%urlLogin%' alt=''> Click here to activate your account </a> </p><p><b><u> Warning: </u></b> This link will expire <i>%expiredAt% </i></p><p> See you soon on Proverbius ... </p><p>The <a href='%urlIndex%' alt=''><b>Proverbius</b> Team</p>"
     editAccount:
         Title: "Edit my account"
     listUsers:
@@ -150,6 +154,7 @@ forgottenPassword:
     confirmation:
         Title: "Confirmation - Forgotten password"
         EmailSent: "An email has been sent to you. Here you will find the procedure to be able to log in on"
+        Email: "<p>Hello %username%,</p><p>If you receive this email, you have forgotten your password. To remedy the situation, we have generated a temporary one: </p><p><b><u> Temporary password:</u></b><i>%temporaryPassword%</i></p><p><b><u>Warning:</u></b> This password is temporary. Therefore, we strongly urge you to modify it as soon as you have <a href='%urlLogin%'> connected to your account</a>. </p><p>Sincerely,</p><p>The team of <a href='%urlIndex%'> <b>Proverbius</b></a></p>"
 editPassword:
     index:
         EditMyPassword: "Edit my password"
