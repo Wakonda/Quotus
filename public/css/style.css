@@ -1,6 +1,11 @@
 @charset "utf-8";
 /* CSS Document */
 
+@font-face {
+	font-family: "MagnetoBoldA";
+	src: url("../font/MagnetoBoldA.ttf") format("opentype");
+}
+
 /*HTML5 Tags Styles starts here */
 header, hgroup, nav, article, section, footer, aside, address{ display:block;}
 time{  font-style:italic; padding:0px 5px;}
@@ -360,7 +365,7 @@ width:80px;
 	}
 }
 
-#logo{ font-family: Magneto, "Times New Roman", "Script MT Bold"; font-size: 60px; }
+#logo{ font-family: MagnetoBoldA, Magneto, "Times New Roman", "Script MT Bold"; font-size: 60px; }
 
 /*** FORM ***/
 table.form_grid  tbody tr td div.errors ul, div.errors ul
