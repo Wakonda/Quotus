@@ -19,6 +19,7 @@ menu:
         EditProfile: "Modifier mon profil"
         LogOut: "Déconnexion"
         Admin: "Admin"
+        HelpUs: "Aidez-nous"
     footer:
         About: "À propos"
         ContactUs: "Contactez-nous"

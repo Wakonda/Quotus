@@ -8,6 +8,7 @@
 		{% block meta_tag %}
 		<meta name="robots" content="index,follow" />
 		{% endblock %}
+		<meta name="msvalidate.01" content="FB19BE8A55C1B235B4389DE2169412FA" />
 
 		<link rel="shortcut icon" href="{{ asset('photo/favicon.ico') }}">
 		<title>{% block head_title %}{% endblock %}</title>
@@ -84,6 +85,28 @@
 						(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
 					</nav>
+					
+					<nav class="sidebar">
+						<h1>{{ 'menu.left.HelpUs'|trans }}</h1>
+						{% if app.request.locale == "en" %}
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="text-center">
+							<input type="hidden" name="cmd" value="_donations" />
+							<input type="hidden" name="business" value="5XXNV9Q7AGB2E" />
+							<input type="hidden" name="currency_code" value="USD" />
+							<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+							<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+						</form>
+						{% else %}
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="text-center">
+							<input type="hidden" name="cmd" value="_donations" />
+							<input type="hidden" name="business" value="5XXNV9Q7AGB2E" />
+							<input type="hidden" name="currency_code" value="EUR" />
+							<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+							<img alt="" border="0" src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1" />
+						</form>
+						{% endif %}
+					</nav>
+
 					<nav class="sidebar">
 						<h1>{{ 'menu.left.Statistics'|trans }}</h1>
 						{{ render(controller('App\\Controller\\IndexController::statAction')) }}
@@ -109,8 +132,8 @@
 
 					<nav class="sidebar">
 						<h1>{{ 'menu.left.Languages'|trans }}</h1>
-							<a href="{{ path('change_language', {'locale':'fr'}) }}" title="Français"><img src="{{ asset('photo/language/fr.png') }}" alt="Fr" width="22" {{ app.request.locale == "fr" ? 'class="selected_language"' : "" }}></a>
-							| <a href="{{ path('change_language', {'locale':'en'}) }}" title="English"><img src="{{ asset('photo/language/en.png') }}" alt="En" width="22" {{ app.request.locale == "en" ? 'class="selected_language"' : "" }}></a>
+							<a href="{{ path('change_language', {'locale':'fr'}) }}" title="Français"><img src="{{ asset('photo/language/fr.png') }}" alt="Fr" width="42" {{ app.request.locale == "fr" ? 'class="selected_language img-rounded"' : 'class="img-rounded"' }}></a>
+							| <a href="{{ path('change_language', {'locale':'en'}) }}" title="English"><img src="{{ asset('photo/language/en.png') }}" alt="En" width="42" {{ app.request.locale == "en" ? 'class="selected_language img-rounded"' : 'class="img-rounded"' }}></a>
 						</ul>
 					</nav>
 				</aside>

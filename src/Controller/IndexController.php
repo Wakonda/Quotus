@@ -35,6 +35,17 @@ class IndexController extends Controller
 		
         return $this->render('Index/index.html.twig', array('form' => $form->createView(), 'random' => $random));
     }
+	
+	public function getToken($redirectURL)
+	{
+			if(!isset($_GET['code']))
+			{
+				header("Location: ".$loginUrl);
+				die;
+			}
+
+			return $_GET['code'];
+	}
 
 	public function changeLanguageAction(Request $request, $locale)
 	{
