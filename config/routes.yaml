@@ -27,6 +27,12 @@ read_pdf:
     defaults:
         slug: null
 
+author:
+    path: /author/{id}/{slug}
+    controller: App\Controller\IndexController::authorAction
+    defaults:
+        slug: null
+
 index_search_datatables:
     path: /result_search/{search}
     controller: App\Controller\IndexController::indexSearchDatatablesAction
@@ -36,6 +42,12 @@ store:
     controller: App\Controller\IndexController::storeAction
     defaults:
         page: 1
+
+read_store:
+    path: /read_store/{id}/{slug}
+    controller: App\Controller\IndexController::readStoreAction
+    defaults:
+        slug: null
 
 error:
     path: /error/{code}
@@ -441,3 +453,36 @@ useradmin_show:
 useradmin_enabled:
     path: /admin/user/enabled/{id}/{state}
     controller: App\Controller\UserAdminController::enabledAction
+
+# ADMIN BIOGRAPHY
+biographyadmin_index:
+    path: /admin/biography/index
+    controller: App\Controller\BiographyAdminController::indexAction
+
+biographyadmin_indexdatatables:
+    path: /admin/biography/indexdatatables
+    controller: App\Controller\BiographyAdminController::indexDatatablesAction
+
+biographyadmin_new:
+    path: /admin/biography/new
+    controller: App\Controller\BiographyAdminController::newAction
+
+biographyadmin_create:
+    path: /admin/biography/create
+    controller: App\Controller\BiographyAdminController::createAction
+
+biographyadmin_show:
+    path: /admin/biography/show/{id}
+    controller: App\Controller\BiographyAdminController::showAction
+
+biographyadmin_edit:
+    path: /admin/biography/edit/{id}
+    controller: App\Controller\BiographyAdminController::editAction
+
+biographyadmin_update:
+    path: /admin/biography/upate/{id}
+    controller: App\Controller\BiographyAdminController::updateAction
+
+biographyadmin_getbiographiesbyajax:
+    path: /admin/biography/get_biographies
+    controller: App\Controller\BiographyAdminController::getBiographiesByAjaxAction

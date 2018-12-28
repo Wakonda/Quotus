@@ -57,6 +57,9 @@ store:
     index:
         Store: "Store"
         Search: "Search"
+    author:
+        Title: "Title"
+        Action: "Action"
 proverb:
     read:
         Proverb: "Proverb"
@@ -259,7 +262,17 @@ admin:
     store:
         Title: "Title"
         ProductCode: "Product code"
-        Tag: "Tag"
+        Text: "Text"
+        Image: "Image"
+        Biography: "Biography"
+    biography:
+        Title: "Titre"
+        Text: "Texte"
+        BirthDate: "Date de naissance"
+        DeathDate: "Date de décès"
+        Image: "Image"
+        Nationality: "Nationalité"
+        Country: "Pays"
     socialNetwork:
         Send: "Product Code"
     imageGenerator:

@@ -21,6 +21,7 @@ use App\Entity\Country;
 use App\Entity\Page;
 use App\Entity\Store;
 use App\Entity\Language;
+use App\Entity\Biography;
 
 use Spipu\Html2Pdf\Html2Pdf;
 use MatthiasMullie\Minify;
@@ -392,7 +393,7 @@ class IndexController extends Controller
 		$nbMessageByPage = 12;
 		
 		$entities = $em->getRepository(Store::class)->getProducts($nbMessageByPage, $page, $query, $request->getLocale());
-		$totalEntities = $em->getRepository(Store::class)->countEntities($query, $request->getLocale());
+		$totalEntities = $em->getRepository(Store::class)->getProducts(0, 0, $query, $request->getLocale(), true);
 		
 		$links = $pagination->setPagination(['url' => 'store'], $page, $totalEntities, $nbMessageByPage);
 
@@ -403,10 +404,30 @@ class IndexController extends Controller
 			'links' => $links
 		));
     }
+
+	public function readStoreAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$entity = $em->getRepository(Store::class)->find($id);
+		
+		return $this->render('Index/readStore.html.twig', [
+			'entity' => $entity
+		]);
+	}
 	
 	public function generateWidgetAction()
 	{
 		return $this->render('Index/generate_widget.html.twig');
+	}
+	
+	// AUTHOR
+	public function authorAction(Request $request, $id)
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+		$entity = $entityManager->getRepository(Biography::class)->find($id);
+		$stores = $entityManager->getRepository(Store::class)->findBy(["biography" => $entity]);
+
+		return $this->render('Index/author.html.twig', array('entity' => $entity, "stores" => $stores));
 	}
 	
 	public function widgetAction(Request $request)

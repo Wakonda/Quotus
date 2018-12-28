@@ -5,17 +5,17 @@ namespace App\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-use App\Entity\Store;
-use App\Entity\Language;
 use App\Repository\LanguageRepository;
+use App\Entity\Language;
+use App\Entity\Store;
 
 class StoreType extends AbstractType
 {
@@ -27,11 +27,17 @@ class StoreType extends AbstractType
             ->add('title', TextType::class, array(
                 'constraints' => new Assert\NotBlank(), "label" => "admin.store.Title"
             ))
-			->add('embeddedCode', TextareaType::class, array(
-                'constraints' => new Assert\NotBlank(), "label" => "admin.store.ProductCode", 'attr' => array('class' => 'redactor')
+            ->add('biography', BiographySelectorType::class, array(
+                'label' => 'admin.store.Biography'
             ))
-			->add('tag', TextType::class, array(
-                'constraints' => new Assert\NotBlank(), "label" => "admin.store.Tag", 'attr' => array('class' => 'full_width tagit form-control')
+			->add('newBiography', HiddenType::class, array("mapped" => false))
+            ->add('text', TextareaType::class, array(
+                'constraints' => new Assert\NotBlank(), "label" => "admin.store.Text"
+            ))
+			->add('photo', FileType::class, array('data_class' => null, "label" => "admin.store.Image", "required" => true
+            ))
+			->add('amazonCode', TextType::class, array(
+                'constraints' => new Assert\NotBlank(), "label" => "admin.store.ProductCode", 'attr' => array('class' => 'redactor')
             ))
 			->add('language', EntityType::class, array(
 				'label' => 'admin.form.Language',
@@ -45,7 +51,7 @@ class StoreType extends AbstractType
 				'placeholder' => 'main.field.ChooseAnOption',
 				'constraints' => new Assert\NotBlank()
 			))
-            ->add('save', SubmitType::class, array('label' => 'Sauvegarder', 'attr' => array('class' => 'btn btn-success')))
+            ->add('save', SubmitType::class, array('label' => 'admin.main.Save', 'attr' => array('class' => 'btn btn-success')))
 			;
     }
 	

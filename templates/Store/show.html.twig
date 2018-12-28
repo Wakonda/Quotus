@@ -10,16 +10,28 @@
 			<td>{{ entity.title }}</td>
 		</tr>
 		<tr>
-			<th>{{ "admin.store.ProductCode"|trans }}</th>
-			<td>{{ entity.embeddedCode|raw }}</td>
+			<th>{{ "admin.store.Text"|trans }}</th>
+			<td>{{ entity.text|raw }}</td>
 		</tr>
 		<tr>
-			<th>{{ "admin.store.Tag"|trans }}</th>
-			<td>{{ entity.tag }}</td>
+			<th>{{ 'admin.store.Image'|trans }}</th>
+			<td><p class="center">{{ ("photo/store/"~entity.photo)|max_size_image() }}</p></td>
+		</tr>
+		<tr>
+			<th>{{ "admin.store.Biography"|trans }}</th>
+			<td><a href="{{ path('biographyadmin_show', {'id': entity.biography.id}) }}">{{ entity.biography.title }}</a> {% if entity.biography.text is empty %}<a href="{{ path('biographyadmin_edit', {'id': entity.biography.id}) }}" class="btn btn-info"><i class="fa fa-edit fa-lg"></i></a>{% endif %}</td>
+		</tr>
+		<tr>
+			<th>{{ "admin.store.ProductCode"|trans }}</th>
+			<td>{{ entity.amazonCode|raw }}</td>
 		</tr>
 		<tr>
 			<th>{{ "admin.form.Language"|trans }}</th>
 			<td>{{ entity.language.title }}</td>
+		</tr>
+		<tr>
+			<th>{{ 'admin.form.Slug'|trans }}</th>
+			<td>{{ entity.slug }}</td>
 		</tr>
 	</table>
 	<hr>

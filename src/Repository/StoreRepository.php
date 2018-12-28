@@ -60,40 +60,35 @@ class StoreRepository extends ServiceEntityRepository implements iRepository
 		return $qb->getQuery()->getSingleScalarResult();
 	}
 
-	public function countEntities($query, $locale)
+	public function getProducts($nbrMessageParPage, $page, $query, $locale, $count = false)
 	{
 		$qb = $this->createQueryBuilder('o');
-		
-		$qb	->select('COUNT(o)');
-		
-		if(!empty($query))
-			$qb->where("o.tag IN (:tags)")
-		       ->setParameter("tags", explode(",", $query));
+
+		if(!empty($query)) {
+			$query = "%".$query."%";
+			$qb->join("o.biography", "b")
+			   ->where("o.title LIKE :query")
+			   ->orWhere("o.text LIKE :query")
+			   ->orWhere("b.title LIKE :query")
+		       ->setParameter("query", $query);
+		}
 
 		$qb->join("o.language", "l")
 		   ->andWhere("l.abbreviation = :locale")
 		   ->setParameter("locale", $locale);
-
-		return $qb->getQuery()->getSingleScalarResult();
-	}
-
-	public function getProducts($nbrMessageParPage, $page, $query, $locale)
-	{	
+		   
+		if($count) {
+			$qb	->select('COUNT(o)');
+			
+			return $qb->getQuery()->getSingleScalarResult();
+		}
+		
 		$firstMessageDisplaying = ($page - 1) * $nbrMessageParPage;
-		$qb = $this->createQueryBuilder('o');
-
-		if(!empty($query))
-			$qb->where("o.tag IN (:tags)")
-		       ->setParameter("tags", explode(",", $query));
 
 		$qb
 			->orderBy('o.id', 'DESC')
 			->setFirstResult($firstMessageDisplaying)
 			->setMaxResults($nbrMessageParPage);
-
-		$qb->join("o.language", "l")
-		   ->andWhere("l.abbreviation = :locale")
-		   ->setParameter("locale", $locale);
 
 		return $qb->getQuery()->getResult();
 	}

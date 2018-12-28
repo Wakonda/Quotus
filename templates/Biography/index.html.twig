@@ -1,7 +1,7 @@
 {% extends 'generic_layout.html.twig' %}
 
-{% block head_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Store'|trans }}{% endblock %}
-{% block main_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Store'|trans }}{% endblock %}
+{% block head_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Biography'|trans }}{% endblock %}
+{% block main_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Biography'|trans }}{% endblock %}
 
 {% block style_additional %}
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}" media="screen" />
@@ -26,7 +26,7 @@
 				"iDisplayLength": 15,
 				"bProcessing": true,
 				"bServerSide": true,
-				"sAjaxSource": "{{ path('storeadmin_indexdatatables') }}",
+				"sAjaxSource": "{{ path('biographyadmin_indexdatatables') }}",
 				"autoWidth": false,
 				"sDom":
 				"<'row'<'col-sm-6'l><'col-sm-6'f>>" +
@@ -50,5 +50,5 @@
 		</tbody>
 	</table>
 	<hr>
-	<a href="{{ path('storeadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a>
+	<a href="{{ path('biographyadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a>
 {% endblock %}
