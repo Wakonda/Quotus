@@ -32,7 +32,7 @@
 {% endblock %}
 
 {% block main_content %}
-	<p class="center"><img src="{{ asset('photo/error-page.jpg') }}" alt="" /></p>
+	<p class="text-center"><img src="{{ asset('photo/error-page.jpg') }}" alt="" /></p>
 	<br>
 	{% if code == "404" %}
 		<p>{{ "error.index.PageNotFound"|trans }}</p>

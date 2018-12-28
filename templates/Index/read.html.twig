@@ -117,7 +117,7 @@
 			{% set i = 0 %}
 			{% for image in entity.images %}
 				<div class="item {{ i == 0 ? 'active' : '' }}">
-					<img src="{{ asset('photo/proverb/'~image) }}" class="center" alt="">
+					<img src="{{ asset('photo/proverb/'~image) }}" class="text-center" alt="">
 					<div class="carousel-caption hidden_print">
 						<a href="{{ path('download_image', {'fileName': image}) }}" class="btn btn-success "><i class="fa fa-download" aria-hidden="true"></i></a>
 					</div>

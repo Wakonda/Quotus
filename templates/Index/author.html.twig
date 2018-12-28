@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block main_content %}
-	<p class="center">{{ ("photo/biography/"~entity.photo)|max_size_image() }}</p>
+	<p class="text-center">{{ ("photo/biography/"~entity.photo)|max_size_image() }}</p>
 	<br>
 	{{ entity.text|raw }}
 	<table class="show">
