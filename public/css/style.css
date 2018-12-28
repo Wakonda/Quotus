@@ -440,11 +440,6 @@ button[type="submit"]
 	cursor: pointer;
 }
 
-.center
-{
-	text-align: center;
-}
-
 .center-iframe iframe{
 	display: block;
     margin: 0 auto;
