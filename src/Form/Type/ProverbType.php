@@ -30,7 +30,7 @@ class ProverbType extends AbstractType
 
         $builder
 			->add('text', TextareaType::class, array(
-                'attr' => array('class' => 'redactor'), 'label' => 'admin.proverb.Text'
+                'constraints' => new Assert\NotBlank(), 'attr' => array('class' => 'redactor'), 'label' => 'admin.proverb.Text'
             ))
 			->add('country', EntityType::class, array(
 				'label' => 'admin.proverb.Country',

@@ -62,7 +62,7 @@
 
 {% block main_content %}
 	{% for message in app.session.getFlashBag.get('new_password') %}
-		<div class="success">{{ message }}</div>
+		<div class="alert alert-success">{{ message }}</div>
 	{% endfor %}
 	
 	<p class="text-center">

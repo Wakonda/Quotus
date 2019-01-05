@@ -10,13 +10,13 @@
 			var clipboard = new ClipboardJS('.clip_button');
 
 			clipboard.on('success', function(e) {
-				$("#success_copy").addClass("success");
+				$("#success_copy").addClass("alert alert-success");
 				$("#success_copy span").text("Le code a été copié avec succès");
 				setTimeout(fade_out, 5000);
 			});
 
 			var fade_out = function() {
-				$("#success_copy").removeClass("success");
+				$("#success_copy").removeClass("alert alert-success");
 				$("#success_copy span").empty();
 			}
 		});

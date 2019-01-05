@@ -741,23 +741,8 @@ span.reload:hover {
 }
 
 /******** ADMIN **********/
-table.admin_show {
-    border-collapse: collapse;
-	width: 100%;
-}
 table.admin_show th {
-	width: 30%;
 	background-color: #F7F7F7;
-}
-
-table.admin_show td {
-	width: 70%;
-}
-
-table.admin_show td, table.admin_show th {
-    border: 1px solid black;
-	padding-left: 10px;
-	padding-right: 10px;
 }
 
 input[type="search"] {

@@ -4,7 +4,7 @@
 {% block main_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Proverb'|trans }}{% endblock %}
 
 {% block main_content %}
-	<table class="admin_show">
+	<table class="table table-bordered admin_show">
 		<tr>
 			<th>{{ 'admin.proverb.Text'|trans }}</th>
 			<td>{{ entity.text|raw }}</td>
@@ -126,6 +126,31 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="panel panel-default sub_block">
+		<div class="panel-heading" role="tab" id="headingFacebook">
+			<p class="panel-title">
+			<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFacebook" aria-expanded="true" aria-controls="collapseOne">
+			<i class="fa fa-facebook-square" aria-hidden="true"></i> Facebook
+			</a>
+			</p>
+		</div>
+		<div id="collapseFacebook" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingFacebook" aria-expanded="true">
+			<div class="panel-body">
+				<form action="{{ path('proverbadmin_facebook', {'id': entity.id}) }}" method="post">
+					<div class="row">
+						{% for image in entity.images %}
+							<div class="col-md-4 mb-10"><div class="thumbnail" role="button"><img src="{{ absolute_url(asset('photo/proverb/'~image)) }}"></div></div>
+						{% endfor %}
+					</div>
+					<input type="hidden" name="image_facebook" id="image_facebook">
+					<textarea id="twitter_area" name="facebook_area" rows="3" cols="70" class="form-control">{{ entity.text|raw }} #proverbe #{{ entity.country.title|replace({'-': '', ' ':''}) }} </textarea>
+					<br>
+					<input value="{{ 'admin.socialNetwork.Send'|trans }}" id="tweet" type="submit" class="btn btn-default">
+				</form>
+			</div>
+		</div>
+	</div>
 	{% endif %}
 	<hr>
 	<a href="{{ path('proverbadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> {{ 'admin.index.Update'|trans }}</a> - <a href="{{ path('proverbadmin_delete', { 'id' : entity.id }) }}"><i class="fa fa-trash"></i> Supprimer</a> - <a href="{{ path('proverbadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a> | <a href="{{ path('proverbadmin_new', {countryId: entity.country.id}) }}"> {{ 'admin.index.ForSameCountry'|trans }}</a>
@@ -150,6 +175,13 @@
 				$("div#collapsePinterest .thumbnail").removeAttr("style");
 				$(this).css({"border-color": "#f00", "background-color": "#eca7a7"});
 				$("#image_pinterest").val($("img", this).attr("src"));
+			});
+			
+			// Facebook
+			$("div#collapseFacebook .thumbnail").click(function() {
+				$("div#collapseFacebook .thumbnail").removeAttr("style");
+				$(this).css({"border-color": "#f00", "background-color": "#eca7a7"});
+				$("#image_facebook").val($("img", this).attr("src"));
 			});
 		});
 	</script>

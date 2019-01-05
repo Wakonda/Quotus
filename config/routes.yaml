@@ -354,6 +354,10 @@ proverbadmin_pinterest:
     path: /admin/proverb/pinterest/{id}
     controller: App\Controller\ProverbAdminController::pinterestAction
 
+proverbadmin_facebook:
+    path: /admin/proverb/facebook/{id}
+    controller: App\Controller\ProverbAdminController::facebookAction
+
 proverbadmin_save_image:
     path: /admin/proverb/saveimage/{id}
     controller: App\Controller\ProverbAdminController:saveImageAction

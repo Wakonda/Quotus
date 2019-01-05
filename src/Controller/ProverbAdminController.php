@@ -328,11 +328,43 @@ class ProverbAdminController extends Controller
 		$bot->pins->create($image, $boards[0]['id'], $entity->getText(), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
 		
 		if(empty($bot->getLastError()))
-			$session->getFlashBag()->add('message', 'Pinterest envoyé avec succès');
+			$session->getFlashBag()->add('message', 'Envoyé avec succès sur Pinterest');
 		else
 			$session->getFlashBag()->add('message', $bot->getLastError());
 	
 		return $this->redirect($this->generateUrl("proverbadmin_show", array("id" => $id)));
+	}
+	
+	public function facebookAction(Request $request, $id)
+	{
+		if(getenv("FACEBOOK_APP_ENV") == "dev")
+		{
+			// TEST FACEBOOK
+			$fb = new \Facebook\Facebook([
+			  'app_id' => getenv("FACEBOOK_DEV_APP_ID"),
+			  'app_secret' => getenv("FACEBOOK_DEV_APP_SECRET"),
+			  'default_graph_version' => 'v2.10'
+			]);
+			
+			$userId = getenv("FACEBOOK_DEV_USER_ID");
+			$token = getenv("FACEBOOK_DEV_TOKEN");
+			$pageId = getenv("FACEBOOK_DEV_PAGE_ID");
+			
+			$response = $fb->get("/".$pageId."?fields=access_token", $token);
+			
+			$accessTokenPage = $response->getDecodedBody()['access_token'];
+			
+			$data = [
+				'caption' => $request->request->get("facebook_area"),
+				'url' => $request->request->get("image_facebook")
+			];
+
+			$response = $fb->post('/'.$pageId.'/photos', $data, $accessTokenPage);
+		}
+
+		$session->getFlashBag()->add('message', 'Envoyé avec succès sur Facebook');
+		
+		return $this->redirect($this->generateUrl("proverbadmin_show", ["id" => $id]));
 	}
 	
 	public function saveImageAction(Request $request, $id)

@@ -146,7 +146,7 @@
 					</header>
 					
 					{% for message in app.session.getFlashBag.get('message') %}
-						<div class="success">{{ message }}</div>
+						<div class="alert alert-success">{{ message }}</div>
 					{% endfor %}
 					
 					{% block main_content %}{% endblock %}

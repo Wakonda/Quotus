@@ -10,14 +10,14 @@
 	{% else %}
 		<form action="{{ path('login') }}" method="post" novalidate>
 			{% if error %}
-				<p class="error">{{ 'user.login.PasswordOrUserForgotten'|trans }}</p>
+				<div class="alert alert-danger">{{ 'user.login.PasswordOrUserForgotten'|trans }}</div>
 			{% endif %}
 			{% for message in app.session.getFlashBag.get('confirm_login') %}
-				<div class="success">{{ message }}</div>
+				<div class="alert alert-success">{{ message }}</div>
 			{% endfor %}
 			
 			{% for message in app.session.getFlashBag.get('expired_login') %}
-				<div class="error">{{ message }}</div>
+				<div class="alert alert-danger">{{ message }}</div>
 			{% endfor %}
 
 			<table class="form_grid">
