@@ -261,7 +261,7 @@ class IndexController extends Controller
 				$show = $this->generateUrl('country', array('id' => $entity['country_id'], 'slug' => $entity['country_slug']));
 				$row[] = '<a href="'.$show.'" alt="Show"><img src="'.$request->getBaseUrl().'/photo/country/'.$entity['flag'].'" class="flag" /> '.$entity['country_title'].'</a>';
 
-				$row[] = $entity['number_proverbs_by_country'];
+				$row[] = '<span class="badge">'.$entity['number_proverbs_by_country'].'</span>';
 
 				$output['aaData'][] = $row;
 			}

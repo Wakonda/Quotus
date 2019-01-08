@@ -325,7 +325,7 @@ class ProverbAdminController extends Controller
 		
 		$image = $request->request->get('image_pinterest');
 		
-		$bot->pins->create($image, $boards[0]['id'], $entity->getText(), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
+		$bot->pins->create($image, $boards[0]['id'], $request->request->get("pinterest_area"), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
 		
 		if(empty($bot->getLastError()))
 			$session->getFlashBag()->add('message', 'Envoyé avec succès sur Pinterest');

@@ -119,7 +119,7 @@
 						{% endfor %}
 					</div>
 					<input type="hidden" name="image_pinterest" id="image_pinterest">
-					<textarea id="twitter_area" name="twitter_area" rows="3" cols="70" class="form-control">{{ entity.text|raw }} #proverbe #{{ entity.country.title|replace({'-': '', ' ':''}) }} </textarea>
+					<textarea id="pinterest_area" name="pinterest_area" rows="3" cols="70" class="form-control">{{ entity.text|raw }}</textarea>
 					<br>
 					<input value="{{ 'admin.socialNetwork.Send'|trans }}" id="tweet" type="submit" class="btn btn-default">
 				</form>
