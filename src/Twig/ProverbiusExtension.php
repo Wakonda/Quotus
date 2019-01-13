@@ -36,7 +36,8 @@ class ProverbiusExtension extends AbstractExtension
 			new TwigFunction('captcha', array($this, 'generateCaptcha')),
 			new TwigFunction('gravatar', array($this, 'generateGravatar')),
 			new TwigFunction('minify_file', array($this, 'minifyFile')),
-			new TwigFunction('count_unread_messages', array($this, 'countUnreadMessagesFunction'))
+			new TwigFunction('count_unread_messages', array($this, 'countUnreadMessagesFunction')),
+			new TwigFunction('random_image', array($this, 'randomImage'))
 		);
 	}
 
@@ -128,5 +129,12 @@ class ProverbiusExtension extends AbstractExtension
 	{
 		$mn = new \App\Service\MinifyFile($file);
 		return $mn->save();
+	}
+	
+	public function randomImage($json) {
+		if(empty($json))
+			return null;
+		
+		return $json[array_rand($json)];
 	}
 }

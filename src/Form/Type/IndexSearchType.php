@@ -31,6 +31,7 @@ class IndexSearchType extends AbstractType
 				},
 				'multiple' => false, 
 				'expanded' => false,
+				'required' => false,
 				'constraints' => array(new Assert\NotBlank()),
 				'placeholder' => 'main.field.ChooseAnOption'
 			))

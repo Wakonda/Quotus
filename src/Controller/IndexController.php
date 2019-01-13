@@ -33,7 +33,7 @@ class IndexController extends Controller
 		$form = $this->createFormIndexSearch($request->getLocale(), null);
 		$entityManager = $this->getDoctrine()->getManager();
 		$random = $entityManager->getRepository(Proverb::class)->getRandomProverb($request->getLocale());
-		
+
         return $this->render('Index/index.html.twig', array('form' => $form->createView(), 'random' => $random));
     }
 	

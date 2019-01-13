@@ -40,15 +40,22 @@
 		{{ form_rest(form) }}
 	{{ form_end(form) }}
 	<hr class="flare">
-	<h2>{{ 'main.index.ProverbRandomly'|trans }}</h2>
+	<h2>{{ 'main.index.ProverbRandomly'|trans }}{% if random is not null %} <a href="{{ path('read', {'id' : random.id, 'slug' : random.slug}) }}" class="btn btn-primary btn-sm"><i class="fa fa-info" aria-hidden="true"></i></a>{% endif %}</h2>
 	{% if random is not null %}
-	<div>
-		<blockquote>{{ random.text|raw }}</blockquote>
-	</div>
-	<hr>
-	<p>
-	<a href="{{ path('country', {'id' : random.country.id, 'slug' : random.country.slug }) }}" alt=""><img class="flag" src="{{ asset('photo/country/'~random.country.flag) }}" alt="" height="8" /> Proverbe - {{ random.country.title }}</a>
-	</p>
+		{% set ri = random_image(random.images) %}
+		{% if ri is not null %}
+			<div class="text-center">
+				<img src="{{ asset('photo/proverb/'~ri) }}" class="text-center" alt="">
+			</div>
+		{% else %}
+			<div>
+				<blockquote>{{ random.text|raw }}</blockquote>
+			</div>
+		{% endif %}
+		<hr>
+		<p>
+		<a href="{{ path('country', {'id' : random.country.id, 'slug' : random.country.slug }) }}" alt=""><img class="flag" src="{{ asset('photo/country/'~random.country.flag) }}" alt="" height="8" /> Proverbe - {{ random.country.title }}</a>
+		</p>
 	{% else %}
 		<p>{{ 'main.index.NoProverb'|trans }}.</p>
 	{% endif %}
