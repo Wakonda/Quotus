@@ -3,14 +3,15 @@
 {% block head_title %}{{ "search.result.Search"|trans }}{% endblock %}
 
 {% block style_additional %}
-	<link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}" media="screen" />
-	<link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/Responsive-2.2.0/css/responsive.bootstrap.min.css') }}" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css') }}" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/Responsive-2.2.2/css/responsive.bootstrap.min.css') }}" media="screen" />
 {% endblock %}
 {% block script_additional %}
 	<script src="{{ asset('js/DataTables/datatables.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('js/DataTables/DataTables-1.10.16/js/dataTables.bootstrap.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('js/DataTables/Responsive-2.2.0/js/dataTables.responsive.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('js/DataTables/Responsive-2.2.0/js/responsive.bootstrap.min.js') }}"></script>	<script src="{{ asset('js/datatables.extension.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/DataTables/Responsive-2.2.2/js/responsive.bootstrap.min.js') }}"></script>
+	
 	<script type="text/javascript">
 		$(function ()
 		{
@@ -26,12 +27,7 @@
 				"bProcessing": true,
 				"bServerSide": true,
 				"sAjaxSource": "{{ path('index_search_datatables', {'search' : search}) }}",
-				"autoWidth": false,
-				"sDom":
-				"<'row'<'col-sm-6'l><'col-sm-6'f>>" +
-				"<'row'<'col-sm-12'tr>>" +
-				"<'row'<'col-sm-12'i>>" +
-				"<'row'<'col-sm-12'p>>"
+				"autoWidth": false
 			});
 		});
 	</script>

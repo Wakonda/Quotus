@@ -59,11 +59,12 @@ class IndexController extends Controller
 		$search = $request->request->get("index_search");
 		$entityManager = $this->getDoctrine()->getManager();
 		$search['country'] = (empty($search['country'])) ? null : $entityManager->getRepository(Country::class)->find($search['country'])->getTitle();
-		$criteria = array_filter(array_values($search));
-		$criteria = empty($criteria) ? $translator->trans("search.result.None") : $criteria;
 		
 		unset($search["_token"]);
-		
+
+		$criteria = array_filter(array_values($search));
+		$criteria = empty($criteria) ? $translator->trans("search.result.None") : $criteria;
+
 		return $this->render('Index/resultIndexSearch.html.twig', array('search' => base64_encode(json_encode($search)), 'criteria' => $criteria));
 	}
 
@@ -261,7 +262,7 @@ class IndexController extends Controller
 				$show = $this->generateUrl('country', array('id' => $entity['country_id'], 'slug' => $entity['country_slug']));
 				$row[] = '<a href="'.$show.'" alt="Show"><img src="'.$request->getBaseUrl().'/photo/country/'.$entity['flag'].'" class="flag" /> '.$entity['country_title'].'</a>';
 
-				$row[] = '<span class="badge">'.$entity['number_proverbs_by_country'].'</span>';
+				$row[] = '<span class="badge badge-secondary">'.$entity['number_proverbs_by_country'].'</span>';
 
 				$output['aaData'][] = $row;
 			}

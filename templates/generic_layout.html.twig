@@ -14,7 +14,7 @@
 		<title>{% block head_title %}{% endblock %}</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset(minify_file('css/style.css')) }}" media="screen" />
 		<link rel="stylesheet" type="text/css" href="{{ asset(minify_file('css/style_print.css')) }}" media="print" />
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-3.3.2-dist/css/bootstrap.min.css') }}" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-4.2.1-dist/css/bootstrap.min.css') }}" media="screen" />
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ asset(minify_file('js/BackToTop/BackToTop.css')) }}" />
 			
@@ -40,7 +40,7 @@
 						</a>
 					</div>
 					<!--<h1>Creating HTML5 <span>Responsive Web Template Using Media Queries</span></h1>-->
-					<h2>{{ 'main.index.WonderfulWorldOfProverb'|trans|raw }}</h2>
+					<h2 class="mt-2">{{ 'main.index.WonderfulWorldOfProverb'|trans|raw }}</h2>
 				</hgroup>
 				<!-- Hgroup Element Ends Here -->
 
@@ -132,8 +132,8 @@
 
 					<nav class="sidebar">
 						<h1>{{ 'menu.left.Languages'|trans }}</h1>
-							<a href="{{ path('change_language', {'locale':'fr'}) }}" title="Français"><img src="{{ asset('photo/language/fr.png') }}" alt="Fr" width="42" {{ app.request.locale == "fr" ? 'class="selected_language img-rounded"' : 'class="img-rounded"' }}></a>
-							| <a href="{{ path('change_language', {'locale':'en'}) }}" title="English"><img src="{{ asset('photo/language/en.png') }}" alt="En" width="42" {{ app.request.locale == "en" ? 'class="selected_language img-rounded"' : 'class="img-rounded"' }}></a>
+							<a href="{{ path('change_language', {'locale':'fr'}) }}" title="Français"><img src="{{ asset('photo/language/fr.png') }}" alt="Fr" width="42" {{ app.request.locale == "fr" ? 'class="selected_language rounded"' : 'class="rounded"' }}></a>
+							| <a href="{{ path('change_language', {'locale':'en'}) }}" title="English"><img src="{{ asset('photo/language/en.png') }}" alt="En" width="42" {{ app.request.locale == "en" ? 'class="selected_language rounded"' : 'class="rounded"' }}></a>
 						</ul>
 					</nav>
 				</aside>
@@ -175,7 +175,7 @@
 		</div>
 		<!-- Div Wrapper Element ends Here -->
 		<script src="{{ asset(minify_file('js/cookiechoices/cookiechoices.js')) }}"></script>
-		<script src="{{ asset('css/bootstrap-3.3.2-dist/js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('css/bootstrap-4.2.1-dist/js/bootstrap.min.js') }}"></script>
 		<script src="{{ asset('js/BackToTop/BackToTop.js') }}"></script>
 		<script>
 			// Resize "aside" and "article" tags

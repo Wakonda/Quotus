@@ -1,22 +1,31 @@
 {% import "Index/macro.html.twig" as macro %}
-<table class="form_grid">
-	<tr>
-		<th>{{ form_label(form.title) }}</th>
-		<td><div class="errors">{{ form_errors(form.title) }}</div>{{ form_widget(form.title, {'attr':{'class':'full_width form-control'}}) }}</td>
-	</tr>
-	<tr>
-		<th>{{ form_label(form.internationalName) }}</th>
-		<td><div class="errors">{{ form_errors(form.internationalName) }}</div>{{ form_widget(form.internationalName, {'attr':{'class':'full_width form-control'}}) }}</td>
-	</tr>
-	<tr>
-		<th>{{ form_label(form.flag) }}</th>
-		<td><div class="errors">{{ form_errors(form.flag) }}</div>{% if entity.flag is defined %}{{ macro.currentImage("photo/country/", entity.flag) }}{% endif %}{{ form_widget(form.flag) }}</td>
-	</tr>
-	<tr>
-		<th>{{ form_label(form.language) }}</th>
-		<td><div class="errors">{{ form_errors(form.language) }}</div>{{ form_widget(form.language, {'attr':{'class':'full_width form-control'}}) }}</td>
-	</tr>
-</table>
+<div class="form-group row">
+	{{ form_label(form.title, null, {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+	<div class="col-sm-10">
+		{{ form_errors(form.title) }}{{ form_widget(form.title, {'attr':{'class':'form-control'}}) }}
+	</div>
+</div>
+
+<div class="form-group row">
+	{{ form_label(form.internationalName, null, {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+	<div class="col-sm-10">
+		{{ form_errors(form.internationalName) }}{{ form_widget(form.internationalName, {'attr':{'class':'form-control'}}) }}
+	</div>
+</div>
+
+<div class="form-group row">
+	{{ form_label(form.flag, null, {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+	<div class="col-sm-10">
+		{{ form_errors(form.flag) }}{% if entity.flag is defined %}{{ macro.currentImage("photo/country/", entity.flag) }}{% endif %}{{ form_widget(form.flag, {'attr':{'class':'form-control'}}) }}
+	</div>
+</div>
+
+<div class="form-group row">
+	{{ form_label(form.language, null, {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+	<div class="col-sm-10">
+		{{ form_errors(form.language) }}{{ form_widget(form.language, {'attr':{'class':'form-control'}}) }}
+	</div>
+</div>
 <hr />
 {{ form_widget(form.save, {'icon': 'fa-save'}) }}
 {{ form_rest(form) }}

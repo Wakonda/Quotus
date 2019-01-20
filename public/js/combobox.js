@@ -5,7 +5,7 @@ function setComboboxEdit(path, table, field)
 		{
 			lang: 'fr',
 			db_table: table,
-			per_page: 20,
+			per_page: 10,
 			navi_num: 10,
 			no_image: true,
 			init_record: $(field).val()
@@ -22,7 +22,7 @@ function setComboboxNew(path, table, field)
 	var options = {
 		lang: 'fr',
 		db_table: table,
-		per_page: 20,
+		per_page: 10,
 		navi_num: 10,
 		no_image: true,
 		bind_to: 'foo'

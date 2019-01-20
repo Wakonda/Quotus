@@ -14,15 +14,15 @@
 
 				if(state == "more")
 				{
-					$(this).removeClass("glyphicon-plus");
-					$(this).addClass("glyphicon-minus");
+					$(this).removeClass("fa-plus");
+					$(this).addClass("fa-minus");
 					$("div#error_content").slideDown();
 					$(this).data("stateError", "less");
 				}
 				else
 				{
-					$(this).removeClass("glyphicon-minus");
-					$(this).addClass("glyphicon-plus");
+					$(this).removeClass("fa-minus");
+					$(this).addClass("fa-plus");
 					$("div#error_content").slideUp();
 					$(this).data("stateError", "more");
 				}
@@ -42,7 +42,7 @@
 	<hr>
 	<div class="error error_content">
 	<div id="state_error_content">
-		<span class="glyphicon glyphicon-plus pointer" data-state-error="more"> </span>
+		<span class="fa fa-plus pointer" data-state-error="more"> </span>
 	</div>
 	<div id="error_content">
 		{{ message }}

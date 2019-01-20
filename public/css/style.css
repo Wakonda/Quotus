@@ -368,31 +368,6 @@ width:80px;
 #logo{ font-family: MagnetoBoldA, Magneto, "Times New Roman", "Script MT Bold"; font-size: 60px; }
 
 /*** FORM ***/
-table.form_grid  tbody tr td div.errors ul, div.errors ul
-{
-	list-style: none;
-	border: solid 1px red;
-	background-color: #ffb780;
-	border-radius: 10px;
-	padding-left: 5px !important;
-	padding-right: 5px !important;
-}
-
-table.form_grid  tbody tr td div.errors ul li, div.errors ul li
-{
-	text-align: center;
-}
-
-table.form_grid th {
-	width: 30%
-}
-table.form_grid th, table.form_grid td {
-	padding-bottom: 10px;
-}
-
-table.form_grid {
-	width: 98%;
-}
 
 form .full_width
 {
@@ -424,10 +399,6 @@ input.year {
 input.day, input.month {
 	width: 65px !important;
 	display: inherit;
-}
-
-input[type=search] {
-	border: solid 1px darkgrey;
 }
 
 /***** GENERIC CLASS **************/
@@ -745,17 +716,6 @@ table.admin_show th {
 	background-color: #F7F7F7;
 }
 
-input[type="search"] {
- -webkit-box-sizing: content-box;
- -moz-box-sizing: content-box;
- box-sizing: content-box;
- -webkit-appearance: searchfield;
-}
-
-input[type="search"]::-webkit-search-cancel-button {
--webkit-appearance: searchfield-cancel-button;
-}
-
 /** Combobox **/
 div.ac_container div.ac_button img {
 	border: none !important;
@@ -955,4 +915,15 @@ div.social_network_container {
 }
 .h-100 {
     height: 100%!important;
+}
+
+.ac_button {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
 }
