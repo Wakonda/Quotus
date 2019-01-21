@@ -71,11 +71,11 @@
 		{{ form_label(form.avatar, null, {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
 		<div class="col-sm-10">
 			<p><b><u>{{ 'user.createAccount.CurrentGravatar'|trans }}</u></b> <i>{{ (entity.avatar is null) ? "Gravatar" : entity.avatar }}</i></p>
-			<p class="underline italic">{{ 'user.createAccount.SelectFile'|trans }}</p>
+			<p class="underline font-italic">{{ 'user.createAccount.SelectFile'|trans }}</p>
 			{{ form_errors(form.avatar) }}
 			{{ form_widget(form.avatar) }}
-			<p class="bold underline">{{ 'user.createAccount.OR'|trans }}</p>
-			<p class="italic underline">{{ 'user.createAccount.UseGravatar'|trans }}</p>
+			<p class="font-weight-bold underline">{{ 'user.createAccount.OR'|trans }}</p>
+			<p class="font-italic underline">{{ 'user.createAccount.UseGravatar'|trans }}</p>
 			<img src="{{ entity.gravatar }}" alt="gravatar" id="gravatar" /> <span class="fa fa-refresh reload" id="reload_gravatar"></span>
 		</div>
 	</div>

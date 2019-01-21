@@ -21,7 +21,6 @@ body{
 	background: #fff url(../img/bg.png) repeat center center;
 }
 h1{
-	font-size: 36px;
 	line-height: 40px;
 	margin: 0;
 	padding: 0;
@@ -418,22 +417,6 @@ button[type="submit"]
 
 .underline {
 	text-decoration: underline;
-}
-
-.italic {
-	font-style: italic;
-}
-
-.bold {
-	font-weight: bold;
-}
-
-.right {
-	float: right;
-}
-
-.displayNone {
-	display: none;
 }
 
 article#contents header h1 img#flag_title

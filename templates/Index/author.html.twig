@@ -38,7 +38,7 @@
 	<table class="show">
 		{% if entity.dayBirth is not null or entity.monthBirth is not null or entity.yearBirth is not null %}
 			<tr>
-			<th><span class="bold">{{ 'biography.field.BirthDate'|trans }} : </span></th>
+			<th><span class="font-weight-bold">{{ 'biography.field.BirthDate'|trans }} : </span></th>
 			<td>
 			{% if entity.dayBirth is not null and entity.monthBirth is not null and entity.yearBirth is not null %}
 				{{ (entity.yearBirth~"-"~entity.monthBirth~"-"~entity.dayBirth)|date_letter(app.request.locale) }}
@@ -52,7 +52,7 @@
 		{% endif %}
 		{% if entity.dayDeath is not null or entity.monthDeath is not null or entity.yearDeath is not null %}
 			<tr>
-			<th><span class="bold">{{ 'biography.field.DeathDate'|trans }} : </span></th>
+			<th><span class="font-weight-bold">{{ 'biography.field.DeathDate'|trans }} : </span></th>
 			<td>
 			{% if entity.dayDeath is not null and entity.monthDeath is not null and entity.yearDeath is not null %}
 				{{ (entity.dayDeath~"-"~entity.monthDeath~"-"~entity.yearDeath)|date_letter(app.request.locale) }}
@@ -66,7 +66,7 @@
 		{% endif %}
 		
 		{% if entity.country is not empty %}
-			<tr><th><span class="bold">{{ 'biography.field.Nationality'|trans }} : </span></th><td><img class="flag" src="{{ asset('photo/country/'~entity.country.flag) }}" /> {{ entity.country.title }}</td></tr>
+			<tr><th><span class="font-weight-bold">{{ 'biography.field.Nationality'|trans }} : </span></th><td><img class="flag" src="{{ asset('photo/country/'~entity.country.flag) }}" /> {{ entity.country.title }}</td></tr>
 		{% endif %}
 	</table>
 	
@@ -82,7 +82,7 @@
 		<tbody>
 			{% for store in stores %}
 			<tr>
-				<td><p class="text-center bold">{{ store.title }}</p>{% if store.photo is not empty %}<p class="text-center">{{ ("photo/store/"~store.photo)|max_size_image() }}</p>{% endif %}</td>
+				<td><p class="text-center font-weight-bold">{{ store.title }}</p>{% if store.photo is not empty %}<p class="text-center">{{ ("photo/store/"~store.photo)|max_size_image() }}</p>{% endif %}</td>
 				<td>
 				    <a href="{{ path('read_store', {'id': store.id, 'slug': store.slug}) }}" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i></a>
 				    <a href="{{ store.getExternalStoreLink() }}" class="btn btn-success" target="_blank"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
