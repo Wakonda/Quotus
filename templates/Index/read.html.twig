@@ -96,9 +96,9 @@
 	<br>
 	<div>
 		<blockquote>
-			<span class="visible-print">{{ ("photo/left-quotes-sign.png")|max_size_image() }}</span>
+			<span class="d-none d-print-block">{{ ("photo/left-quotes-sign.png")|max_size_image() }}</span>
 			{{ entity.text|raw }}
-			<span class="visible-print">{{ ("photo/right-quotes-symbol.png")|max_size_image() }}</span>
+			<span class="d-none d-print-block">{{ ("photo/right-quotes-symbol.png")|max_size_image() }}</span>
 		</blockquote>
 	</div>
 	
@@ -148,13 +148,13 @@
 				<tbody>
 					<tr>
 						<td class="socialNetwork">
-							<a href="{{ path('read_pdf', {'id' : entity.id, 'slug' : entity.slug}) }}" class="btn btn-default"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></a>
+							<a href="{{ path('read_pdf', {'id' : entity.id, 'slug' : entity.slug}) }}" class="btn btn-outline-secondary"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></a>
 						</td>
 						<td class="socialNetwork">
-							<a id="print_page" href="#" class="btn btn-default"><i class="fa fa-print fa-2x" aria-hidden="true"></i></a>
+							<a id="print_page" href="#" class="btn btn-outline-secondary"><i class="fa fa-print fa-2x" aria-hidden="true"></i></a>
 						</td>
 						<td class="socialNetwork">
-							<a href="#" data-toggle="modal" data-target="#send_modal" class="btn btn-default"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>
+							<a href="#" data-toggle="modal" data-target="#send_modal" class="btn btn-outline-secondary"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>
 						</td>
 					</tr>
 				</tbody>

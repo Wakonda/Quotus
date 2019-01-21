@@ -545,7 +545,6 @@ h2.subtitle_show_user {
 #up_vote, #down_vote
 {
 	border: 3px grey solid;
-	margin-bottom: 5px;
 	width: 25px !important;
 	text-align: center;
 	font-weight: bold;
