@@ -278,4 +278,4 @@ admin:
     imageGenerator:
         Image: "Image"
         FontSize: "Taille de la police"
-        InvertColors: "Inverses les couleurs"
+        InvertColors: "Inverser les couleurs"

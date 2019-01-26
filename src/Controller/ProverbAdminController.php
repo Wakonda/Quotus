@@ -294,9 +294,8 @@ class ProverbAdminController extends Controller
 
 		$parameters = [];
 		$parameters["status"] = $request->request->get("twitter_area")." ".$this->generateUrl("read", array("id" => $id, 'slug' => $entity->getSlug()), UrlGeneratorInterface::ABSOLUTE_URL);
-		
 		$image = $request->request->get('image_tweet');
-		
+
 		if(!empty($image)) {
 			$media = $connection->upload('media/upload', array('media' => $image));
 			$parameters['media_ids'] = implode(',', array($media->media_id_string));
