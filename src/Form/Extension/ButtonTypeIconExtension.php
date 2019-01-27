@@ -6,7 +6,8 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 class ButtonTypeIconExtension extends AbstractTypeExtension
 {
@@ -16,7 +17,8 @@ class ButtonTypeIconExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->setAttribute('icon', $options['icon']);
+		if (isset($options['icon']))
+			$builder->setAttribute('icon', $options['icon']);
     }
 
     /**
@@ -26,17 +28,16 @@ class ButtonTypeIconExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['icon'] = $options['icon'];
+		if (isset($options['icon']))
+			$view->vars['icon'] = $options['icon'];
     }
 
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'icon' => null,
-        ));
+		$resolver->setDefined(['icon']);
     }
 
     /**
@@ -44,8 +45,8 @@ class ButtonTypeIconExtension extends AbstractTypeExtension
      *
      * @return string The name of the type being extended
      */
-    public function getExtendedType()
+    public static function getExtendedTypes(): iterable
     {
-        return 'button'; // Extend the button field type
+        return [ButtonType::class]; // Extend the button field type
     }
 }
