@@ -13,9 +13,11 @@
 		$(function ()
 		{
 			oTable = $('table.index_admin').dataTable( {
+				{% if app.request.locale != 'en' %}
 				"oLanguage": {
 					"sUrl": "{{ asset('js/DataTables/language/dataTables.'~app.request.locale) }}.txt"
 				},
+				{% endif %}
 				"bFilter": false,
 				"bInfo": false,
 				"bSort": true,

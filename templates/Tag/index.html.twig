@@ -17,9 +17,11 @@
 		$(function ()
 		{
 			$('table.index_directories').DataTable({
+				{% if app.request.locale != 'en' %}
 				"oLanguage": {
 					"sUrl": "{{ asset('js/DataTables/language/dataTables.'~app.request.locale) }}.txt"
-				}, 
+				},
+				{% endif %}
 				"bFilter": true,
 				"bInfo": true,
 				"bSort": true,

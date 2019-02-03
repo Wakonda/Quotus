@@ -18,9 +18,11 @@
 		$(function ()
 		{
 			$('table.comments_user_datatables').dataTable( {
+				{% if app.request.locale != 'en' %}
 				"oLanguage": {
 					"sUrl": "{{ asset('js/DataTables/language/dataTables.'~app.request.locale) }}.txt"
 				},
+				{% endif %}
 				"bFilter": true,
 				"bInfo": true,
 				"bSort": true,
@@ -33,9 +35,11 @@
 			});
 			
 			$('table.votes_user_datatables').dataTable( {
+				{% if app.request.locale != 'en' %}
 				"oLanguage": {
 					"sUrl": "{{ asset('js/DataTables/language/dataTables.'~app.request.locale) }}.txt"
 				},
+				{% endif %}
 				"bFilter": true,
 				"bInfo": true,
 				"bSort": true,
