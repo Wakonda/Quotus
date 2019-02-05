@@ -58,11 +58,13 @@ class IndexController extends Controller
 	{
 		$search = $request->request->get("index_search");
 		$entityManager = $this->getDoctrine()->getManager();
-		$search['country'] = (empty($search['country'])) ? null : $entityManager->getRepository(Country::class)->find($search['country'])->getTitle();
+		$search['country'] = (empty($search['country'])) ? null : $search['country'];
 		
 		unset($search["_token"]);
-
-		$criteria = array_filter(array_values($search));
+		
+		$criteria = $search;
+		$criteria['country'] = (empty($search['country'])) ? null : $entityManager->getRepository(Country::class)->find($search['country'])->getTitle();
+		$criteria = array_filter(array_values($criteria));
 		$criteria = empty($criteria) ? $translator->trans("search.result.None") : $criteria;
 
 		return $this->render('Index/resultIndexSearch.html.twig', array('search' => base64_encode(json_encode($search)), 'criteria' => $criteria));
