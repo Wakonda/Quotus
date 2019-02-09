@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Proverb;
 use App\Entity\Country;
+use App\Entity\Language;
 use App\Service\GenericFunction;
 use App\Service\ImageGenerator;
 use App\Form\Type\ProverbType;
@@ -25,6 +26,8 @@ require __DIR__.'/../../vendor/simple_html_dom.php';
 
 class ProverbAdminController extends Controller
 {
+	private $formName = "proverb";
+	
 	public function indexAction(Request $request)
 	{
 		return $this->render('Proverb/index.html.twig');
@@ -88,22 +91,25 @@ class ProverbAdminController extends Controller
 		if(!empty($countryId))
 			$entity->setCountry($entityManager->getRepository(Country::class)->find($countryId));
 		
-        $form = $this->genericCreateForm($entity);
+		$form = $this->genericCreateForm($request->getLocale(), $entity);
 
 		return $this->render('Proverb/new.html.twig', array('form' => $form->createView()));
     }
 	
 	public function createAction(Request $request)
 	{
+		$entityManager = $this->getDoctrine()->getManager();
 		$entity = new Proverb();
-        $form = $this->genericCreateForm($entity);
+		$locale = $request->request->get($this->formName)["language"];
+		$language = $entityManager->getRepository(Language::class)->find($locale);
+
+        $form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
 		$this->checkForDoubloon($entity, $form);
 
 		if($form->isValid())
 		{
-			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($entity);
 			$entityManager->flush();
 
@@ -129,7 +135,7 @@ class ProverbAdminController extends Controller
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Proverb::class)->find($id);
-		$form = $this->genericCreateForm($entity);
+		$form = $this->genericCreateForm($entity->getLanguage()->getAbbreviation(), $entity);
 	
 		return $this->render('Proverb/edit.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
@@ -138,7 +144,10 @@ class ProverbAdminController extends Controller
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Proverb::class)->find($id);
-		$form = $this->genericCreateForm($entity);
+		$locale = $request->request->get($this->formName)["language"];
+		$language = $entityManager->getRepository(Language::class)->find($locale);
+		
+		$form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
 		$this->checkForDoubloon($entity, $form);
@@ -461,9 +470,9 @@ class ProverbAdminController extends Controller
 		return $this->redirect($redirect);
 	}
 	
-	private function genericCreateForm($entity)
+	private function genericCreateForm($locale, $entity)
 	{
-		return $this->createForm(ProverbType::class, $entity);
+		return $this->createForm(ProverbType::class, $entity, array('locale' => $locale));
 	}
 	
 	private function checkForDoubloon($entity, $form)

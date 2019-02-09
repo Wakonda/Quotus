@@ -56,7 +56,7 @@ class CountryRepository extends ServiceEntityRepository implements iRepository
 		$qb = $this->createQueryBuilder("co");
 
 		$qb->leftjoin("co.language", "la")
-		   ->where("la.abbreviation = :locale")
+		   ->where("la.id = :locale")
 		   ->setParameter("locale", $locale);
 
 		return $qb->getQuery()->getResult();

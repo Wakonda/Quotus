@@ -204,6 +204,7 @@ admin:
         Version: "Version"
         Store: "Boutique"
         Tag: "Tag"
+        Biography: "Biographie"
         Create: "Créer"
         Read: "Lire"
         Update: "Modifier"

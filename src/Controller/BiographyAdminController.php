@@ -16,6 +16,8 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class BiographyAdminController extends Controller
 {
+	private $formName = "biography";
+
 	public function indexAction()
 	{
 		return $this->render('Biography/index.html.twig');
@@ -86,7 +88,10 @@ class BiographyAdminController extends Controller
 	public function createAction(Request $request, TranslatorInterface $translator)
 	{
 		$entity = new Biography();
-        $form = $this->genericCreateForm($request->getLocale(), $entity);
+		$locale = $request->request->get($this->formName)["language"];
+		$language = $this->getDoctrine()->getManager()->getRepository(Language::class)->find($locale);
+
+        $form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
 		$this->checkForDoubloon($entity, $form);
@@ -124,7 +129,7 @@ class BiographyAdminController extends Controller
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Biography::class)->find($id);
-		$form = $this->genericCreateForm($request->getLocale(), $entity);
+		$form = $this->genericCreateForm($entity->getLanguage()->getAbbreviation(), $entity);
 	
 		return $this->render('Biography/edit.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
@@ -133,8 +138,12 @@ class BiographyAdminController extends Controller
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Biography::class)->find($id);
+		
+		$locale = $request->request->get($this->formName)["language"];
+		$language = $entityManager->getRepository(Language::class)->find($locale);
+		
 		$currentImage = $entity->getPhoto();
-		$form = $this->genericCreateForm($request->getLocale(), $entity);
+		$form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
 		$this->checkForDoubloon($entity, $form);
