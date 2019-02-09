@@ -285,10 +285,12 @@ class ProverbAdminController extends Controller
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Proverb::class)->find($id);
 
-		$consumer_key = getenv("TWITTER_CONSUMER_KEY");
-		$consumer_secret = getenv("TWITTER_CONSUMER_SECRET");
-		$access_token = getenv("TWITTER_ACCESS_TOKEN");
-		$access_token_secret = getenv("TWITTER_ACCESS_TOKEN_SECRET");
+		$locale = strtoupper($entity->getLanguage()->getAbbreviation());
+		
+		$consumer_key = getenv("TWITTER_CONSUMER_KEY_".$locale);
+		$consumer_secret = getenv("TWITTER_CONSUMER_SECRET_".$locale);
+		$access_token = getenv("TWITTER_ACCESS_TOKEN_".$locale);
+		$access_token_secret = getenv("TWITTER_ACCESS_TOKEN_SECRET_".$locale);
 
 		$connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
 
