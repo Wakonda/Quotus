@@ -95,7 +95,12 @@ error:
         PageNotFound: "The page you want to access does not exist!"
 widget:
     random:
+        IncorporateProverbsIntoYourWebsite: "Incorporate proverbs into your website"
+        AProverbAtRandom: "A proverb at random"
+        Copy: "Copy"
+        Preview: "Preview"
         Proverb: "Proverb"
+        TheCodeHasBeenCopiedSuccessfully: "The code has been copied successfully"
 user:
     login:
         Pseudo: "Pseudo"

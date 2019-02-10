@@ -3,11 +3,6 @@
 {% block head_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Proverb'|trans }}{% endblock %}
 {% block main_title %}{{ 'menu.left.Admin'|trans }} - {{ 'admin.index.Proverb'|trans }}{% endblock %}
 
-{% block script_additional %}
-	{% import "Index/macro.html.twig" as macro %}
-	{{ macro.redactor() }}
-{% endblock %}
-
 {% block main_content %}
 {% form_theme form 'Form/fields.html.twig' %}
 

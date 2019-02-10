@@ -16,11 +16,14 @@ class CountryRepository extends ServiceEntityRepository implements iRepository
         parent::__construct($registry, Country::class);
     }
 	
-	public function findAllForChoice()
+	public function findAllForChoice($locale)
 	{
-		$qb = $this->createQueryBuilder("pf");
+		$qb = $this->createQueryBuilder("cy");
 		
-		$qb->orderBy("pf.title", "ASC");
+		$qb->leftjoin("cy.language", "la")
+		   ->where('la.abbreviation = :locale')
+		   ->setParameter('locale', $locale)
+		   ->orderBy("cy.title", "ASC");
 
 		return $qb;
 	}

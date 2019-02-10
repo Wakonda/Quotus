@@ -35,8 +35,8 @@ class ProverbType extends AbstractType
 			->add('country', EntityType::class, array(
 				'label' => 'admin.proverb.Country',
 				'class' => Country::class,
-				'query_builder' => function (CountryRepository $er) {
-					return $er->findAllForChoice();
+				'query_builder' => function (CountryRepository $er) use ($locale) {
+					return $er->findAllForChoice($locale);
 				},
 				'multiple' => false, 
 				'expanded' => false,
