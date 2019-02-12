@@ -31,7 +31,7 @@ class StoreType extends AbstractType
                 'label' => 'admin.store.Biography'
             ))
 			->add('newBiography', HiddenType::class, array("mapped" => false))
-            ->add('text', TextareaType::class, array(
+            ->add('text', TextareaType::class, array( 'attr' => array('class' => 'redactor'), 
                 'constraints' => new Assert\NotBlank(), "label" => "admin.store.Text"
             ))
 			->add('photo', FileType::class, array('data_class' => null, "label" => "admin.store.Image", "required" => true

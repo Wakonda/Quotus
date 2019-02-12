@@ -17,6 +17,8 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class StoreAdminController extends Controller
 {
+	private $formName = "store";
+
 	public function indexAction(Request $request)
 	{
 		return $this->render('Store/index.html.twig');
@@ -86,7 +88,10 @@ class StoreAdminController extends Controller
 	public function createAction(Request $request, TranslatorInterface $translator)
 	{
 		$entity = new Store();
-        $form = $this->genericCreateForm($request->getLocale(), $entity);
+		$locale = $request->request->get($this->formName)["language"];
+		$language = $this->getDoctrine()->getManager()->getRepository(Language::class)->find($locale);
+
+        $form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
 		$this->checkForDoubloon($entity, $form);
@@ -133,7 +138,7 @@ class StoreAdminController extends Controller
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Store::class)->find($id);
-		$form = $this->genericCreateForm($request->getLocale(), $entity);
+		$form = $this->genericCreateForm($entity->getLanguage()->getAbbreviation(), $entity);
 	
 		return $this->render('Store/edit.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
@@ -142,7 +147,12 @@ class StoreAdminController extends Controller
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Store::class)->find($id);
-		$form = $this->genericCreateForm($request->getLocale(), $entity);
+
+		$locale = $request->request->get($this->formName)["language"];
+		$language = $entityManager->getRepository(Language::class)->find($locale);
+		
+		$currentImage = $entity->getPhoto();
+		$form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
 		$this->checkForDoubloon($entity, $form);
