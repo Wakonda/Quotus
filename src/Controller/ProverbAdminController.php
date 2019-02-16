@@ -88,6 +88,8 @@ class ProverbAdminController extends Controller
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = new Proverb();
 		
+		$entity->setLanguage($entityManager->getRepository(Language::class)->findOneBy(["abbreviation" => $request->getLocale()]));
+		
 		if(!empty($countryId))
 			$entity->setCountry($entityManager->getRepository(Country::class)->find($countryId));
 		

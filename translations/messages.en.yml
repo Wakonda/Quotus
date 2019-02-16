@@ -280,8 +280,10 @@ admin:
         Nationality: "Nationalité"
         Country: "Pays"
     socialNetwork:
-        Send: "Product Code"
+        AddAnImage: "Add an image"
+        Send: "Send"
     imageGenerator:
+        GenerateAnImage: "Generate an image"
         Image: "Image"
         FontSize: "Font size"
         InvertColors: "Invert colors"

@@ -280,8 +280,10 @@ admin:
         Nationality: "Nationalité"
         Country: "Pays"
     socialNetwork:
+        AddAnImage: "Ajouter une image"
         Send: "Envoyer"
     imageGenerator:
+        GenerateAnImage: "Générer une image"
         Image: "Image"
         FontSize: "Taille de la police"
         InvertColors: "Inverser les couleurs"

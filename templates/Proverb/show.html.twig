@@ -41,7 +41,7 @@
 	<div class="card">
 		<div class="card-header" role="tab" id="headingImageGenerator">
 			<a href="#" role="button" data-toggle="collapse" data-target="#collapseImageGenerator" aria-expanded="true" aria-controls="collapseOne">
-			<i class="fa fa-picture-o" aria-hidden="true"></i> Générer une image
+			<i class="fa fa-picture-o" aria-hidden="true"></i> {{ 'admin.imageGenerator.GenerateAnImage'|trans }}
 			</a>
 		</div>
 		<div id="collapseImageGenerator" class="collapse" aria-labelledby="headingImageGenerator" aria-expanded="true">
@@ -82,7 +82,7 @@
 		<div id="collapseTwitter" class="collapse" aria-labelledby="headingTwitter" aria-expanded="true">
 			<div class="card-body">
 				<form action="{{ path('proverbadmin_twitter', {'id': entity.id}) }}" method="post">
-					<label for="addImage"> <input type="checkbox" id="addImage"> Ajouter une image</label>
+					<label for="addImage"> <input type="checkbox" id="addImage"> {{ 'admin.socialNetwork.AddAnImage'|trans }}</label>
 					<div class="row d-none mb-3" id="image_container">
 						{% for image in entity.images %}
 							<div class="col-md-4 mb-10"><div class="thumbnail" role="button"><img src="{{ absolute_url(asset('photo/proverb/'~image)) }}"></div></div>
@@ -145,7 +145,7 @@
 	</div>
 	{% endif %}
 	<hr>
-	<a href="{{ path('proverbadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> {{ 'admin.index.Update'|trans }}</a> - <a href="{{ path('proverbadmin_delete', { 'id' : entity.id }) }}"><i class="fa fa-trash"></i> Supprimer</a> - <a href="{{ path('proverbadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a> | <a href="{{ path('proverbadmin_new', {countryId: entity.country.id}) }}"> {{ 'admin.index.ForSameCountry'|trans }}</a>
+	<a href="{{ path('proverbadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> {{ 'admin.index.Update'|trans }}</a> - <a href="{{ path('proverbadmin_delete', { 'id' : entity.id }) }}"><i class="fa fa-trash"></i> Supprimer</a> - <a href="{{ path('proverbadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a> | <a href="{{ path('proverbadmin_new', {countryId: entity.country.id}) }}"> {{ 'admin.proverb.ForSameCountry'|trans }}</a>
 {% endblock %}
 
 {% block script_additional %}
