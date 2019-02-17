@@ -23,7 +23,7 @@ class BiographyAdminController extends Controller
 		return $this->render('Biography/index.html.twig');
 	}
 
-	public function indexDatatablesAction(Request $request/*, TranslatorInterface $translator*/)
+	public function indexDatatablesAction(Request $request, TranslatorInterface $translator)
 	{
 		$iDisplayStart = $request->query->get('iDisplayStart');
 		$iDisplayLength = $request->query->get('iDisplayLength');
@@ -94,7 +94,7 @@ class BiographyAdminController extends Controller
         $form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 		
 		if($entity->getPhoto() == null)
 			$form->get("photo")->addError(new FormError($translator->trans("This value should not be blank.", array(), "validators")));
@@ -134,7 +134,7 @@ class BiographyAdminController extends Controller
 		return $this->render('Biography/edit.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
 
-	public function updateAction(Request $request, $id)
+	public function updateAction(Request $request, TranslatorInterface $translator, $id)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Biography::class)->find($id);
@@ -146,7 +146,7 @@ class BiographyAdminController extends Controller
 		$form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 		
 		if($form->isValid())
 		{
@@ -234,7 +234,7 @@ class BiographyAdminController extends Controller
 		return $this->createForm(BiographyType::class, $entity, array("locale" => $locale));
 	}
 	
-	private function checkForDoubloon($entity, $form)
+	private function checkForDoubloon(TranslatorInterface $translator, $entity, $form)
 	{
 		if($entity->getTitle() != null)
 		{
@@ -242,7 +242,7 @@ class BiographyAdminController extends Controller
 			$checkForDoubloon = $entityManager->getRepository(Biography::class)->checkForDoubloon($entity);
 
 			if($checkForDoubloon > 0)
-				$form->get("title")->addError(new FormError('Cette entrée existe déjà !'));
+				$form->get("title")->addError(new FormError($translator->trans("admin.index.ThisEntryAlreadyExists")));
 		}
 	}
 }

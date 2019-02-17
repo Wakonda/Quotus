@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ContactController extends Controller
 {
@@ -21,7 +22,7 @@ class ContactController extends Controller
         return $this->render('Index/contact.html.twig', array('form' => $form->createView()));
     }
 	
-	public function sendAction(Request $request, SessionInterface $session)
+	public function sendAction(Request $request, SessionInterface $session, TranslatorInterface $translator)
 	{
 		$entity = new Contact();
         $form = $this->createForm(ContactType::class, $entity);
@@ -32,7 +33,7 @@ class ContactController extends Controller
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($entity);
 			$entityManager->flush();
-			$session->getFlashBag()->add('message', 'Votre message a été envoyé avec succès !');
+			$session->getFlashBag()->add('message', $translator->trans("contact.field.YourMessageHasBeenSentSuccessfully"));
 
 			return $this->redirect($this->generateUrl('index'));
 		}

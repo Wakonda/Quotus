@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class CountryAdminController extends Controller
 {
@@ -19,7 +20,7 @@ class CountryAdminController extends Controller
 		return $this->render('Country/index.html.twig');
 	}
 
-	public function indexDatatablesAction(Request $request)
+	public function indexDatatablesAction(Request $request, TranslatorInterface $translator)
 	{
 		$iDisplayStart = $request->query->get('iDisplayStart');
 		$iDisplayLength = $request->query->get('iDisplayLength');
@@ -58,7 +59,7 @@ class CountryAdminController extends Controller
 			$show = $this->generateUrl('countryadmin_show', array('id' => $entity->getId()));
 			$edit = $this->generateUrl('countryadmin_edit', array('id' => $entity->getId()));
 			
-			$row[] = '<a href="'.$show.'" alt="Show">Lire</a> - <a href="'.$edit.'" alt="Edit">Modifier</a>';
+			$row[] = '<a href="'.$show.'" alt="Show">'.$translator->trans('admin.index.Read').'</a> - <a href="'.$edit.'" alt="Edit">'.$translator->trans('admin.index.Update').'</a>';
 
 			$output['aaData'][] = $row;
 		}
@@ -76,15 +77,15 @@ class CountryAdminController extends Controller
 		return $this->render('Country/new.html.twig', array('form' => $form->createView()));
     }
 	
-	public function createAction(Request $request)
+	public function createAction(Request $request, TranslatorInterface $translator)
 	{
 		$entity = new Country();
         $form = $this->createForm(CountryType::class, $entity);
 		$form->handleRequest($request);
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 
 		if($entity->getFlag() == null)
-			$form->get("flag")->addError(new FormError('Ce champ ne peut pas être vide'));
+			$form->get("flag")->addError(new FormError($translator->trans("This value should not be blank.", array(), "validators")));
 		
 		if($form->isValid())
 		{
@@ -122,14 +123,14 @@ class CountryAdminController extends Controller
 		return $this->render('Country/edit.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
 
-	public function updateAction(Request $request, $id)
+	public function updateAction(Request $request, TranslatorInterface $translator, $id)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Country::class)->find($id);
 		$currentImage = $entity->getFlag();
 		$form = $this->createForm(CountryType::class, $entity);
 		$form->handleRequest($request);
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 		
 		if($form->isValid())
 		{
@@ -172,7 +173,7 @@ class CountryAdminController extends Controller
 		return $response;
 	}
 
-	private function checkForDoubloon($entity, $form)
+	private function checkForDoubloon(TranslatorInterface $translator, $entity, $form)
 	{
 		if($entity->getTitle() != null)
 		{
@@ -180,7 +181,7 @@ class CountryAdminController extends Controller
 			$checkForDoubloon = $entityManager->getRepository(Country::class)->checkForDoubloon($entity);
 
 			if($checkForDoubloon > 0)
-				$form->get("title")->addError(new FormError('Cette entrée existe déjà !'));
+				$form->get("title")->addError(new FormError($translator->trans("admin.index.ThisEntryAlreadyExists")));
 		}
 	}
 }

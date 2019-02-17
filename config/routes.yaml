@@ -334,10 +334,6 @@ proverbadmin_update:
     path: /admin/proverb/upate/{id}
     controller: App\Controller\ProverbAdminController::updateAction
 
-proverbadmin_delete:
-    path: /admin/proverb/delete/{id}
-    controller: App\Controller\ProverbAdminController::deleteAction
-
 proverbadmin_newfastmultiple:
     path: /admin/proverb/newFastMultiple
     controller: App\Controller\ProverbAdminController::newFastMultipleAction

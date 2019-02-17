@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ContactAdminController extends Controller
 {
@@ -16,7 +17,7 @@ class ContactAdminController extends Controller
 		return $this->render('Contact/index.html.twig');
 	}
 
-	public function indexDatatablesAction(Request $request)
+	public function indexDatatablesAction(Request $request, TranslatorInterface $translator)
 	{
 		$iDisplayStart = $request->query->get('iDisplayStart');
 		$iDisplayLength = $request->query->get('iDisplayLength');
@@ -52,13 +53,13 @@ class ContactAdminController extends Controller
 			$row[] = $entity->getSubject();
 			
 			if($entity->getReadMessage() == 1)
-				$row[] = "Oui";
+				$row[] = $translator->trans("admin.index.Yes");
 			else
-				$row[] = "Non";
+				$row[] = $translator->trans("admin.index.No");
 			
 			$show = $this->generateUrl('contactadmin_show', array('id' => $entity->getId()));
 			
-			$row[] = '<a href="'.$show.'" alt="Show">Lire</a>';
+			$row[] = '<a href="'.$show.'" alt="Show">'.$translator->trans("admin.index.Read").'</a>';
 
 			$output['aaData'][] = $row;
 		}

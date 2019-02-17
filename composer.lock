@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "243f97e35d370630f7aa2928b4439022",
-    "content-hash": "1b9297b2495d3b8413c37650142582f7",
+    "hash": "a452cd84648be4b11f679f7674263442",
+    "content-hash": "2eec47df083ec09a57e91dde66b624da",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -2233,16 +2233,16 @@
         },
         {
             "name": "seregazhuk/pinterest-bot",
-            "version": "v5.9.0",
+            "version": "v5.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/seregazhuk/php-pinterest-bot.git",
-                "reference": "fadae22b3a4c7aee4bc6c1b7fe210817ffb31743"
+                "reference": "9621d078fb3b0b6651ac5987841a2a8ccc4f2a2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seregazhuk/php-pinterest-bot/zipball/fadae22b3a4c7aee4bc6c1b7fe210817ffb31743",
-                "reference": "fadae22b3a4c7aee4bc6c1b7fe210817ffb31743",
+                "url": "https://api.github.com/repos/seregazhuk/php-pinterest-bot/zipball/9621d078fb3b0b6651ac5987841a2a8ccc4f2a2d",
+                "reference": "9621d078fb3b0b6651ac5987841a2a8ccc4f2a2d",
                 "shasum": ""
             },
             "require": {
@@ -2281,7 +2281,7 @@
                 "php",
                 "pinterest"
             ],
-            "time": "2018-12-29 16:17:08"
+            "time": "2019-02-13 10:22:44"
         },
         {
             "name": "spipu/html2pdf",

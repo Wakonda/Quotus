@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Translation\TranslatorInterface;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use seregazhuk\PinterestBot\Factories\PinterestBot;
@@ -33,7 +34,7 @@ class ProverbAdminController extends Controller
 		return $this->render('Proverb/index.html.twig');
 	}
 
-	public function indexDatatablesAction(Request $request)
+	public function indexDatatablesAction(Request $request, TranslatorInterface $translator)
 	{
 		$iDisplayStart = $request->query->get('iDisplayStart');
 		$iDisplayLength = $request->query->get('iDisplayLength');
@@ -72,7 +73,7 @@ class ProverbAdminController extends Controller
 			$show = $this->generateUrl('proverbadmin_show', array('id' => $entity->getId()));
 			$edit = $this->generateUrl('proverbadmin_edit', array('id' => $entity->getId()));
 			
-			$row[] = '<a href="'.$show.'" alt="Show">Lire</a> - <a href="'.$edit.'" alt="Edit">Modifier</a>';
+			$row[] = '<a href="'.$show.'" alt="Show">'.$translator->trans('admin.index.Read').'</a> - <a href="'.$edit.'" alt="Edit">'.$translator->trans('admin.index.Update').'</a>';
 
 			$output['aaData'][] = $row;
 		}
@@ -98,7 +99,7 @@ class ProverbAdminController extends Controller
 		return $this->render('Proverb/new.html.twig', array('form' => $form->createView()));
     }
 	
-	public function createAction(Request $request)
+	public function createAction(Request $request, TranslatorInterface $translator)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = new Proverb();
@@ -108,7 +109,7 @@ class ProverbAdminController extends Controller
         $form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 
 		if($form->isValid())
 		{
@@ -142,7 +143,7 @@ class ProverbAdminController extends Controller
 		return $this->render('Proverb/edit.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
 
-	public function updateAction(Request $request, $id)
+	public function updateAction(Request $request, TranslatorInterface $translator, $id)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Proverb::class)->find($id);
@@ -152,7 +153,7 @@ class ProverbAdminController extends Controller
 		$form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 		
 		if($form->isValid())
 		{
@@ -166,18 +167,6 @@ class ProverbAdminController extends Controller
 	
 		return $this->render('Proverb/edit.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
-	
-	public function deleteAction(Request $request, SessionInterface $session, $id)
-	{
-		$entityManager = $this->getDoctrine()->getManager();
-		$entity = $entityManager->getRepository(Proverb::class)->find($id);
-		$entityManager->remove($entity);
-		$entityManager->flush();
-		
-		$session->getFlashBag()->add('message', 'Le proverbe a été supprimé avec succès !');
-
-		return $this->redirect($this->generateUrl('proverbadmin_index'));
-	}
 
 	public function newFastMultipleAction(Request $request)
 	{
@@ -186,7 +175,7 @@ class ProverbAdminController extends Controller
 		return $this->render('Proverb/fastMultiple.html.twig', array('form' => $form->createView()));
 	}
 	
-	public function addFastMultipleAction(Request $request, SessionInterface $session)
+	public function addFastMultipleAction(Request $request, SessionInterface $session, TranslatorInterface $translator)
 	{
 		$entity = new Proverb();
 		
@@ -203,7 +192,7 @@ class ProverbAdminController extends Controller
 			$authorizedURLs = ['d3d3LmxpbnRlcm5hdXRlLmNvbQ==', 'Y2l0YXRpb24tY2VsZWJyZS5sZXBhcmlzaWVuLmZy', 'ZGljb2NpdGF0aW9ucy5sZW1vbmRlLmZy', 'd3d3LnByb3ZlcmJlcy1mcmFuY2Fpcy5mcg=='];
 
 			if(!in_array(base64_encode($url_array['host']), $authorizedURLs))
-				$form->get("url")->addError(new FormError('URL inconnue'));
+				$form->get("url")->addError(new FormError($translator->trans("admin.error.UnknownURL")));
 		}
 
 		if($form->isValid())
@@ -291,7 +280,7 @@ class ProverbAdminController extends Controller
 		return $this->render('Proverb/fastMultiple.html.twig', array('form' => $form->createView()));
 	}
 
-	public function twitterAction(Request $request, SessionInterface $session, $id)
+	public function twitterAction(Request $request, SessionInterface $session, TranslatorInterface $translator, $id)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Proverb::class)->find($id);
@@ -316,12 +305,12 @@ class ProverbAdminController extends Controller
 
 		$statues = $connection->post("statuses/update", $parameters);
 	
-		$session->getFlashBag()->add('message', 'Twitter envoyé avec succès');
+		$session->getFlashBag()->add('message', $translator->trans("admin.index.SentSuccessfully"));
 	
 		return $this->redirect($this->generateUrl("proverbadmin_show", array("id" => $id)));
 	}
 
-	public function pinterestAction(Request $request, SessionInterface $session, $id)
+	public function pinterestAction(Request $request, SessionInterface $session, TranslatorInterface $translator, $id)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Proverb::class)->find($id);
@@ -340,14 +329,14 @@ class ProverbAdminController extends Controller
 		$bot->pins->create($image, $boards[0]['id'], $request->request->get("pinterest_area"), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
 		
 		if(empty($bot->getLastError()))
-			$session->getFlashBag()->add('message', 'Envoyé avec succès sur Pinterest');
+			$session->getFlashBag()->add('message', $translator->trans("admin.index.SentSuccessfully"));
 		else
 			$session->getFlashBag()->add('message', $bot->getLastError());
 	
 		return $this->redirect($this->generateUrl("proverbadmin_show", array("id" => $id)));
 	}
 	
-	public function facebookAction(Request $request, $id)
+	public function facebookAction(Request $request, TranslatorInterface $translator, $id)
 	{
 		if(getenv("FACEBOOK_APP_ENV") == "dev")
 		{
@@ -374,7 +363,7 @@ class ProverbAdminController extends Controller
 			$response = $fb->post('/'.$pageId.'/photos', $data, $accessTokenPage);
 		}
 
-		$session->getFlashBag()->add('message', 'Envoyé avec succès sur Facebook');
+		$session->getFlashBag()->add('message', $translator->trans("admin.index.SentSuccessfully"));
 		
 		return $this->redirect($this->generateUrl("proverbadmin_show", ["id" => $id]));
 	}
@@ -477,7 +466,7 @@ class ProverbAdminController extends Controller
 		return $this->createForm(ProverbType::class, $entity, array('locale' => $locale));
 	}
 	
-	private function checkForDoubloon($entity, $form)
+	private function checkForDoubloon(TranslatorInterface $translator, $entity, $form)
 	{
 		if($entity->getText() != null)
 		{
@@ -485,7 +474,7 @@ class ProverbAdminController extends Controller
 			$checkForDoubloon = $entityManager->getRepository(Proverb::class)->checkForDoubloon($entity);
 
 			if($checkForDoubloon > 0)
-				$form->get("text")->addError(new FormError('Cette entrée existe déjà !'));
+				$form->get("text")->addError(new FormError($translator->trans("admin.index.ThisEntryAlreadyExists")));
 		}
 	}
 }

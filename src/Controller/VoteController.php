@@ -8,10 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class VoteController extends Controller
 {
-	public function voteAction(Request $request, TokenStorageInterface $tokenStorage, $id)
+	public function voteAction(Request $request, TokenStorageInterface $tokenStorage, TranslatorInterface $translator, $id)
 	{
 		$vote = $request->query->get('vote');
 		$entityManager = $this->getDoctrine()->getManager();
@@ -38,7 +39,7 @@ class VoteController extends Controller
 				$numberOfDoubloons = $entityManager->getRepository(Vote::class)->checkIfUserAlreadyVote($id, $userDb->getId());
 				
 				if($numberOfDoubloons >= 1)
-					$state = "Vous avez déjà voté pour ce proverbe";
+					$state = $translator->trans("YouHaveAlreadyVotedForThisProverb");
 				else
 				{
 					$entityManager->persist($entity);
@@ -46,7 +47,7 @@ class VoteController extends Controller
 				}
 			}
 			else
-				$state = "Vous devez être connecté pour pouvoir voter !";
+				$state = $translator->trans("YouMustBeLoggedInToVote");
 		}
 
 		$up_values = $entityManager->getRepository(Vote::class)->countVoteByProverb($id, 1);

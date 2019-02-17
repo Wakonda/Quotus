@@ -24,7 +24,7 @@ class StoreAdminController extends Controller
 		return $this->render('Store/index.html.twig');
 	}
 
-	public function indexDatatablesAction(Request $request)
+	public function indexDatatablesAction(Request $request, TranslatorInterface $translator)
 	{
 		$iDisplayStart = $request->query->get('iDisplayStart');
 		$iDisplayLength = $request->query->get('iDisplayLength');
@@ -63,7 +63,7 @@ class StoreAdminController extends Controller
 			$show = $this->generateUrl('storeadmin_show', array('id' => $entity->getId()));
 			$edit = $this->generateUrl('storeadmin_edit', array('id' => $entity->getId()));
 			
-			$row[] = '<a href="'.$show.'" alt="Show">Lire</a> - <a href="'.$edit.'" alt="Edit">Modifier</a>';
+			$row[] = '<a href="'.$show.'" alt="Show">'.$translator->trans('admin.index.Read').'</a> - <a href="'.$edit.'" alt="Edit">'.$translator->trans('admin.index.Update').'</a>';
 
 			$output['aaData'][] = $row;
 		}
@@ -94,7 +94,7 @@ class StoreAdminController extends Controller
         $form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 
 		if($entity->getPhoto() == null)
 			$form->get("photo")->addError(new FormError($translator->trans("This value should not be blank.", array(), "validators")));
@@ -143,7 +143,7 @@ class StoreAdminController extends Controller
 		return $this->render('Store/edit.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
 
-	public function updateAction(Request $request, $id)
+	public function updateAction(Request $request, TranslatorInterface $translator, $id)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Store::class)->find($id);
@@ -155,7 +155,7 @@ class StoreAdminController extends Controller
 		$form = $this->genericCreateForm($language->getAbbreviation(), $entity);
 		$form->handleRequest($request);
 		
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 		
 		if($form->isValid())
 		{
@@ -196,7 +196,7 @@ class StoreAdminController extends Controller
 		return $this->createForm(StoreType::class, $entity, array("locale" => $locale));
 	}
 	
-	private function checkForDoubloon($entity, $form)
+	private function checkForDoubloon($translator, $entity, $form)
 	{
 		if($entity->getTitle() != null)
 		{
@@ -204,7 +204,7 @@ class StoreAdminController extends Controller
 			$checkForDoubloon = $entityManager->getRepository(Store::class)->checkForDoubloon($entity);
 
 			if($checkForDoubloon > 0)
-				$form->get("title")->addError(new FormError('Cette entrée existe déjà !'));
+				$form->get("title")->addError(new FormError($translator->trans("admin.index.ThisEntryAlreadyExists")));
 		}
 	}
 }

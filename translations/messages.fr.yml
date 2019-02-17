@@ -172,6 +172,7 @@ editPassword:
         PasswordValidation: "Mot de passe (Validation)"
 contact:
     field:
+        YourMessageHasBeenSentSuccessfully: "Votre message a été envoyé avec succès !"
         ContactUs: "Contactez nous !"
         Message: "Message"
         Email: "Email"
@@ -221,6 +222,10 @@ admin:
         CurrentImage: "Photo actuelle"
         CurrentFile: "Fichier actuel"
         UnreadMessages: "Message(s) non lu(s)"
+        ThisEntryAlreadyExists: "Cette entrée existe déjà !"
+        SentSuccessfully: "Envoyé avec succès"
+    error:
+        UnknownURL: "URL inconnue"
     table:
         Title: "Titre"
         Text: "Texte"

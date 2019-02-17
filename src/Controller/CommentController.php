@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 use App\Entity\Comment;
 use App\Entity\User;
@@ -24,7 +25,7 @@ class CommentController extends Controller
         return $this->render('Comment/index.html.twig', array('id' => $id, 'form' => $form->createView()));
     }
 	
-	public function createAction(Request $request, TokenStorageInterface $tokenStorage, $id)
+	public function createAction(Request $request, TokenStorageInterface $tokenStorage, TranslatorInterface $translator, $id)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = new Comment();
@@ -37,7 +38,7 @@ class CommentController extends Controller
 			$user = $entityManager->getRepository(User::class)->findByUsernameOrEmail($user->getUsername());
 		else
 		{
-			$form->get("text")->addError(new FormError('Vous devez être connecté pour pouvoir poster un commentaire'));
+			$form->get("text")->addError(new FormError($translator->trans("comment.field.YouMustBeLoggedInToWriteAComment")));
 		}
 
 		if($form->isValid())

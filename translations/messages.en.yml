@@ -172,6 +172,7 @@ editPassword:
         PasswordValidation: "Password (Validation)"
 contact:
     field:
+        YourMessageHasBeenSentSuccessfully: "Votre message a été envoyé avec succès !"
         ContactUs: "Contact us"
         Message: "Message"
         Email: "Email"
@@ -193,7 +194,7 @@ vote:
     field:
         Error: "Error"
         YouMustBeLoggedInToVote: "You must be logged in to vote!"
-        YouHaveAlreadyVotedForThisPoem: "You have already voted for this proverb"
+        YouHaveAlreadyVotedForThisProverb: "You have already voted for this proverb"
 version:
     index:
         Version: "Version"
@@ -217,10 +218,14 @@ admin:
         QuicklyCreation: "Quick Creation"
         GenerateSitemap: "Generate Sitemap"
         Yes: "Yes"
-        No: "Yes"
+        No: "No"
         CurrentImage: "Current image"
         CurrentFile: "Current file"
         UnreadMessages: "Unread message(s)"
+        ThisEntryAlreadyExists: "This entry already exists!"
+        SentSuccessfully: "Sent successfully"
+    error:
+        UnknownURL: "Unknown URL"
     table:
         Title: "Title"
         Text: "Text"
