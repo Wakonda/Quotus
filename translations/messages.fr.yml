@@ -111,6 +111,8 @@ user:
         ForgottenPassword: "Mot de passe oublié ?"
         PasswordOrUserForgotten: "Pseudo ou mot de passe incorect"
         YouAreLoggedInAs: "Vous êtes déjà connecté en tant que"
+        CongratulationAccountActivated: "Félicitation %username%, votre compte a été activé. Veuillez entrer vos identifiants pour vous connecter."
+        AccountCannotBeActivated: "Désolé %username%, votre compte ne peut pas être activé, puisque le lien est expiré."
     createAccount:
         CreateAccount: "Créer un compte"
         Pseudo: "Pseudo"
@@ -127,6 +129,13 @@ user:
         UseGravatar: "Utilisez un gravatar"
         CurrentGravatar: "Avatar actuel :"
         PasswordsMustMatch: "Les mots de passe doivent correspondre"
+        TheWordMustMatchThePicture: "Le mot doit correspondre à l'image"
+        Registration: "Inscription"
+        UnableToAccessThisPage: "Impossible d'accéder à cette page"
+        UserSameUsernameEmailExists: "Un utilisateur ayant le même nom d'utilisateur / email existe déjà !"
+        PasswordMustContainAtLeast: "Votre mot de passe doit contenir au moins %minLength% caractères."
+        PasswordOneLetter: "Votre mot de passe doit comporter au moins une lettre."
+        PasswordOneNumber: "Votre mot de passe doit comporter au moins un chiffre."
     confirmation:
         Title: "Confirmation"
         Text: "Votre compte a bien été créé. Toutefois pour pouvoir connecter, vous devez activer votre compte. Pour ce faire, cliquez sur le lien que vous avez reçu par email."
@@ -154,13 +163,17 @@ user:
         Vote: "Vote"
 forgottenPassword:
     index:
+        ForgotYourPassword: "Mot de passe oublié"
         ResetPassword: "Réinitialisation du mot de passe"
         NewPasswordSend: "Un nouveau mot de passe vous sera envoyé à l'adresse mail renseignée sur votre compte utilisateur."
     field:
         EmailUsername: "Email ou nom d'utilisateur"
         Captcha: "Recopiez le mot contenu dans l'image"
         Send: "Réinitialiser le mot de passe"
+        TheWordMustMatchThePicture: "Le mot doit correspondre à l'image"
+        UsernameOrEmailAddressDoesNotExist: "Le nom d'utilisateur ou l'adresse email n'existe pas"
     confirmation:
+        YourPasswordHasBeenChanged: "Votre mot de passe a bien été modifié."
         Title: "Confirmation - Mot de passe oublié"
         EmailSent: "Un email vous a été envoyé. Vous y trouverez la procédure afin de pouvoir vous reconnecter sur"
         Email: "<p>Bonjour %entity.username%,</p><p>Si vous recevez cet email, c'est que vous avez oublié votre mot de passe. Pour remédier à la situation, nous vous en avons généré un provisoire :</p><p><b><u>Mot de passe provisoire :</u></b> <i>%temporaryPassword%</i></p><p><b><u>Attention :</u></b> Ce mot de passe est provisoire. De ce fait, nous vous invitons vivement à le modifier dès que vous vous serez <a href='%urlLogin%'>connecté à votre compte</a>.</p><p>Cordialement,</p><p>L'équipe de <a href='%urlIndex%'><b>Proverbius</b></a></p>"

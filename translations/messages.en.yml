@@ -111,6 +111,8 @@ user:
         ForgottenPassword: "Forgot your password?"
         PasswordOrUserForgotten: "Nickname or password incorect"
         YouAreLoggedInAs: "You are already logged in as"
+        CongratulationAccountActivated: "Congratulations %username%, your account has been activated. Please enter your login to log in."
+        AccountCannotBeActivated: "Sorry %username%, your account can not be activated because the link has expired."
     createAccount:
         CreateAccount: "Create an account"
         Pseudo: "Pseudo"
@@ -127,6 +129,13 @@ user:
         UseGravatar: "Use a gravatar"
         CurrentGravatar: "Current avatar:"
         PasswordsMustMatch: "Passwords must match"
+        TheWordMustMatchThePicture: "The word must match the picture"
+        Registration: "Registration"
+        UnableToAccessThisPage: "Can not access this page"
+        UserSameUsernameEmailExists: "A user with the same username / email already exists!"
+        PasswordMustContainAtLeast: "Your password must contain at least %minLength% characters."
+        PasswordOneLetter: "Your password must include at least one letter."
+        PasswordOneNumber: "Your password must include at least one number."
     confirmation:
         Title: "Confirmation"
         Text: "Your account has been created, but to be able to log in, you must activate your account by clicking on the link you received by email."
@@ -154,13 +163,17 @@ user:
         Vote: "Vote"
 forgottenPassword:
     index:
+        ForgotYourPassword: "Forgot your password"
         ResetPassword: "Reset password"
         NewPasswordSend: "A new password will be sent to the email address entered on your user account."
     field:
         EmailUsername: "Email or username"
         Captcha: "Copy the word contained in the image"
         Send: "Reset password"
+        TheWordMustMatchThePicture: "The word must match the picture"
+        UsernameOrEmailAddressDoesNotExist: "Username or email address does not exist"
     confirmation:
+        YourPasswordHasBeenChanged: "Your password has been changed."
         Title: "Confirmation - Forgotten password"
         EmailSent: "An email has been sent to you. Here you will find the procedure to be able to log in on"
         Email: "<p>Hello %username%,</p><p>If you receive this email, you have forgotten your password. To remedy the situation, we have generated a temporary one: </p><p><b><u> Temporary password:</u></b><i>%temporaryPassword%</i></p><p><b><u>Warning:</u></b> This password is temporary. Therefore, we strongly urge you to modify it as soon as you have <a href='%urlLogin%'> connected to your account</a>. </p><p>Sincerely,</p><p>The team of <a href='%urlIndex%'> <b>Proverbius</b></a></p>"

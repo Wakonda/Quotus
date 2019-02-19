@@ -21,11 +21,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends Controller
 {
-    public function loginAction(Request $request, AuthenticationUtils $authenticationUtils, SessionInterface $session)
+    public function loginAction(Request $request, AuthenticationUtils $authenticationUtils, SessionInterface $session, TranslatorInterface $translator)
     {
 		if($request->query->get("t") != null)
 		{
@@ -36,13 +37,13 @@ class UserController extends Controller
 
 			if($entity->getExpiredAt() > $now)
 			{
-				$session->getFlashBag()->add('confirm_login', 'Félicitation '.$entity->getUsername(). ', votre compte a été activé. Veuillez entrer vos identifiants pour vous connecter.');
+				$session->getFlashBag()->add('confirm_login', $translator->trans('user.login.CongratulationAccountActivated', ['%username%' => $entity->getUsername()]));
 				$entity->setEnabled(true);
 				$entityManager->persist($entity);
 				$entityManager->flush();
 			}
 			else
-				$session->getFlashBag()->add('expired_login', 'Désolé '.$entity->getUsername(). ', votre compte ne peut pas être activé, puisque le lien est expiré.');
+				$session->getFlashBag()->add('expired_login', $translator->trans('user.login.AccountCannotBeActivated', ['%username%' => $entity->getUsername()]));
 		}
 
 		return $this->render('User/login.html.twig', array(
@@ -78,7 +79,7 @@ class UserController extends Controller
 		return $this->render('User/new.html.twig', array('form' => $form->createView()));
 	}
 
-	public function createAction(Request $request, SessionInterface $session, \Swift_Mailer $mailer)
+	public function createAction(Request $request, SessionInterface $session, \Swift_Mailer $mailer, TranslatorInterface $translator)
 	{
 		$entity = new User();
         $form = $this->createFormUser($entity, false);
@@ -87,9 +88,9 @@ class UserController extends Controller
 		$params = $request->request->get("user");
 
 		if($params["captcha"] != "" and $session->get("captcha_word") != $params["captcha"])
-			$form->get("captcha")->addError(new FormError('Le mot doit correspondre à l\'image'));
+			$form->get("captcha")->addError(new FormError($translator->trans('user.createAccount.TheWordMustMatchThePicture')));
 
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 
 		if($form->isValid())
 		{
@@ -120,7 +121,7 @@ class UserController extends Controller
 			$body = $this->renderView('User/confirmationInscription_mail.html.twig', array("entity" => $entity));
 
 			$mailer->getTransport()->setStreamOptions(["ssl" => ["verify_peer" => false, "verify_peer_name" => false]]);
-			$message = (new \Swift_Message('Proverbius - Inscription'))
+			$message = (new \Swift_Message('Proverbius - '.$translator->trans('user.createAccount.Registration')))
 				->setFrom('amatukami66@gmail.com', "Proverbius")
 				->setTo($entity->getEmail())
 				->setBody($body, 'text/html');
@@ -133,14 +134,14 @@ class UserController extends Controller
 		return $this->render('User/new.html.twig', array('form' => $form->createView()));
 	}
 
-	public function editAction(Request $request, TokenStorageInterface $tokenStorage, $id)
+	public function editAction(Request $request, TokenStorageInterface $tokenStorage, TranslatorInterface $translator, $id)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		if(!empty($id))
 			$entity = $entityManager->getRepository(User::class)->find($id);
 		else
 		{
-			$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, 'Unable to access this page!');
+			$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, $translator->trans('user.createAccount.UnableToAccessThisPage'));
 			$entity = $tokenStorage->getToken()->getUser();
 		}
 
@@ -149,7 +150,7 @@ class UserController extends Controller
 		return $this->render('User/edit.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
 
-	public function updateAction(Request $request, TokenStorageInterface $tokenStorage, $id)
+	public function updateAction(Request $request, TokenStorageInterface $tokenStorage, TranslatorInterface $translator, $id)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		if(empty($id))
@@ -162,7 +163,7 @@ class UserController extends Controller
 		$form = $this->createFormUser($entity, true);
 		$form->handleRequest($request);
 		
-		$this->checkForDoubloon($entity, $form);
+		$this->checkForDoubloon($translator, $entity, $form);
 
 		if($form->isValid())
 		{
@@ -196,7 +197,7 @@ class UserController extends Controller
 		return $this->render('User/updatepassword.html.twig', array('form' => $form->createView(), 'entity' => $entity));
 	}
 	
-	public function updatePasswordSaveAction(Request $request, SessionInterface $session, TokenStorageInterface $tokenStorage)
+	public function updatePasswordSaveAction(Request $request, SessionInterface $session, TokenStorageInterface $tokenStorage, TranslatorInterface $translator)
 	{
 		$entity = $tokenStorage->getToken()->getUser();
         $form = $this->createForm(UpdatePasswordType::class, $entity);
@@ -214,7 +215,7 @@ class UserController extends Controller
 			$entityManager->persist($entity);
 			$entityManager->flush();
 
-			$session->getFlashBag()->add('new_password', 'Votre mot de passe a bien été modifié.');
+			$session->getFlashBag()->add('new_password', $translator->trans('forgottenPassword.confirmation.YourPasswordHasBeenChanged'));
 
 			return $this->redirect($this->generateUrl('user_show', array('id' => $id)));
 		}
@@ -229,7 +230,7 @@ class UserController extends Controller
 		return $this->render('User/forgottenpassword.html.twig', array('form' => $form->createView()));
 	}
 	
-	public function forgottenPasswordSendAction(Request $request, \Swift_Mailer $mailer)
+	public function forgottenPasswordSendAction(Request $request, \Swift_Mailer $mailer, TranslatorInterface $translator)
 	{
         $form = $this->createForm(ForgottenPasswordType::class, null);
 		$form->handleRequest($request);
@@ -237,13 +238,13 @@ class UserController extends Controller
 		$params = $request->request->get("forgotten_password");
 
 		if($params["captcha"] != "" and $request->getSession()->get("captcha_word") != $params["captcha"])
-			$form->get("captcha")->addError(new FormError('Le mot doit correspondre à l\'image'));
+			$form->get("captcha")->addError(new FormError($translator->trans('forgottenPassword.field.TheWordMustMatchThePicture')));
 
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(User::class)->findByUsernameOrEmail($params["emailUsername"]);
 
 		if(empty($entity))
-			$form->get("emailUsername")->addError(new FormError("Le nom d'utilisateur ou l'adresse email n'existe pas"));
+			$form->get("emailUsername")->addError(new FormError($translator->trans('forgottenPassword.field.UsernameOrEmailAddressDoesNotExist')));
 
 		if(!$form->isValid())
 		{
@@ -264,7 +265,7 @@ class UserController extends Controller
 		$body = $this->renderView('User/forgottenpassword_mail.html.twig', array("entity" => $entity, "temporaryPassword" => $temporaryPassword));
 		
 		$mailer->getTransport()->setStreamOptions(["ssl" => ["verify_peer" => false, "verify_peer_name" => false]]);
-		$message = (new \Swift_Message("Proverbius - Mot de passe oublié"))
+		$message = (new \Swift_Message("Proverbius - ".$translator->trans('forgottenPassword.index.ForgotYourPassword')))
 			->setFrom('amatukami66@gmail.com', "Proverbius")
 			->setTo($entity->getEmail())
 			->setBody($body, 'text/html');
@@ -291,7 +292,7 @@ class UserController extends Controller
 		return $this->createForm(UserType::class, $entity, array('edit' => $ifEdit));
 	}
 
-	private function checkForDoubloon($entity, $form)
+	private function checkForDoubloon(TranslatorInterface $translator, $entity, $form)
 	{
 		if($entity->getUsername() != null)
 		{
@@ -299,7 +300,7 @@ class UserController extends Controller
 			$checkForDoubloon = $entityManager->getRepository(User::class)->checkForDoubloon($entity);
 
 			if($checkForDoubloon > 0)
-				$form->get("username")->addError(new FormError('Un utilisateur ayant le même nom d\'utilisateur / email existe déjà !'));
+				$form->get("username")->addError(new FormError($translator->trans('user.createAccount.UserSameUsernameEmailExists')));
 		}
 	}
 	
@@ -318,7 +319,7 @@ class UserController extends Controller
 		return $email ^ $key;
 	}
 
-	private function testStrongestPassword($form, $password)
+	private function testStrongestPassword(TranslatorInterface $translator, $form, $password)
 	{
 		$min_length = 5;
 		
@@ -338,13 +339,13 @@ class UserController extends Controller
 		if(strlen($password) > 0)
 		{
 			if(strlen($password) < $min_length)
-				$form->get("password")->addError(new FormError('Votre mot de passe doit contenir au moins '.$min_length.' caractères.'));
+				$form->get("password")->addError(new FormError($translator->trans('user.createAccount.PasswordMustContainAtLeast', ["%minLength%" => $min_length])));
 			else
 			{
 				if(count($letter) == 0)
-					$form->get('password')->addError(new FormError('Votre mot de passe doit comporter au moins une lettre.'));
+					$form->get('password')->addError(new FormError($translator->trans('user.createAccount.PasswordOneLetter')));
 				if(count($number) == 0)
-					$form->get('password')->addError(new FormError('Votre mot de passe doit comporter au moins un chiffre.'));
+					$form->get('password')->addError(new FormError($translator->trans('user.createAccount.PasswordOneNumber')));
 			}
 		}
 	}
