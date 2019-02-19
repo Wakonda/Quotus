@@ -13,12 +13,16 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use App\Entity\Proverb;
 use App\Entity\Country;
+use App\Entity\Language;
 use App\Repository\CountryRepository;
+use App\Repository\LanguageRepository;
 
 class ProverbFastMultipleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+		$locale = $options["locale"];
+
         $builder
 			->add('url', TextType::class, array(
                 'constraints' => [new Assert\NotBlank(), new Assert\Url()], 'label' => 'URL', 'mapped' => false
@@ -26,11 +30,23 @@ class ProverbFastMultipleType extends AbstractType
 			->add('ipProxy', TextType::class, array(
                 'label' => 'admin.proverb.ProxyAddress', 'required' => false, 'mapped' => false, 'constraints' => [new Assert\Regex("#^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:[0-9]{2,4}$#")]
             ))
+			->add('language', EntityType::class, array(
+				'label' => 'admin.form.Language',
+				'class' => Language::class,
+				'query_builder' => function (LanguageRepository $er) use ($locale) {
+					return $er->findAllForChoice($locale);
+				},
+				'multiple' => false,
+				'required' => true,
+				'expanded' => false,
+				'placeholder' => 'main.field.ChooseAnOption',
+				'constraints' => new Assert\NotBlank()
+			))
 			->add('country', EntityType::class, array(
 				'label' => 'admin.proverb.Country',
 				'class' => Country::class,
-				'query_builder' => function (CountryRepository $er) {
-					return $er->findAllForChoice();
+				'query_builder' => function (CountryRepository $er) use ($locale) {
+					return $er->findAllForChoice($locale);
 				},
 				'multiple' => false, 
 				'expanded' => false,
@@ -46,7 +62,8 @@ class ProverbFastMultipleType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			"data_class" => Proverb::class
+			"data_class" => Proverb::class,
+			"locale" => null
 		));
 	}
 

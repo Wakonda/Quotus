@@ -170,7 +170,11 @@ class ProverbAdminController extends Controller
 
 	public function newFastMultipleAction(Request $request)
 	{
-		$form = $this->createForm(ProverbFastMultipleType::class, new Proverb());
+		$entityManager = $this->getDoctrine()->getManager();
+		$entity = new Proverb();
+		$entity->setLanguage($entityManager->getRepository(Language::class)->findOneBy(["abbreviation" => $request->getLocale()]));
+		
+		$form = $this->createForm(ProverbFastMultipleType::class, $entity, ["locale" => $request->getLocale()]);
 
 		return $this->render('Proverb/fastMultiple.html.twig', array('form' => $form->createView()));
 	}
@@ -179,7 +183,7 @@ class ProverbAdminController extends Controller
 	{
 		$entity = new Proverb();
 		
-		$form = $this->createForm(ProverbFastMultipleType::class, $entity);
+		$form = $this->createForm(ProverbFastMultipleType::class, $entity, ["locale" => $request->getLocale()]);
 		
 		$form->handleRequest($request);
 		$req = $request->request->get($form->getName());
@@ -272,7 +276,7 @@ class ProverbAdminController extends Controller
 				}
 			}
 
-			$session->getFlashBag()->add('message', $numberAdded.' proverbe(s) ajouté(s), '.$numberDoubloons.' doublon(s)');
+			$session->getFlashBag()->add('message', $translator->trans("admin.index.AddedSuccessfully", ["%numberAdded%" => $numberAdded, "%numberDoubloons%" => $numberDoubloons]));
 	
 			return $this->redirect($this->generateUrl('proverbadmin_index'));
 		}

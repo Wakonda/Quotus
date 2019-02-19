@@ -237,6 +237,7 @@ admin:
         UnreadMessages: "Unread message(s)"
         ThisEntryAlreadyExists: "This entry already exists!"
         SentSuccessfully: "Sent successfully"
+        AddedSuccessfully: "%numberAdded% proverb(s) added, %numberDoubloons% duplication(s)"
     error:
         UnknownURL: "Unknown URL"
     table:
