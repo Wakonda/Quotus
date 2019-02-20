@@ -93,6 +93,7 @@ error:
     index:
         Error: "Error"
         PageNotFound: "The page you want to access does not exist!"
+        Message: "<p>An <b>error %code%</b> has occurred. If the problem persists, do not hesitate to <a href='%url%' alt=''>contact us</a> so that we can solve it as soon as possible!</p>"
 widget:
     random:
         IncorporateProverbsIntoYourWebsite: "Incorporate proverbs into your website"
