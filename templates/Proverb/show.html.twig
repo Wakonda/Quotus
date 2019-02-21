@@ -145,7 +145,7 @@
 	</div>
 	{% endif %}
 	<hr>
-	<a href="{{ path('proverbadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> {{ 'admin.index.Update'|trans }}</a> - <a href="{{ path('proverbadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a> | <a href="{{ path('proverbadmin_new', {countryId: entity.country.id}) }}"> {{ 'admin.proverb.ForSameCountry'|trans }}</a>
+	<a href="{{ path('proverbadmin_index') }}"><i class="fa fa-list"></i> {{ 'admin.index.List'|trans }}</a> - <a href="{{ path('proverbadmin_edit', { 'id' : entity.id }) }}"><i class="fa fa-edit"></i> {{ 'admin.index.Update'|trans }}</a> - <a href="{{ path('proverbadmin_new') }}"><i class="fa fa-plus-square"></i> {{ 'admin.index.Create'|trans }}</a> | <a href="{{ path('proverbadmin_new', {countryId: entity.country.id}) }}"> {{ 'admin.proverb.ForSameCountry'|trans }}</a>
 {% endblock %}
 
 {% block script_additional %}

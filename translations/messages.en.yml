@@ -239,6 +239,7 @@ admin:
         ThisEntryAlreadyExists: "This entry already exists!"
         SentSuccessfully: "Sent successfully"
         AddedSuccessfully: "%numberAdded% proverb(s) added, %numberDoubloons% duplication(s)"
+        List: "List"
     error:
         UnknownURL: "Unknown URL"
     table:
