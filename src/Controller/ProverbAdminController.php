@@ -193,7 +193,7 @@ class ProverbAdminController extends Controller
 			$url = $req["url"];
 			$url_array = parse_url($url);
 
-			$authorizedURLs = ['d3d3LmxpbnRlcm5hdXRlLmNvbQ==', 'Y2l0YXRpb24tY2VsZWJyZS5sZXBhcmlzaWVuLmZy', 'ZGljb2NpdGF0aW9ucy5sZW1vbmRlLmZy', 'd3d3LnByb3ZlcmJlcy1mcmFuY2Fpcy5mcg=='];
+			$authorizedURLs = ['d3d3LmxpbnRlcm5hdXRlLmNvbQ==', 'Y2l0YXRpb24tY2VsZWJyZS5sZXBhcmlzaWVuLmZy', 'ZGljb2NpdGF0aW9ucy5sZW1vbmRlLmZy', 'd3d3LnByb3ZlcmJlcy1mcmFuY2Fpcy5mcg==', 'Y3JlYXRpdmVwcm92ZXJicy5jb20='];
 
 			if(!in_array(base64_encode($url_array['host']), $authorizedURLs))
 				$form->get("url")->addError(new FormError($translator->trans("admin.error.UnknownURL")));
@@ -257,6 +257,16 @@ class ProverbAdminController extends Controller
 						$proverbsArray[] = $entityProverb;
 					}
 					break;
+				case 'Y3JlYXRpdmVwcm92ZXJicy5jb20=':
+					foreach($dom->find('center table tr td center table[CELLPADDING=10] tr td') as $pb) {
+						if(!empty($pb->plaintext)) {
+							$entityProverb = clone $entity;
+							$entityProverb->setText($pb->plaintext);
+
+							$proverbsArray[] = $entityProverb;
+						}
+					}
+				break;
 			}
 
 			$numberAdded = 0;
