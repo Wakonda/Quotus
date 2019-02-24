@@ -333,14 +333,27 @@ class ProverbAdminController extends Controller
 		$pwd = getenv("PINTEREST_PASSWORD");
 		$username = getenv("PINTEREST_USERNAME");
 
+		$pinterestBoards = [
+			"Proverbes" => "fr",
+			"Proverbs" => "en"
+		];
+
 		$bot = PinterestBot::create();
 		$bot->auth->login($mail, $pwd);
 		
 		$boards = $bot->boards->forUser($username);
-		
+		$i = 0;
+
+		foreach($boards as $board) {
+			if($pinterestBoards[$board["name"]] == $entity->getLanguage()->getAbbreviation()) {
+				break;
+			}
+			$i++;
+		}
+
 		$image = $request->request->get('image_pinterest');
 		
-		$bot->pins->create($image, $boards[0]['id'], $request->request->get("pinterest_area"), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
+		$bot->pins->create($image, $boards[$i]['id'], $request->request->get("pinterest_area"), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
 		
 		if(empty($bot->getLastError()))
 			$session->getFlashBag()->add('message', $translator->trans("admin.index.SentSuccessfully"));

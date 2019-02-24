@@ -68,7 +68,11 @@
 							{% elseif app.request.locale == "fr" %}
 							<a class="twitter" href="https://twitter.com/poeticus12" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
 							{% endif %}
-							<a class="pinterest" href="https://pinterest.com/amatukamiproverbius/" target="_blank"><i class="fa fa-pinterest-square fa-3x"></i></a>
+							{% if app.request.locale == "fr" %}
+							<a class="pinterest" href="https://www.pinterest.ru/amatukamiproverbius/proverbes/" target="_blank"><i class="fa fa-pinterest-square fa-3x"></i></a>
+							{% elseif app.request.locale == "en" %}
+							<a class="pinterest" href="https://www.pinterest.ru/amatukamiproverbius/proverbs/" target="_blank"><i class="fa fa-pinterest-square fa-3x"></i></a>
+							{% endif %}
 							<a class="instagram" href="https://www.instagram.com/_proverbius/" target="_blank"><i class="fa fa-instagram fa-3x"></i></a> 
 							<a class="widget" style="color: #33b242;" href="{{ path('generate_widget') }}"><i class="fa fa-share-alt-square fa-3x"></i></a> 
 						</div>
