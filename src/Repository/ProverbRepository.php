@@ -79,7 +79,8 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
 		if(!empty($sSearch))
 		{
 			$search = "%".$sSearch."%";
-			$qb->andWhere('co.title LIKE "'.$search.'"');
+			$qb->andWhere('co.title LIKE :search')
+               ->setParameter("search", $search);
 		}
 		if($count)
 		{
