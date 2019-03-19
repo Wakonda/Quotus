@@ -38,6 +38,16 @@ class Proverb
      */
     protected $images;
 	
+   /**
+    * @ORM\OneToMany(targetEntity=ProverbImage::class, cascade={"persist", "remove"}, mappedBy="proverb", orphanRemoval=true)
+    */
+    protected $proverbImages;
+	
+    public function __construct()
+    {
+        $this->proverbImages = new ArrayCollection();
+    }
+	
 	/**
      * @ORM\ManyToOne(targetEntity="App\Entity\Language")
      */
@@ -117,4 +127,21 @@ class Proverb
 	{
 		$this->language = $language;
 	}
+
+    public function getProverbImages()
+    {
+        return $this->proverbImages;
+    }
+     
+    public function addProverbImage(ProverbImage $proverbImage)
+    {
+        $this->proverbImages->add($proverbImage);
+        $proverbImage->setProverb($this);
+    }
+	
+    public function removeProverbImage(ProverbImage $proverbImage)
+    {
+        $proverbImage->setProverb(null);
+        $this->proverbImages->removeElement($proverbImage);
+    }
 }

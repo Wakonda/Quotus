@@ -131,10 +131,15 @@ class ProverbiusExtension extends AbstractExtension
 		return $mn->save();
 	}
 	
-	public function randomImage($json) {
-		if(empty($json))
+	public function randomImage($entity) {
+		$imageArray = [];
+		
+		foreach($entity->getProverbImages() as $image)
+			$imageArray[] = $image->getImage();
+
+		if(empty($imageArray))
 			return null;
 		
-		return $json[array_rand($json)];
+		return $imageArray[array_rand($imageArray)];
 	}
 }

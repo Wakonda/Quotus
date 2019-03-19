@@ -115,11 +115,11 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner">
 			{% set i = 0 %}
-			{% for image in entity.images %}
+			{% for proverbImage in entity.proverbImages %}
 				<div class="carousel-item {{ i == 0 ? 'active' : '' }}">
-					<img src="{{ asset('photo/proverb/'~image) }}" class="text-center" alt="">
+					<img src="{{ asset('photo/proverb/'~proverbImage.image) }}" class="text-center" alt="">
 					<div class="carousel-caption hidden_print">
-						<a href="{{ path('download_image', {'fileName': image}) }}" class="btn btn-success "><i class="fa fa-download" aria-hidden="true"></i></a>
+						<a href="{{ path('download_image', {'fileName': proverbImage.image}) }}" class="btn btn-success "><i class="fa fa-download" aria-hidden="true"></i></a>
 					</div>
 				</div>
 				{% set i = i + 1 %}

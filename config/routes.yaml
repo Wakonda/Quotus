@@ -359,7 +359,7 @@ proverbadmin_save_image:
     controller: App\Controller\ProverbAdminController:saveImageAction
 
 proverbadmin_remove_image:
-    path: /admin/proverb/removeimage/{id}/{fileName}
+    path: /admin/proverb/removeimage/{id}/{proverbImageId}
     controller: App\Controller\ProverbAdminController:removeImageAction
 
 # ADMIN PAGE

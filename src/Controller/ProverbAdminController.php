@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Proverb;
+use App\Entity\ProverbImage;
 use App\Entity\Country;
 use App\Entity\Language;
 use App\Service\GenericFunction;
@@ -310,16 +311,27 @@ class ProverbAdminController extends Controller
 
 		$parameters = [];
 		$parameters["status"] = $request->request->get("twitter_area")." ".$this->generateUrl("read", array("id" => $id, 'slug' => $entity->getSlug()), UrlGeneratorInterface::ABSOLUTE_URL);
-		$image = $request->request->get('image_tweet');
+		$imageId = $request->request->get('image_id_tweet');
 
-		if(!empty($image)) {
-			$media = $connection->upload('media/upload', array('media' => $image));
+		if(!empty($imageId)) {
+			$proverbImage = $entityManager->getRepository(ProverbImage::class)->find($imageId);
+			
+			$media = $connection->upload('media/upload', array('media' => $request->getUriForPath('/photo/proverb/'.$proverbImage->getImage())));
 			$parameters['media_ids'] = implode(',', array($media->media_id_string));
 		}
 
 		$statues = $connection->post("statuses/update", $parameters);
-	
-		$session->getFlashBag()->add('message', $translator->trans("admin.index.SentSuccessfully"));
+		
+		if(isset($statues->errors) and !empty($statues->errors))
+			$session->getFlashBag()->add('message', $translator->trans("admin.index.SentError"));
+		else {
+			$proverbImage->addSocialNetwork("Twitter");
+			$entityManager->persist($proverbImage);
+			$entityManager->flush();
+		
+			$session->getFlashBag()->add('message', $translator->trans("admin.index.SentSuccessfully"));
+			
+		}
 	
 		return $this->redirect($this->generateUrl("proverbadmin_show", array("id" => $id)));
 	}
@@ -351,12 +363,18 @@ class ProverbAdminController extends Controller
 			$i++;
 		}
 
-		$image = $request->request->get('image_pinterest');
+		$imageId = $request->request->get('image_id_pinterest');
+		$proverbImage = $entityManager->getRepository(ProverbImage::class)->find($imageId);
 		
-		$bot->pins->create($image, $boards[$i]['id'], $request->request->get("pinterest_area"), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
+		$bot->pins->create($request->getUriForPath('/photo/proverb/'.$proverbImage->getImage()), $boards[$i]['id'], $request->request->get("pinterest_area"), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
 		
-		if(empty($bot->getLastError()))
+		if(empty($bot->getLastError())) {
 			$session->getFlashBag()->add('message', $translator->trans("admin.index.SentSuccessfully"));
+
+			$proverbImage->addSocialNetwork("Pinterest");
+			$entityManager->persist($proverbImage);
+			$entityManager->flush();
+		}
 		else
 			$session->getFlashBag()->add('message', $bot->getLastError());
 	
@@ -364,7 +382,7 @@ class ProverbAdminController extends Controller
 	}
 	
 	public function facebookAction(Request $request, TranslatorInterface $translator, $id)
-	{
+	{		
 		if(getenv("FACEBOOK_APP_ENV") == "dev")
 		{
 			// TEST FACEBOOK
@@ -382,16 +400,30 @@ class ProverbAdminController extends Controller
 			
 			$accessTokenPage = $response->getDecodedBody()['access_token'];
 			
+			$entityManager = $this->getDoctrine()->getManager();
+			
+			$proverbImage = $entityManager->getRepository(ProverbImage::class)->find($request->request->get("image_id_facebook"));
+			
 			$data = [
 				'caption' => $request->request->get("facebook_area"),
-				'url' => $request->request->get("image_facebook")
+				'url' => $request->getUriForPath('/photo/proverb/'.$proverbImage->getImage())
 			];
+			
+			try {
+				$response = $fb->post('/'.$pageId.'/photos', $data, $accessTokenPage);
 
-			$response = $fb->post('/'.$pageId.'/photos', $data, $accessTokenPage);
+				$proverbImage->addSocialNetwork("Facebook");
+				$entityManager->persist($proverbImage);
+				$entityManager->flush();
+				
+				$session->getFlashBag()->add('message', $translator->trans("admin.index.SentSuccessfully"));
+			} catch(Facebook\Exceptions\FacebookResponseException $e) {
+				$session->getFlashBag()->add('message', $translator->trans("admin.index.SentError"));
+			} catch(Facebook\Exceptions\FacebookSDKException $e) {
+				$session->getFlashBag()->add('message', $translator->trans("admin.index.SentError"));
+			}
 		}
 
-		$session->getFlashBag()->add('message', $translator->trans("admin.index.SentSuccessfully"));
-		
 		return $this->redirect($this->generateUrl("proverbadmin_show", ["id" => $id]));
 	}
 	
@@ -457,7 +489,7 @@ class ProverbAdminController extends Controller
 			imagepng($image, "photo/proverb/".$fileName);
 			imagedestroy($image);
 			
-			$entity->addImage($fileName);
+			$entity->addProverbImage(new ProverbImage($fileName));
 			
 			$entityManager->persist($entity);
 			$entityManager->flush();
@@ -470,12 +502,15 @@ class ProverbAdminController extends Controller
         return $this->render('Proverb/show.html.twig', array('entity' => $entity, 'imageGeneratorForm' => $imageGeneratorForm->createView()));
 	}
 	
-	public function removeImageAction(Request $request, $id, $fileName)
+	public function removeImageAction(Request $request, $id, $proverbImageId)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Proverb::class)->find($id);
+		$proverbImage = $entityManager->getRepository(ProverbImage::class)->find($proverbImageId);
 		
-		$entity->removeImage($fileName);
+		$fileName = $proverbImage->getImage();
+		
+		$entity->removeProverbImage($proverbImage);
 		
 		$entityManager->persist($entity);
 		$entityManager->flush();

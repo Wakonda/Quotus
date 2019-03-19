@@ -238,6 +238,7 @@ admin:
         UnreadMessages: "Message(s) non lu(s)"
         ThisEntryAlreadyExists: "Cette entrée existe déjà !"
         SentSuccessfully: "Envoyé avec succès"
+        SentError: "Une erreur s'est produite"
         AddedSuccessfully: "%numberAdded% proverbe(s) ajouté(s), %numberDoubloons% doublon(s)"
         List: "Liste"
     error:
