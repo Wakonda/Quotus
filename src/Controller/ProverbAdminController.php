@@ -194,7 +194,7 @@ class ProverbAdminController extends Controller
 			$url = $req["url"];
 			$url_array = parse_url($url);
 
-			$authorizedURLs = ['d3d3LmxpbnRlcm5hdXRlLmNvbQ==', 'Y2l0YXRpb24tY2VsZWJyZS5sZXBhcmlzaWVuLmZy', 'ZGljb2NpdGF0aW9ucy5sZW1vbmRlLmZy', 'd3d3LnByb3ZlcmJlcy1mcmFuY2Fpcy5mcg==', 'Y3JlYXRpdmVwcm92ZXJicy5jb20='];
+			$authorizedURLs = ['d3d3LmxpbnRlcm5hdXRlLmNvbQ==', 'Y2l0YXRpb24tY2VsZWJyZS5sZXBhcmlzaWVuLmZy', 'ZGljb2NpdGF0aW9ucy5sZW1vbmRlLmZy', 'd3d3LnByb3ZlcmJlcy1mcmFuY2Fpcy5mcg==', 'Y3JlYXRpdmVwcm92ZXJicy5jb20=', 'd3d3LnNwZWNpYWwtZGljdGlvbmFyeS5jb20='];
 
 			if(!in_array(base64_encode($url_array['host']), $authorizedURLs))
 				$form->get("url")->addError(new FormError($translator->trans("admin.error.UnknownURL")));
@@ -266,6 +266,18 @@ class ProverbAdminController extends Controller
 
 							$proverbsArray[] = $entityProverb;
 						}
+					}
+				break;
+				case 'd3d3LnNwZWNpYWwtZGljdGlvbmFyeS5jb20=':
+					foreach($dom->find('.quotes li') as $quote)
+					{
+						$entityProverb = clone $entity;
+						$content = $quote->innertext;
+						$content = preg_replace('/<span[^>]*>.*?<\/span>/i', '', $content);
+						
+						$entityProverb->setText(strip_tags($content));
+						
+						$proverbsArray[] = $entityProverb;
 					}
 				break;
 			}
