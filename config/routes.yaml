@@ -301,6 +301,15 @@ tagadmin_update:
     path: /admin/tag/upate/{id}
     controller: App\Controller\TagAdminController::updateAction
 
+# ADMIN PROVERBIMAGE
+proverbimageadmin_index:
+    path: /admin/proverb_image/index
+    controller: App\Controller\ProverbImageAdminController::indexAction
+
+proverbimageadmin_indexdatatables:
+    path: /admin/proverb_image/indexdatatables
+    controller: App\Controller\ProverbImageAdminController::indexDatatablesAction
+
 # ADMIN PROVERB
 proverbadmin_index:
     path: /admin/proverb/index

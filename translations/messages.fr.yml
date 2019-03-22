@@ -221,6 +221,7 @@ admin:
         Page: "Page"
         Country: "Pays"
         Proverb: "Proverbe"
+        ProverbImage: "Image Proverbe"
         Version: "Version"
         Store: "Boutique"
         Tag: "Tag"
@@ -263,6 +264,9 @@ admin:
         Country: "Pays"
         ProxyAddress: "Adresse proxy"
         ForSameCountry: "pour le même pays"
+    proverbImage:
+        Image: "Image"
+        Share: "Partager"
     country:
         Title: "Titre"
         InternationalName: "Nom international"
