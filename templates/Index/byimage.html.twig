@@ -1,0 +1,22 @@
+{% extends 'generic_layout.html.twig' %}
+
+{% block head_title %}{{ 'proverbImage.index.ByImages'|trans }}{% endblock %}
+
+{% block main_title %}{{ 'proverbImage.index.ByImages'|trans }}{% endblock %}
+
+{% block main_content %}
+	<div class="card-columns">
+    {% for image in pagination %}
+		<div class="card">
+			<a href="{{ path('read', {'id' : image.proverb.id, 'slug' : image.proverb.slug}) }}"><img src="{{ asset('photo/proverb/'~image.image) }}" class="card-img-top" alt="{{ image.proverb.text }}"></a>
+			<div class="card-body">
+				<p class="card-text"><i>{{ image.proverb.text|raw }}</i></p>
+				<p class="card-text"><small class="text-muted"><a href="{{ path('country', {'id' : image.proverb.country.id, 'slug' : image.proverb.country.slug }) }}" alt=""><img class="flag" src="{{ asset('photo/country/'~image.proverb.country.flag) }}" alt="" height="8" /> {{ 'proverb.read.Proverb'|trans }} - {{ image.proverb.country.title }}</a></small></p>
+			</div>
+		</div>
+
+    {% endfor %}
+	</div>
+
+{{ knp_pagination_render(pagination) }}
+{% endblock %}

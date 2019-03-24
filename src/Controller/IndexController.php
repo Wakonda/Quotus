@@ -17,6 +17,7 @@ use App\Service\Gravatar;
 use App\Service\Pagination;
 
 use App\Entity\Proverb;
+use App\Entity\ProverbImage;
 use App\Entity\Country;
 use App\Entity\Page;
 use App\Entity\Store;
@@ -126,6 +127,23 @@ class IndexController extends Controller
 		$browsingProverbs = $entityManager->getRepository(Proverb::class)->browsingProverbShow($id);
 
 		return $this->render('Index/read.html.twig', array('entity' => $entity, 'browsingProverbs' => $browsingProverbs));
+	}
+	
+	public function byImagesAction(Request $request)
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+		$query = $entityManager->getRepository(ProverbImage::class)->getPaginator();
+		
+		$paginator  = $this->get('knp_paginator');
+		$pagination = $paginator->paginate(
+			$query, /* query NOT result */
+			$request->query->getInt('page', 1), /*page number*/
+			10 /*limit per page*/
+		);
+		
+		$pagination->setCustomParameters(['align' => 'center']);
+		
+		return $this->render('Index/byImage.html.twig', ['pagination' => $pagination]);
 	}
 	
 	public function downloadImageProverbAction($fileName)

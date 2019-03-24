@@ -150,7 +150,7 @@ article
 	line-height:21px;
 }
 
-#contents img:not(.votes_result_user):not(#gravatar):not(.not_content) {
+#contents img:not(.votes_result_user):not(#gravatar):not(.not_content):not(.card-img-top) {
 	-moz-box-shadow: 2px 2px 10px #ccc;
 	-webkit-box-shadow: 2px 2px 5px #ccc;
 	box-shadow: 2px 2px 10px #ccc;

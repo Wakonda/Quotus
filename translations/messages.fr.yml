@@ -4,6 +4,7 @@ menu:
         Countries: "Pays"
         AlphabetBook: "Abécédaire"
         Store: "Boutique"
+        Images: "Images"
     left:
         RecentPublications: "Publications récentes"
         FollowUs: "Suivez-nous"
@@ -214,6 +215,9 @@ version:
         Version: "Version"
         ReleaseDate: "Date de sortie"
         Read: "Lire"
+proverbImage:
+    index:
+        ByImages: "En image"
 admin:
     index:
         Contact: "Contact"

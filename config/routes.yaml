@@ -71,6 +71,10 @@ country_datatables:
     path: /country_datatables/{countryId}
     controller: App\Controller\IndexController::countryDatatablesAction
 
+byimages:
+    path: /byimages
+    controller: App\Controller\IndexController::byImagesAction
+
 bycountries:
     path: /bycountries
     controller: App\Controller\IndexController::byCountriesAction

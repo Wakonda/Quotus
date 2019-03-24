@@ -44,4 +44,13 @@ class ProverbImageRepository extends ServiceEntityRepository
 
 		return $qb->getQuery()->getResult();
 	}
+
+	public function getPaginator()
+	{
+		$qb = $this->createQueryBuilder("ip");
+
+		$qb->join('ip.proverb', 'pf');
+
+		return $qb->getQuery();
+	}
 }
