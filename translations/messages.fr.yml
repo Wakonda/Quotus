@@ -61,6 +61,8 @@ store:
     author:
         Title: "Titre"
         Action: "Action"
+    read:
+        Abstract: "Résumé"
 proverb:
     read:
         Proverb: "Proverbe"
