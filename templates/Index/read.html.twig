@@ -102,12 +102,12 @@
 		</blockquote>
 	</div>
 	
-	{% if entity.images > 0 %}
+	{% if entity.proverbImages is not empty %}
 	<h3>En image ...</h3>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators hidden_print">
-			{% for i in 0..entity.images|length - 1 %}
+			{% for i in 0..entity.proverbImages|length - 1 %}
 				<li data-target="#myCarousel" data-slide-to="{{ i }}" {{ i == 0 ? 'class="active"' : '' }}></li>
 			{% endfor %}
 		</ol>
