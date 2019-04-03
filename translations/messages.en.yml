@@ -319,3 +319,4 @@ admin:
         Image: "Image"
         FontSize: "Font size"
         InvertColors: "Invert colors"
+        Version: "Version"

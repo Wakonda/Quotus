@@ -45,11 +45,14 @@ class ProverbImageRepository extends ServiceEntityRepository
 		return $qb->getQuery()->getResult();
 	}
 
-	public function getPaginator()
+	public function getPaginator($locale)
 	{
 		$qb = $this->createQueryBuilder("ip");
 
-		$qb->join('ip.proverb', 'pf');
+		$qb->join('ip.proverb', 'pf')
+		   ->join('pf.language', 'la')
+		   ->where('la.abbreviation = :locale')
+		   ->setParameter("locale", $locale);
 
 		return $qb->getQuery();
 	}

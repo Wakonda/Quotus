@@ -48,6 +48,12 @@
 			<div class="card-body">
 				{{ form_start(imageGeneratorForm, {'action': path('proverbadmin_save_image', {'id': entity.id})}) }}
 					<div class="form-group row">
+						{{ form_label(imageGeneratorForm.version, null, {'label_attr': {'class': "col-sm-2 col-form-label"}}) }}
+						<div class="col-sm-10">
+							{{ form_widget(imageGeneratorForm.version, {'attr': {'class': 'form-control'}}) }}
+						</div>
+					</div>
+					<div class="form-group row">
 						{{ form_label(imageGeneratorForm.image, null, {'label_attr': {'class': "col-sm-2 col-form-label"}}) }}
 						<div class="col-sm-10">
 							{{ form_widget(imageGeneratorForm.image, {'attr': {'class': 'form-control'}}) }}

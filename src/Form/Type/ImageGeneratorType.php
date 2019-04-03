@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ImageGeneratorType extends AbstractType
@@ -19,7 +20,10 @@ class ImageGeneratorType extends AbstractType
 			->add('image', FileType::class, array("label" => "admin.imageGenerator.Image", "required" => true, 'constraints' => new Assert\NotBlank()))
 			->add('font_size', IntegerType::class, ["label" => "admin.imageGenerator.FontSize", "required" => true, 'constraints' => new Assert\NotBlank(), "data" => 35])
 			->add('invert_colors', CheckboxType::class, ["label" => "admin.imageGenerator.InvertColors", "required" => false])
-            ->add('save', SubmitType::class, array('label' => 'admin.main.Save', "attr" => array("class" => "btn btn-primary")))
+			->add('version', ChoiceType::class, array(
+                "required" => true, 'label' => 'admin.imageGenerator.Version', "choices" => ["V1" => "v1", "V2" => "v2"]
+            ))
+			->add('save', SubmitType::class, array('label' => 'admin.main.Save', "attr" => array("class" => "btn btn-primary")))
 			;
     }
 
