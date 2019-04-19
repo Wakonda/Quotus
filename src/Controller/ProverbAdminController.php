@@ -521,7 +521,6 @@ class ProverbAdminController extends Controller
 				$image = new PHPImage();
 				$image->setDimensionsFromImage($bg);
 				$image->draw($bg);
-				$image->resize(486, 540, true, true);
 				$image->setAlignHorizontal('center');
 				$image->setAlignVertical('center');
 				$image->setFont($font);
@@ -530,7 +529,7 @@ class ProverbAdminController extends Controller
 				$image->setStrokeColor($strokeColor);
 				$gutter = 50;
 				$image->rectangle($gutter, $gutter, $image->getWidth() - $gutter * 2, $image->getHeight() - $gutter * 2, $rectangleColor, 0.5);
-				$image->textBox("“".$text."”", array(
+				$image->textBox("“".html_entity_decode($text)."”", array(
 					'width' => $image->getWidth() - $gutter * 2,
 					'height' => $image->getHeight() - $gutter * 2,
 					'fontSize' => $data["font_size"],
