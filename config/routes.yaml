@@ -499,3 +499,20 @@ biographyadmin_update:
 biographyadmin_getbiographiesbyajax:
     path: /admin/biography/get_biographies
     controller: App\Controller\BiographyAdminController::getBiographiesByAjaxAction
+
+# ADMIN BACKUP
+backupadmin_index:
+    path: /admin/backup/index
+    controller: App\Controller\BackupAdminController::indexAction
+
+backupadmin_download:
+    path: /admin/backup/download/{filename}
+    controller: App\Controller\BackupAdminController::downloadAction
+
+backupadmin_delete:
+    path: /admin/backup/delete/{filename}
+    controller: App\Controller\BackupAdminController::deleteAction
+
+backupadmin_generate:
+    path: /admin/backup/generate
+    controller: App\Controller\BackupAdminController::generateAction

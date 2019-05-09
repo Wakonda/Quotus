@@ -105,6 +105,13 @@ widget:
         Preview: "Preview"
         Proverb: "Proverb"
         TheCodeHasBeenCopiedSuccessfully: "The code has been copied successfully"
+backup:
+    index:
+        File: "File"
+        Actions: "Actions"
+        No: "No backup"
+        FileDeleted: "File deleted"
+        FileGenerated: "File generated"
 user:
     login:
         Pseudo: "Pseudo"
@@ -248,6 +255,7 @@ admin:
         SentError: "An error has occurred"
         AddedSuccessfully: "%numberAdded% proverb(s) added, %numberDoubloons% duplication(s)"
         List: "List"
+        Backup: "Backup"
     error:
         UnknownURL: "Unknown URL"
     table:

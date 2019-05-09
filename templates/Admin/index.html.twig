@@ -70,6 +70,10 @@
 				<td><a href="{{ path('useradmin_index') }}" alt="">{{ 'admin.index.Member'|trans }}</a></td>
 				<td>-</td>
 			</tr>
+			<tr>
+				<td><a href="{{ path('backupadmin_index') }}" alt="">{{ 'admin.index.Backup'|trans }}</a></td>
+				<td><span class="badge badge-pill badge-info">{{ render(controller('App\\Controller\\BackupAdminController::countAction')) }}</span></td>
+			</tr>
 		</tbody>
 	</table>
 	<hr>
