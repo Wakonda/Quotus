@@ -23,11 +23,13 @@
 				</h5>
 			</div>
 
+			{% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted("ROLE_ADMIN") %}
 			<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 				<div class="card-body">
 					{{ exception.message }}
 				</div>
 			</div>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}
