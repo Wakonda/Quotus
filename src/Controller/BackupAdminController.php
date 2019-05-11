@@ -16,14 +16,16 @@ class BackupAdminController extends Controller
     {
 		$files = [];
 		
-		if ($handle = opendir($this->getPath())) {
-			while (false !== ($entry = readdir($handle))) {
-				if ($entry != "." && $entry != "..") {
-					$files[] = $entry;
+		if(is_dir($this->getPath())) {
+			if ($handle = opendir($this->getPath())) {
+				while (false !== ($entry = readdir($handle))) {
+					if ($entry != "." && $entry != "..") {
+						$files[] = $entry;
+					}
 				}
-			}
 
-			closedir($handle);
+				closedir($handle);
+			}
 		}
 
         return $this->render('Backup/index.html.twig', ["files" => $files]);
@@ -55,6 +57,10 @@ class BackupAdminController extends Controller
 	public function generateAction(SessionInterface $session, TranslatorInterface $translator)
 	{
 		try {
+			if(!is_dir($this->getPath())) {
+				mkdir($this->getPath());
+			}
+			
 			$filename = "backup_" . date("Y_m_d_H_i_s") . ".sql";
 
 			$dump = new IMysqldump\Mysqldump($_ENV['DB_DSN'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
@@ -69,9 +75,14 @@ class BackupAdminController extends Controller
 
 	public function countAction()
 	{
-		$fi = new \FilesystemIterator($this->getPath(), \FilesystemIterator::SKIP_DOTS);
+		$count = 0;
 		
-		return new Response(iterator_count($fi));
+		if(is_dir($this->getPath())) {
+			$fi = new \FilesystemIterator($this->getPath(), \FilesystemIterator::SKIP_DOTS);
+			$count = iterator_count($fi);
+		}
+		
+		return new Response($count);
 	}
 
 	private function getPath()
