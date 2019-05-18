@@ -27,7 +27,8 @@ class ProverbiusExtension extends AbstractExtension
 			new TwigFilter('text_month', array($this, 'textMonthFilter')),
 			new TwigFilter('max_size_image', array($this, 'maxSizeImageFilter'), array('is_safe' => array('html'))),
 			new TwigFilter('date_letter', array($this, 'dateLetterFilter'), array('is_safe' => array('html'))),
-			new TwigFilter('remove_control_characters', array($this, 'removeControlCharactersFilter'))
+			new TwigFilter('remove_control_characters', array($this, 'removeControlCharactersFilter')),
+			new TwigFilter('base64_decode', array($this, 'base64DecodeFilter'))
         );
     }
 	
@@ -96,6 +97,11 @@ class ProverbiusExtension extends AbstractExtension
 	public function removeControlCharactersFilter($string)
 	{
 		return preg_replace("/[^a-zA-Z0-9 .\-_;!:?äÄöÖüÜß<>='\"]/", "", $string);
+	}
+	
+	public function base64DecodeFilter($string)
+	{
+		return base64_decode($string);
 	}
 	
 	public function generateCaptcha($request)

@@ -30,7 +30,8 @@ require __DIR__.'/../../vendor/simple_html_dom.php';
 class ProverbAdminController extends Controller
 {
 	private $formName = "proverb";
-	
+	private $authorizedURLs = ['d3d3LmxpbnRlcm5hdXRlLmNvbQ==', 'Y2l0YXRpb24tY2VsZWJyZS5sZXBhcmlzaWVuLmZy', 'ZGljb2NpdGF0aW9ucy5sZW1vbmRlLmZy', 'd3d3LnByb3ZlcmJlcy1mcmFuY2Fpcy5mcg==', 'Y3JlYXRpdmVwcm92ZXJicy5jb20=', 'd3d3LnNwZWNpYWwtZGljdGlvbmFyeS5jb20='];
+
 	public function indexAction(Request $request)
 	{
 		return $this->render('Proverb/index.html.twig');
@@ -178,7 +179,7 @@ class ProverbAdminController extends Controller
 		
 		$form = $this->createForm(ProverbFastMultipleType::class, $entity, ["locale" => $request->getLocale()]);
 
-		return $this->render('Proverb/fastMultiple.html.twig', array('form' => $form->createView()));
+		return $this->render('Proverb/fastMultiple.html.twig', array('form' => $form->createView(), "authorizedURLs" => $this->authorizedURLs));
 	}
 	
 	public function addFastMultipleAction(Request $request, SessionInterface $session, TranslatorInterface $translator)
@@ -195,9 +196,7 @@ class ProverbAdminController extends Controller
 			$url = $req["url"];
 			$url_array = parse_url($url);
 
-			$authorizedURLs = ['d3d3LmxpbnRlcm5hdXRlLmNvbQ==', 'Y2l0YXRpb24tY2VsZWJyZS5sZXBhcmlzaWVuLmZy', 'ZGljb2NpdGF0aW9ucy5sZW1vbmRlLmZy', 'd3d3LnByb3ZlcmJlcy1mcmFuY2Fpcy5mcg==', 'Y3JlYXRpdmVwcm92ZXJicy5jb20=', 'd3d3LnNwZWNpYWwtZGljdGlvbmFyeS5jb20='];
-
-			if(!in_array(base64_encode($url_array['host']), $authorizedURLs))
+			if(!in_array(base64_encode($url_array['host']), $this->authorizedURLs))
 				$form->get("url")->addError(new FormError($translator->trans("admin.error.UnknownURL")));
 		}
 
@@ -305,7 +304,7 @@ class ProverbAdminController extends Controller
 			return $this->redirect($this->generateUrl('proverbadmin_index'));
 		}
 		
-		return $this->render('Proverb/fastMultiple.html.twig', array('form' => $form->createView()));
+		return $this->render('Proverb/fastMultiple.html.twig', array('form' => $form->createView(), "authorizedURLs" => $this->authorizedURLs));
 	}
 
 	public function twitterAction(Request $request, SessionInterface $session, TranslatorInterface $translator, $id)

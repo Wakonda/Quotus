@@ -30,6 +30,26 @@
 {% endblock %}
 
 {% block main_content %}
+	{% if authorizedURLs|length > 0 %}
+		<div id="accordionSource">
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<a href="#" role="button" data-toggle="collapse" data-target="#collapseSource" aria-expanded="true" aria-controls="collapseSource"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> URL</a>
+				</div>
+
+				<div id="collapseSource" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSource">
+					<div class="card-body">
+						<ul>
+						{% for authorizedURL in authorizedURLs %}
+							<li><a href="//{{ authorizedURL|base64_decode }}" target="_blank">{{ authorizedURL|base64_decode }}</a></li>
+						{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+	{% endif %}
 	{% form_theme form 'Form/fields.html.twig' %}
 	<form action="{{ path('proverbadmin_addfastmultiple') }}" method="post" novalidate>
 		<div class="form-group row">
