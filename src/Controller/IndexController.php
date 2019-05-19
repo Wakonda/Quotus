@@ -451,10 +451,10 @@ class IndexController extends Controller
 		return $this->render('Index/author.html.twig', array('entity' => $entity, "stores" => $stores));
 	}
 	
-	public function widgetAction(Request $request)
+	public function widgetAction(Request $request, $locale)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
-		$proverb = $entityManager->getRepository(Proverb::class)->getRandomProverb($request->getLocale());
+		$proverb = $entityManager->getRepository(Proverb::class)->getRandomProverb($locale);
 
 		return $this->render('Index/Widget/randomProverbWidget.html.twig', ['proverb' => $proverb]);
 	}

@@ -112,8 +112,10 @@ generate_widget:
     controller: App\Controller\IndexController::generateWidgetAction
 
 widget:
-    path: /widget
+    path: /widget/{locale}
     controller: App\Controller\IndexController::widgetAction
+    defaults:
+        locale: en
 
 # CONTACT
 contact:
