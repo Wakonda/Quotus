@@ -319,8 +319,8 @@ class IndexController extends Controller
 		}
 
 		$entityManager = $this->getDoctrine()->getManager();
-		$entities = $entityManager->getRepository(Proverb::class)->getProverbByLetterDatatables($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $letter);
-		$iTotal = $entityManager->getRepository(Proverb::class)->getProverbByLetterDatatables($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $letter, true);
+		$entities = $entityManager->getRepository(Proverb::class)->getProverbByLetterDatatables($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $letter, $request->getLocale());
+		$iTotal = $entityManager->getRepository(Proverb::class)->getProverbByLetterDatatables($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $letter, $request->getLocale(), true);
 
 		$output = array(
 			"sEcho" => $request->query->get('sEcho'),

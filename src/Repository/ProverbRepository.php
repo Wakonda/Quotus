@@ -254,7 +254,7 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
 		return $qb->getQuery()->getResult();
 	}
 
-	public function getProverbByLetterDatatables($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $letter, $count = false)
+	public function getProverbByLetterDatatables($iDisplayStart, $iDisplayLength, $sortByColumn, $sortDirColumn, $sSearch, $letter, $locale, $count = false)
 	{
 		$qb = $this->createQueryBuilder("pf");
 
@@ -273,6 +273,9 @@ class ProverbRepository extends ServiceEntityRepository implements iRepository
 			$qb->andWhere('pf.text LIKE :search')
 			   ->setParameter('search', $search);
 		}
+		
+		$this->whereLanguage($qb, "pf", $locale, true);
+		
 		if($count)
 		{
 			$qb->select("COUNT(pf) AS count");
