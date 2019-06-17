@@ -378,6 +378,11 @@ class ProverbAdminController extends Controller
 		$imageId = $request->request->get('image_id_pinterest');
 		$proverbImage = $entityManager->getRepository(ProverbImage::class)->find($imageId);
 		
+		if(empty($proverbImage)) {
+			$session->getFlashBag()->add('message', $translator->trans("admin.index.YouMustSelectAnImage"));
+			return $this->redirect($this->generateUrl("proverbadmin_show", array("id" => $id)));
+		}
+			
 		$bot->pins->create($request->getUriForPath('/photo/proverb/'.$proverbImage->getImage()), $boards[$i]['id'], $request->request->get("pinterest_area"), $this->generateUrl("read", ["id" => $entity->getId(), "slug" => $entity->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL));
 		
 		if(empty($bot->getLastError())) {

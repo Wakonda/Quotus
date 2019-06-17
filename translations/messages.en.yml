@@ -252,6 +252,7 @@ admin:
         UnreadMessages: "Unread message(s)"
         ThisEntryAlreadyExists: "This entry already exists!"
         SentSuccessfully: "Sent successfully"
+        YouMustSelectAnImage: "You must select an image"
         SentError: "An error has occurred"
         AddedSuccessfully: "%numberAdded% proverb(s) added, %numberDoubloons% duplication(s)"
         List: "List"
