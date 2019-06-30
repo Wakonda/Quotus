@@ -65,6 +65,7 @@ store:
         Abstract: "Abstract"
 proverb:
     read:
+        InPictures: "In pictures ..."
         Proverb: "Proverb"
 search:
     result:
