@@ -119,14 +119,15 @@ class IndexController extends Controller
 		return $response;
 	}
 	
-	public function readAction(Request $request, $id)
+	public function readAction(Request $request, $id, $idImage)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
 		$entity = $entityManager->getRepository(Proverb::class)->find($id);
+		$image = (!empty($idImage)) ? $entityManager->getRepository(ProverbImage::class)->find($idImage) : null;
 		
 		$browsingProverbs = $entityManager->getRepository(Proverb::class)->browsingProverbShow($id);
 
-		return $this->render('Index/read.html.twig', array('entity' => $entity, 'browsingProverbs' => $browsingProverbs));
+		return $this->render('Index/read.html.twig', array('entity' => $entity, 'browsingProverbs' => $browsingProverbs, 'image' => $image));
 	}
 	
 	public function byImagesAction(Request $request)
