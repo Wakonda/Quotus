@@ -38,6 +38,7 @@ class ProverbiusExtension extends AbstractExtension
 			new TwigFunction('gravatar', array($this, 'generateGravatar')),
 			new TwigFunction('minify_file', array($this, 'minifyFile')),
 			new TwigFunction('count_unread_messages', array($this, 'countUnreadMessagesFunction')),
+			new TwigFunction('code_by_language', array($this, 'getCodeByLanguage')),
 			new TwigFunction('random_image', array($this, 'randomImage'))
 		);
 	}
@@ -147,5 +148,16 @@ class ProverbiusExtension extends AbstractExtension
 			return null;
 		
 		return $imageArray[array_rand($imageArray)];
+	}
+	
+	public function getCodeByLanguage($locale)
+	{
+		switch($locale)
+		{
+			case "en":
+				return "en_GB";
+			default:
+				return "fr_FR";
+		}
 	}
 }

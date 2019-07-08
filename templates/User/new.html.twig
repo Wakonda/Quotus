@@ -17,7 +17,7 @@
 				selector:'textarea',
 				height: 250,
 				menubar: false,
-				language: "fr_FR",
+				language: "{{ code_by_language(app.request.locale) }}",
 				statusbar: false,
 				plugins: [
 					'lists link image charmap textcolor media'

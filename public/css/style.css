@@ -909,3 +909,8 @@ div.social_network_container {
     background-color: #eee;
     border: 1px solid #ccc;
 }
+
+/** TinyMCE issue **/
+.mce-edit-area {
+	padding-right: 1px;
+}

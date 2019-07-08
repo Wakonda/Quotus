@@ -136,6 +136,7 @@ user:
         Country: "Pays"
         Captcha: "Recopiez le mot contenu dans l'image"
         CreateSave: "Créer votre compte"
+        Save: "Enregistrer"
         OR: "OU"
         SelectFile: "Sélectionnez un fichier"
         UseGravatar: "Utilisez un gravatar"

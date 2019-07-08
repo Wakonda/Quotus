@@ -45,7 +45,7 @@ class UserType extends AbstractType
             ))
 			
 			->add('presentation', TextareaType::class, array(
-                'constraints' => new Assert\NotBlank(), 'label' => 'user.createAccount.Description'
+                'required' => false, 'label' => 'user.createAccount.Description'
             ))
 			
 			->add('country', EntityType::class, array(
@@ -58,7 +58,7 @@ class UserType extends AbstractType
 											))
 			
 			
-            ->add('save', SubmitType::class, array('label' => 'user.createAccount.CreateSave', "attr" => array("class" => "btn btn-success")));
+            ->add('save', SubmitType::class, array('label' => (empty($ifEdit)) ? 'user.createAccount.CreateSave' : 'user.createAccount.Save', "attr" => array("class" => "btn btn-success")));
 			
 		if(!$ifEdit)
 		{
