@@ -66,17 +66,17 @@
 		{{ ("photo/user/"~entity.avatar)|max_size_image() }}
 	{% endif %}
 	</p>
-	<table id="generic_info">
+	<table class="table table-sm table-bordered text-center">
 		<tr>
-			<th>{{ 'user.myProfile.Login'|trans }}</th>
+			<th class="table-active w-25">{{ 'user.myProfile.Login'|trans }}</th>
 			<td>{{ entity.username }}</td>
 		</tr>
 		<tr>
-			<th>{{ 'user.myProfile.Country'|trans }}</th>
+			<th class="table-active w-25">{{ 'user.myProfile.Country'|trans }}</th>
 			<td><span>{{ entity.country.title }} <img class="flag" src="{{ asset('photo/country/'~entity.country.flag) }}" alt="" /></span></td>
 		</tr>
 		<tr>
-			<th>{{ 'user.myProfile.Description'|trans }}</th>
+			<th class="table-active w-25">{{ 'user.myProfile.Description'|trans }}</th>
 			<td>{{ entity.presentation|raw }}</td>
 		</tr>
 	</table>

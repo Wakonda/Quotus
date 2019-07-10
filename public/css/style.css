@@ -471,29 +471,6 @@ article#contents header h1 img#flag_title
 }
 
 /****** USER ******/
-table#generic_info
-{
-	border-collapse: collapse;
-	width: 100%;
-}
-
-table#generic_info td, table#generic_info th
-{
-	border: solid 1px black;
-	text-align: center;
-}
-
-table#generic_info th
-{
-	background-color: #add8e6;
-	width: 30%
-}
-
-table#generic_info td
-{
-	width: 70%
-}
-
 hr.show_user_separator {
 	margin-top: 0px;
 	margin-bottom: 10px;
@@ -911,6 +888,6 @@ div.social_network_container {
 }
 
 /** TinyMCE issue **/
-.mce-edit-area {
+div.mce-edit-area {
 	padding-right: 1px;
 }
