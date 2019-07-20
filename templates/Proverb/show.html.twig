@@ -31,7 +31,15 @@
 							&nbsp;
 							<a class="btn btn-danger" href="{{ path('proverbadmin_remove_image', {'id' : entity.id, 'proverbImageId': proverbImage.id}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
 						</div>
-						<br>
+						<div class="input-group mt-3">
+							<input class="form-control" id="url_image_{{ proverbImage.id }}" value="{{ url('read', {id: proverbImage.proverb.id, slug: proverbImage.proverb.slug, idImage: proverbImage.id}) }}">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary copy" type="button" data-clipboard-target="#url_image_{{ proverbImage.id }}">
+								<i class="fa fa-clipboard" aria-hidden="true"></i>
+								</button>
+							</div>
+						</div>
+						<hr>
 					{% endfor %}
 				{% endif %}
 			</td>
@@ -155,7 +163,9 @@
 {% endblock %}
 
 {% block script_additional %}
+	<script src="{{ asset('js/clipboard.js/clipboard.min.js') }}"></script>
 	<script type="text/javascript">
+		new ClipboardJS('.copy');
 		$(function() {
 			// Twitter
 			$("div#collapseTwitter input#addImage").click(function() {
